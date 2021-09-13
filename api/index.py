@@ -1,6 +1,7 @@
 from flask import Flask
 
 app = Flask(__name__)
+db = None  # TODO: replace None to SQLAlchemy() object
 
 
 @app.route("/")
