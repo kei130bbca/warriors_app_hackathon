@@ -1,7 +1,9 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-db = None  # TODO: replace None to SQLAlchemy() object
+db = SQLAlchemy()
+db.init_app(app)
 
 
 @app.route("/")
