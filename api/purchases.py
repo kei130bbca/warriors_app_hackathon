@@ -1,6 +1,6 @@
 
 from flask_sqlalchemy import SQLAlchemy
-from api import db
+from . import db
 
 
 class Purchases (db.Model):  # A Model representing purchases and reviews
