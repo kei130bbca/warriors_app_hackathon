@@ -1,12 +1,12 @@
 version: "3"
 services:
   front:
-    image: python:3
+    image: node:14
     volumes:
       - ./front:/usr/src
-      # - front_modules:/usr/src/node_modules #node_modulesはコンテナ内部で用意します
+      - front_modules:/usr/src/node_modules #node_modulesはコンテナ内部で用意します
     working_dir: "/usr/src"
-    # command: sh -c "yarn install && yarn start"
+    command: sh -c "yarn install && yarn start"
     ports:
       - "80:3000"
     # environment:
@@ -14,11 +14,11 @@ services:
     #   REACT_APP_AUTH0_DOMAIN: $AUTH0_DOMAIN
     #   REACT_APP_SERVER_URL: "http://localhost:3000"
   api:
-    image: node:14
-    hostname: api-container
+    image: python:3
+    # hostname: api-container
     volumes:
       - ./api/:/usr/src/
-      - api_modules:/usr/src/node_modules #node_modulesはコンテナ内部で用意します
+      # - api_modules:/usr/src/node_modules #node_modulesはコンテナ内部で用意します
     working_dir: "/usr/src"
     ports:
       - "3000:3000"
@@ -29,7 +29,7 @@ services:
       RDS_USERNAME: root
       RDS_PASSWORD: docker
       RDS_DB_NAME: test_db
-    command: sh -c "yarn install && yarn dev"
+    # command: sh -c "yarn install && yarn dev"
     depends_on:
       - db
   db:
