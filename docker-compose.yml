@@ -21,7 +21,7 @@ services:
       # - api_modules:/usr/src/node_modules #node_modulesはコンテナ内部で用意します
     working_dir: "/usr/src"
     ports:
-      - "3000:3000"
+      - "8000:80"
     environment:
       CLIENT_ORIGIN_URL: "http://localhost"
       # RDS_HOSTNAME: $RDS_HOSTNAME
@@ -29,7 +29,7 @@ services:
       RDS_USERNAME: root
       RDS_PASSWORD: docker
       RDS_DB_NAME: test_db
-    # command: sh -c "yarn install && yarn dev"
+    command: sh -c "pip install flask && python index.py"
     depends_on:
       - db
   db:
