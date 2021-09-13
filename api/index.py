@@ -1,4 +1,5 @@
-from flask import Flask
+from api.models.purchases import Purchases
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -13,7 +14,8 @@ def index():
 
 @app.route("/purchases")
 def get_purchases():
-    return ""
+    query = db.session.query(Purchases).all()
+    return jsonify(query)
 
 
 if __name__ == "__main__":
