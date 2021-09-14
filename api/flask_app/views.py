@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 from flask import flash, jsonify
 from models.users import User
 from models.purchases import Purchase
 from sqlalchemy import func
-=======
 import base64
->>>>>>> 9b0e2753345996d488cb6c2fe2d2b4ae8147dd7f
 from flask_app import app, db
 from flask import jsonify, request
 from .models.purchases import Purchase
@@ -88,9 +85,6 @@ def post_user():
 def get_product(id):
     product = db.session.query(Product).get(id)
     return jsonify(product)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
 
 @app.route('/get_user/<int: index>')
@@ -124,8 +118,6 @@ def get_user(index):
             flash('query failed!')
             db.session.rollback()
     return jsonify(user_array)
->>>>>>> fd3b9453d1bc49e8d13a97f96dcee521a4d94455
-=======
 
 
 def convert_and_save(b64_string):
@@ -133,4 +125,3 @@ def convert_and_save(b64_string):
     with open(FILE_NAME, "wb") as fh:
         fh.write(base64.decodebytes(b64_string.encode()))
     return FILE_NAME
->>>>>>> 9b0e2753345996d488cb6c2fe2d2b4ae8147dd7f
