@@ -35,3 +35,18 @@ def import_views():
 
 
 import_views()
+
+
+def register_test_user():
+    from .models.users import User
+    with app.app_context():
+        if db.session.query(User).filter_by(username='Yasoob').count() < 1:
+            db.session.add(User(
+                username='Yasoob',
+                password=guard.hash_password('strongpassword'),
+                roles='admin'
+            ))
+        db.session.commit()
+
+
+register_test_user()

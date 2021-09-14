@@ -138,7 +138,7 @@ def protected():
        $ curl http://localhost:8000/api/protected -X GET \
          -H "Authorization: Bearer <your_token>"
     """
-    return jsonify(flask_praetorian.current_user())
+    return jsonify({"username": flask_praetorian.current_user().username})
 
 
 @app.route("/login", methods=['POST'])
