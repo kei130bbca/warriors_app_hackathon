@@ -156,4 +156,4 @@ def refresh():
     old_token = flask.request.get_data()
     new_token = guard.refresh_jwt_token(old_token)
     ret = {'access_token': new_token}
-    return ret, 200
+    return jsonify(ret), 200
