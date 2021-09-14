@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_app import db
 
 
-class Purchases (db.Model):  # A Model representing purchases and reviews
+class Purchase (db.Model):  # A Model representing purchases and reviews
     __tablename__ = "purchases"
     id = db.Column(db.Integer, primary_key=True)  # ID
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -21,3 +21,5 @@ class Purchases (db.Model):  # A Model representing purchases and reviews
 
     # def __repr__(self):
     #     return f"<Break id:{self.id} attendance_id:{self.attendance_id} started_at:{self.started_at} end_at:{self.end_at}"
+
+    # TODO add __repr__ and __init__
