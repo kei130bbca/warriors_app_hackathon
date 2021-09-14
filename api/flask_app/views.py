@@ -1,6 +1,4 @@
 from flask import flash, jsonify
-from models.users import User
-from models.purchases import Purchase
 from sqlalchemy import func
 import base64
 from flask_app import app, db
@@ -87,8 +85,8 @@ def get_product(id):
     return jsonify(product)
 
 
-@app.route('/get_user/<int: index>')
-def get_user(index):
+@app.route('/users')
+def get_users():
     '''
     where does the parameter index from  --> calculated by the front page
     logic:display by id?
@@ -103,6 +101,8 @@ def get_user(index):
     '''
     query the sum of users, if it is smaller than index, invalid operation
     '''
+    args = request.args
+    index = args.get("index")
     count = db.session.query(func.count(User.id)).scalar()
     if count < index:
         flash('not enough data')

@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_app import db
-from purchases import Purchase
+from .purchases import Purchase
 
 
 class User(db.Model):
@@ -13,10 +13,8 @@ class User(db.Model):
     password = db.Column(db.String(127))
     icon = db.Column(db.String(127))
     description = db.Column(db.String(511))
-<<<<<<< HEAD
     purchses = db.relationship('Purchase')
     # TODO add __repr__ and __init__
-=======
 
     def __init__(self, id, username, nickname, password, twitter_screenname=None, youtube_url=None, icon=None, description=None):
         self.id = id
@@ -30,4 +28,3 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<User(id=%s)>" % self.id
->>>>>>> c042dd112a49a77f7fea4c2bf8a7dffefe824ff9
