@@ -1,7 +1,7 @@
 from flask_app import app, db
 from flask import jsonify
-from .models.purchases import Purchases
-from .models.users import Users
+from .models.purchases import Purchase
+from .models.users import User
 
 
 @app.route("/")
@@ -11,12 +11,12 @@ def index():
 
 @app.route("/purchases")
 def get_purchases():
-    query = db.session.query(Purchases).all()
+    query = db.session.query(Purchase).all()
     return jsonify(query)
 
 
 @app.route("/users/<int:id>", methods=['GET'])
 def get_user(id):
-    user = db.session.query(Users.user_id, Users.username, Users.nickname,
-                            Users.twitter, Users.youtube, Users.icon, Users.descriptioin).get(id)
+    user = db.session.query(User.user_id, User.username, User.nickname,
+                            User.twitter, User.youtube, User.icon, User.descriptioin).get(id)
     return jsonify(user)
