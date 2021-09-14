@@ -9,6 +9,7 @@ services:
     command: sh -c "yarn install && yarn start"
     ports:
       - "80:3000"
+    restart: always
     # environment:
     #   REACT_APP_AUTH0_AUDIENCE: $AUTH0_AUDIENCE
     #   REACT_APP_AUTH0_DOMAIN: $AUTH0_DOMAIN
@@ -33,6 +34,7 @@ services:
     command: sh -c 'pip install -r requirements.txt && flask db upgrade ; python app.py'
     depends_on:
       - db
+    restart: always
   db:
     platform: linux/x86_64 # M1チップ対応のため追記
     image: mysql:8
@@ -44,6 +46,7 @@ services:
     volumes:
       - ./db/data:/var/lib/mysql #データ永続化
       - ./db/sql:/docker-entrypoint-initdb.d #起動時sqlフォルダ内のsqlファイルを実行
+    restart: always
   phpmyadmin:
     image: phpmyadmin #fpmやalpineタグは別途httpサーバが必要
     environment:
@@ -57,6 +60,7 @@ services:
       - "./phpmyadmin:/sessions"
     depends_on:
       - db
+    restart: always
 volumes:
   front_modules:
   api_modules:
