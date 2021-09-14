@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import TemplatePage from './pages/TemplatePage';
 import InfluencerPersonal from './pages/InfluencerPersonal'
+import ReviewManagementPage from './pages/ReviewManagementPage';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
     </Route>
     <Route path="/influencerpersonal" component = {InfluencerPersonal} >
       <InfluencerPersonal />
+    </Route>
+    <Route path="/review-management">
+      <ReviewManagementPage />
     </Route>
     </BrowserRouter>
   );
