@@ -10,7 +10,7 @@ class User(db.Model):
     nickname = db.Column(db.String(127))
     twitter_screenname = db.Column(db.String(127))
     youtube_url = db.Column(db.String(511))
-    password = db.Column(db.String(127))
+    password = db.Column(db.String(255))
     icon = db.Column(db.String(127))
     description = db.Column(db.String(511))
     roles = db.Column(db.Text)
