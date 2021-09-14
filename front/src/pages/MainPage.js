@@ -72,21 +72,10 @@ function Icon(props) {
 }
 
 function InfluencerName(props) {
-  // const users = props.users;
-
   return (
     <div>
       <Icon src={props.icon} height="200" />
       <font>{`${props.name}'s recommendations`}</font>
-
-      {/* {users.map((user) => {
-        return (
-          <div>
-            <Icon src={user.Icon} height="200" />
-            <font>{`${user.nickname}'s recommendations`}</font>
-          </div>
-        );
-      })} */}
     </div>
   );
 }
@@ -149,8 +138,6 @@ function Main() {
 
   return (
     <div>
-      {/* <InfluencerName name={users[0].nickname} icon={users[0].icon} /> */}
-      {/* <InfluencerName users={users} /> */}
       {
         users.map((user) => {
           let ReviewElementArray = [];
@@ -173,7 +160,6 @@ function Main() {
           );
         })
       }
-      {/* <ReviewCard img={products[0].img} title={purchases[0].title} comment={purchases[0].comment} stars={purchases[0].stars} /> */}
     </div>
   );
 }
