@@ -13,3 +13,14 @@ class User(db.Model):
     icon = db.Column(db.String(127))
     description = db.Column(db.String(511))
     # TODO add __repr__ and __init__
+
+    
+    def __init__(self, id, username, nickname, password, twitter_screenname=None, youtube_url=None, icon=None, description=None):
+        self.id = id
+        self.username = username
+        self.nickname = nickname
+        self.password = password
+        self.twitter_screenname = twitter_screenname
+        self.youtube_url = youtube_url
+        self.icon = icon
+        self.description = description
