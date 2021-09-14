@@ -16,7 +16,7 @@ class Purchase (db.Model):  # A Model representing purchases and reviews
 
     def __init__(self, id, products_id, count, bought_at, comment, stars, title):
         self.id = id
-        self.name = name
+        # self.name = name
         self.products_id = products_id
         self.count = count
         self.bought_at = bought_at
