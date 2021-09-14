@@ -45,7 +45,7 @@ def put_user(id):
     payload = request.json
     user.nickname = payload.get('nickname')
     user.youtube_url = payload.get('youtube')
-    user.twitter_screenname = payload.get('twitter_screenname')
+    user.twitter_screenname = payload.get('twitter')
     user.description = payload.get('desc')
     # save user icon
     icon = payload.get('img')
@@ -55,6 +55,26 @@ def put_user(id):
     db.session.add(user)
     db.session.commit()
     return jsonify({}), 200
+
+
+@app.route("/users", methods=['POST'])
+def post_user():
+    user = User()
+    payload = request.json
+    user.username = payload.get('username')
+    user.nickname = payload.get('nickname')
+    user.password = payload.get('password')
+    user.youtube_url = payload.get('youtube')
+    user.twitter_screenname = payload.get('twitter')
+    user.description = payload.get('desc')
+    # save user icon
+    icon = payload.get('img')
+    if icon is not None:
+        src = convert_and_save(icon)
+        user.icon = src
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({}), 201
 
 
 @app.route("/products/<int:id>", methods=['GET'])
