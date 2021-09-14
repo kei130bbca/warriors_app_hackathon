@@ -25,5 +25,5 @@ def get_user(id):
 
 @app.route("/products/<int:id>", methods=['GET'])
 def get_product(id):
-    product = db.session.query(Products).get(id)
+    product = db.session.query(Product).get(id)
     return jsonify(product)
