@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 from flask import flash, jsonify
 from models.users import User
 from models.purchases import Purchase
 from sqlalchemy import func
+=======
+import base64
+>>>>>>> 9b0e2753345996d488cb6c2fe2d2b4ae8147dd7f
 from flask_app import app, db
 from flask import jsonify, request
 from .models.purchases import Purchase
@@ -40,10 +44,51 @@ def get_user(id):
     return jsonify(user)
 
 
+@app.route("/users/<int:id>", methods=['PUT'])
+def put_user(id):
+    user = db.session.query(User).get(id)
+    if user is None:
+        return jsonify({'message': 'the user was not found'}), 404
+    payload = request.json
+    user.nickname = payload.get('nickname')
+    user.youtube_url = payload.get('youtube')
+    user.twitter_screenname = payload.get('twitter')
+    user.description = payload.get('desc')
+    # save user icon
+    icon = payload.get('img')
+    if icon is not None:
+        src = convert_and_save(icon)
+        user.icon = src
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({}), 200
+
+
+@app.route("/users", methods=['POST'])
+def post_user():
+    user = User()
+    payload = request.json
+    user.username = payload.get('username')
+    user.nickname = payload.get('nickname')
+    user.password = payload.get('password')
+    user.youtube_url = payload.get('youtube')
+    user.twitter_screenname = payload.get('twitter')
+    user.description = payload.get('desc')
+    # save user icon
+    icon = payload.get('img')
+    if icon is not None:
+        src = convert_and_save(icon)
+        user.icon = src
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({}), 201
+
+
 @app.route("/products/<int:id>", methods=['GET'])
 def get_product(id):
     product = db.session.query(Product).get(id)
     return jsonify(product)
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -80,3 +125,12 @@ def get_user(index):
             db.session.rollback()
     return jsonify(user_array)
 >>>>>>> fd3b9453d1bc49e8d13a97f96dcee521a4d94455
+=======
+
+
+def convert_and_save(b64_string):
+    FILE_NAME = "imageToSave.png"
+    with open(FILE_NAME, "wb") as fh:
+        fh.write(base64.decodebytes(b64_string.encode()))
+    return FILE_NAME
+>>>>>>> 9b0e2753345996d488cb6c2fe2d2b4ae8147dd7f
