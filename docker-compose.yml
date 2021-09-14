@@ -29,8 +29,8 @@ services:
       RDS_USERNAME: root
       RDS_PASSWORD: docker
       RDS_DB_NAME: test_db
-      FLASK_DEBUG: 1
-    command: sh -c 'pip install -r requirements.txt && flask db upgrade ; flask run'
+      # FLASK_DEBUG: 1
+    command: sh -c 'pip install -r requirements.txt && flask db upgrade ; python app.py'
     depends_on:
       - db
   db:
