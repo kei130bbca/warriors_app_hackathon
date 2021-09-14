@@ -3,7 +3,7 @@ import flask_cors
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
-from .models.users import User
+
 
 app = Flask(__name__)
 
@@ -14,11 +14,18 @@ app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
 app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
 
 db = SQLAlchemy()
+cors = flask_cors.CORS()
+guard = flask_praetorian.Praetorian()
+
+
+def init_guard():
+    from .models.users import User
+    guard.init_app(app, User)
+
+
+init_guard()
 db.init_app(app)
 migrate = Migrate(app, db)
-guard = flask_praetorian.Praetorian()
-guard.init_app(app, User)
-cors = flask_cors.CORS()
 cors.init_app(app)
 
 
