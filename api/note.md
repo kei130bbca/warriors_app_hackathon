@@ -20,3 +20,8 @@ Do not forget to proceed update.
 
 When you have non applied migration files, you need to update database with them.
 Type "flask db upgrade".
+
+# Don't use flask run
+
+Flask run doesn't load app.run arguments in app.py
+Use python app.py to launch application
