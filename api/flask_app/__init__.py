@@ -10,5 +10,10 @@ db = SQLAlchemy()
 db.init_app(app)
 migrate = Migrate(app, db)
 
-# Write import flask_app.views at the last line!!!
-import flask_app.views
+
+def import_views():
+    """The function to avoid code shaping destroying import orders. Views has to be loaded finally due to circular import."""
+    import flask_app.views
+
+
+import_views()
