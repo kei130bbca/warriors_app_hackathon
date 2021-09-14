@@ -14,6 +14,16 @@ class Purchase (db.Model):  # A Model representing purchases and reviews
     stars = db.Column(db.Integer)
     title = db.Column(db.String(255))
 
+    def __init__(self, id, products_id, count, bought_at, comment, stars, title):
+        self.id = id
+        self.name = name
+        self.products_id = products_id
+        self.count = count
+        self.bought_at = bought_at
+        self.comment = comment
+        self.stars = stars
+        self.title = title
+
     # def __init__(self, attendance_id=None, started_at=None, end_at=None):
     #     self.attendance_id = attendance_id
     #     self.started_at = started_at
