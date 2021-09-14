@@ -149,3 +149,11 @@ def login():
     user = guard.authenticate(username, password)
     token = {'access_token': guard.encode_jwt_token(user)}
     return jsonify(token), 200
+
+@app.route('/refresh', methods=['POST'])
+def refresh():
+    print('refresh request')
+    old_token = flask.request.get_data()
+    new_token = guard.refresh_jwt_token(old_token)
+    ret = {'access_token': new_token}
+    return jsonify(ret), 200
