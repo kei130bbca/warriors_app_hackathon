@@ -1,5 +1,5 @@
 import base64
-from flask_app import app, db
+from flask_app import app, db, guard
 from flask import jsonify, request
 from .models.purchases import Purchase
 from .models.users import User
@@ -102,6 +102,7 @@ def protected():
          -H "Authorization: Bearer <your_token>"
     """
     return jsonify(flask_praetorian.current_user())
+
 
 @app.route("/login", methods=['POST'])
 def login():
