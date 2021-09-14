@@ -1,13 +1,8 @@
 from flask_app import app, db
 from flask import jsonify
-<<<<<<< HEAD
 from .models.purchases import Purchase
 from .models.users import User
-=======
-from .models.purchases import Purchases
-from .models.users import Users
-from .models.products import Products
->>>>>>> feature/back_get_a_product
+from .models.products import Product
 
 
 @app.route("/")
