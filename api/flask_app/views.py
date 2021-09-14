@@ -34,7 +34,7 @@ def put_purchase(id):
 def get_user(id):
     user = db.session.query(User.user_id, User.username, User.nickname,
                             User.twitter, User.youtube, User.icon, User.descriptioin).get(id)
-    return jsonify(user)
+    return jsonify(user), 200
 
 
 @app.route("/users/<int:id>", methods=['PUT'])
@@ -80,7 +80,7 @@ def post_user():
 @app.route("/products/<int:id>", methods=['GET'])
 def get_product(id):
     product = db.session.query(Product).get(id)
-    return jsonify(product)
+    return jsonify(product), 200
 
 
 def convert_and_save(b64_string):
@@ -88,3 +88,14 @@ def convert_and_save(b64_string):
     with open(FILE_NAME, "wb") as fh:
         fh.write(base64.decodebytes(b64_string.encode()))
     return FILE_NAME
+
+
+
+@app.route("/login", methods=['POST'])
+def login():
+    payload = request.json
+    username = payload.get('username')
+    password = payload.get('password')
+    user = guard.authenticate(username, password)
+    token = {'access_token': guard.encode_jwt_token(user)}
+    return jsonify(token), 200
