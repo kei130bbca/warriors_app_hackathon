@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_app import db
+from .purchases import Purchase
 
 
 class User(db.Model):
@@ -13,6 +14,8 @@ class User(db.Model):
     icon = db.Column(db.String(127))
     description = db.Column(db.String(511))
     roles = db.Column(db.Text)
+    purchses = db.relationship('Purchase')
+    # TODO add __repr__ and __init__
 
     @classmethod
     def lookup(cls, username):
