@@ -13,7 +13,7 @@ function App() {
     <Route path="/template-page">
       <TemplatePage />
     </Route>
-    <Route path="/influencerPersonal">
+    <Route path="/influencerpersonal" component = {InfluencerPersonal} >
       <InfluencerPersonal />
     </Route>
     </BrowserRouter>

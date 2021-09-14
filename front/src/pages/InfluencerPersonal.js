@@ -1,10 +1,12 @@
 import React from 'react';
 
 
-function InfluencerPersonal() {
+const InfluencerPersonal = () => {
   return (
-    <div>This is influencerPersonal page</div>
+      <div>
+          <h1>InfluencerPersonal's personal page</h1>
+      </div> 
   );
 }
 
-export default InfluencerPersonal;
+export default InfluencerPersonal
