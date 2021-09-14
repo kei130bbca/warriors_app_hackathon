@@ -24,12 +24,5 @@ class Purchase (db.Model):  # A Model representing purchases and reviews
         self.stars = stars
         self.title = title
 
-    # def __init__(self, attendance_id=None, started_at=None, end_at=None):
-    #     self.attendance_id = attendance_id
-    #     self.started_at = started_at
-    #     self.end_at = end_at
-
-    # def __repr__(self):
-    #     return f"<Break id:{self.id} attendance_id:{self.attendance_id} started_at:{self.started_at} end_at:{self.end_at}"
-
-    # TODO add __repr__ and __init__
+    def __repr__(self):
+        return f"<Purchase(id=%s)>" % self.id

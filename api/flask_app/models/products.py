@@ -10,7 +10,6 @@ class Product (db.Model):
     price = db.Column(db.Integer)
     url = db.Column(db.String(511))
 
-    # TODO add __repr__ and __init__
     def __init__(self, id, name, img, price, url):
         self.id = id
         self.name = name
@@ -18,3 +17,6 @@ class Product (db.Model):
         self.img = img
         self.price = price
         self.url = url
+
+    def __repr__(self):
+        return f"<Product(id=%s)>" % self.id
