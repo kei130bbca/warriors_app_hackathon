@@ -4,6 +4,7 @@ import MainPage from './pages/MainPage';
 import TemplatePage from './pages/TemplatePage';
 import InfluencerPersonal from './pages/InfluencerPersonal'
 import ReviewManagementPage from './pages/ReviewManagementPage';
+import ReviewPostingPage from './pages/ReviewPostingPage';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
     </Route>
     <Route path="/review-management">
       <ReviewManagementPage />
+    </Route>
+    <Route path="/review-posting">
+      <ReviewPostingPage />
     </Route>
     </BrowserRouter>
   );
