@@ -4,6 +4,7 @@ from flask import jsonify, request
 from .models.purchases import Purchase
 from .models.users import User
 from .models.products import Product
+import flask_praetorian
 
 
 @app.route("/")
@@ -88,3 +89,16 @@ def convert_and_save(b64_string):
     with open(FILE_NAME, "wb") as fh:
         fh.write(base64.decodebytes(b64_string.encode()))
     return FILE_NAME
+
+
+@app.route('/api/protected')
+@flask_praetorian.auth_required
+def protected():
+    """
+    A protected endpoint provides authenticated user. The auth_required decorator will require a header
+    containing a valid JWT
+    .. example::
+       $ curl http://localhost:8000/api/protected -X GET \
+         -H "Authorization: Bearer <your_token>"
+    """
+    return jsonify(flask_praetorian.current_user())
