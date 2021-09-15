@@ -1,5 +1,6 @@
 from flask_script import Command
 from flask_app.models.users import User
+from flask_app import guard
 
 # You can run scripts in docker api container
 # python manage.py [command_name]
@@ -34,5 +35,6 @@ class RegisterTestUser(Command):
             for user in users:
                 from flask_app import db
                 if db.session.query(User).filter_by(username=user.username).count() < 1:
+                    user.password = guard.hash_password(user.password)
                     db.session.add(user)
             db.session.commit()
