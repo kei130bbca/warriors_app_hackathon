@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { fetchUser, fetchUsers } from './components/api';
+// import { Button } from 'react-bulma-components';
 
 class User {
   id = 1;
@@ -105,6 +107,30 @@ function ReviewCard(props) {
 }
 
 function Main() {
+  const [userss, setUserss] = useState(null);
+  // useEffect(() => {
+  //   fetchUser(0).then((u) => {
+  //     setUserss(u);
+  //     console.log(u);
+  //   }
+  //   }, []);
+  useEffect(() => {
+    fetchUser(0).then((u) => {
+      console.log(u);
+    })
+  });
+
+  // fetch('https:8000/users/1')
+  //   .then((response) => {
+  //     if (response.ok) { // ステータスがokならば
+  //       return response.text(); // レスポンスをテキストとして変換する
+  //     } else {
+  //       throw new Error();
+  //     }
+  //   })
+  //   .then((text) => console.log(text))
+  //   .catch((error) => console.log(error));
+
   const user1 = new User(
     1,
     'hikakin@gmail',
@@ -134,8 +160,6 @@ function Main() {
   const purchases = [purchase1, purchase2, purchase3];
   const products = [product1, product2, product3];
 
-  console.log(users, purchases, products);
-
   return (
     <div>
       {
@@ -146,10 +170,8 @@ function Main() {
               <InfluencerName name={user.nickname} icon={user.icon} />
               {purchases.map((purchase) => {
                 if (purchase.user_id === user.id) {
-                  console.log(user, purchase);
                   products.map((product) => {
                     if (purchase.product_id === product.id) {
-                      console.log(product);
                       ReviewElementArray.push(<ReviewCard purchase={purchase} product={product} />);
                     }
                   })
