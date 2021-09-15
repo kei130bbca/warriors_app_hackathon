@@ -8,7 +8,7 @@ from flask_app.models.users import User
 users = Blueprint("users", __name__)
 
 
-@app.route('/users')
+@app.route('/users', methods=['GET'])
 def get_users():
     '''
     where does the parameter index from  --> calculated by the front page
