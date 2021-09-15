@@ -83,7 +83,7 @@ def post_user():
     return jsonify({}), 201
 
 
-@app.route("/products/<str:id>", methods=['GET'])
+@app.route("/products/<string:id>", methods=['GET'])
 def get_product(id: str):
     # product = db.session.query(Product).get(id)
     product = get_product_rakuten(id)
