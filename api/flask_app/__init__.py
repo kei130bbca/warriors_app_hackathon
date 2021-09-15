@@ -1,9 +1,9 @@
+import os
 import flask_praetorian
 import flask_cors
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
-
 
 app = Flask(__name__)
 
@@ -23,10 +23,14 @@ def init_guard():
     guard.init_app(app, User)
 
 
+# Configure Flask libraries
 init_guard()
 db.init_app(app)
 migrate = Migrate(app, db)
 cors.init_app(app)
+
+# Load environmental variables
+RAKUTEN_APP_ID = os.environ.get("RAKUTEN_APP_ID")
 
 
 def import_views():
@@ -35,18 +39,3 @@ def import_views():
 
 
 import_views()
-
-
-def register_test_user():
-    from .models.users import User
-    with app.app_context():
-        if db.session.query(User).filter_by(username='Yasoob').count() < 1:
-            db.session.add(User(
-                username='Yasoob',
-                password=guard.hash_password('strongpassword'),
-                roles='admin'
-            ))
-        db.session.commit()
-
-
-register_test_user()

@@ -1,7 +1,9 @@
+import json
+import requests
 from flask import flash, jsonify
 from sqlalchemy import func
 import base64
-from flask_app import app, db, guard
+from flask_app import app, db, guard, RAKUTEN_APP_ID
 from flask import jsonify, request
 from .models.purchases import Purchase
 from .models.users import User
@@ -21,7 +23,7 @@ def get_purchases():
 
 
 @app.route("/purchases/<int:id>", methods=['PUT'])
-def put_purchase(id):
+def put_purchase(id: int):
     purchase = db.session.query(Purchase).get(id)
     if purchase is None:
         return jsonify({'message': 'the purchase was not found'}), 404
@@ -34,7 +36,7 @@ def put_purchase(id):
 
 
 @app.route("/users/<int:id>", methods=['GET'])
-def get_user(id):
+def get_user(id: int):
     user = db.session.query(User.user_id, User.username, User.nickname,
                             User.twitter, User.youtube, User.icon, User.descriptioin).get(id)
     return jsonify(user), 200
@@ -66,10 +68,11 @@ def post_user():
     payload = request.json
     user.username = payload.get('username')
     user.nickname = payload.get('nickname')
-    user.password = payload.get('password')
+    user.password = guard.hash_password(payload.get('password'))
     user.youtube_url = payload.get('youtube')
     user.twitter_screenname = payload.get('twitter')
     user.description = payload.get('desc')
+    user.roles = "viewer"
     # save user icon
     icon = payload.get('img')
     if icon is not None:
@@ -80,9 +83,10 @@ def post_user():
     return jsonify({}), 201
 
 
-@app.route("/products/<int:id>", methods=['GET'])
-def get_product(id):
-    product = db.session.query(Product).get(id)
+@app.route("/products/<string:id>", methods=['GET'])
+def get_product(id: str):
+    # product = db.session.query(Product).get(id)
+    product = get_product_rakuten(id)
     return jsonify(product), 200
 
 
@@ -121,7 +125,7 @@ def get_users():
     return jsonify(user_array)
 
 
-def convert_and_save(b64_string):
+def convert_and_save(b64_string: str):
     FILE_NAME = "imageToSave.png"
     with open(FILE_NAME, "wb") as fh:
         fh.write(base64.decodebytes(b64_string.encode()))
@@ -158,3 +162,17 @@ def refresh():
     new_token = guard.refresh_jwt_token(old_token)
     ret = {'access_token': new_token}
     return jsonify(ret), 200
+
+
+def get_product_rakuten(product_id: str = "sorara:10001376"):
+    query = {
+        "applicationId": RAKUTEN_APP_ID,
+        "itemCode": product_id
+    }
+    response = requests.get(
+        f"https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706", params=query)
+    item = response.json().Items[0].Item
+    print(item)
+    product = {"id": item.itemCode, "name": item.itemName,
+               "img": item.smallImageUrls[0].imageUrl, "price": item.itemPrice, "url": item.itemUrl}
+    return product

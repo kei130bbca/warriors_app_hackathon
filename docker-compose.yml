@@ -24,6 +24,7 @@ services:
       RDS_USERNAME: root
       RDS_PASSWORD: docker
       RDS_DB_NAME: test_db
+      RAKUTEN_APP_ID: $RAKUTEN_APP_ID
     command: sh -c 'flask db upgrade ; python app.py'
     depends_on:
       - db
