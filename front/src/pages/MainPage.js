@@ -123,25 +123,16 @@ function LoginSystem(props) {
 function Main() {
   const [userss, setUserss] = useState(null);
 
-  // useEffect(() => {
-  //   fetchProducts(2).then((u) => {
-  //     console.log(u);
-  //   })
-  //   .catch((e) => {
-  //     console.log(e);
-  //   })
-  // });
-
-  // fetch('https:8000/users/1')
-  //   .then((response) => {
-  //     if (response.ok) { // ステータスがokならば
-  //       return response.text(); // レスポンスをテキストとして変換する
-  //     } else {
-  //       throw new Error();
-  //     }
-  //   })
-  //   .then((text) => console.log(text))
-  //   .catch((error) => console.log(error));
+  useEffect(() => {
+    fetchUser(1).then((u) => {
+      console.log(u);
+    })
+    .catch((e) => {
+      console.log(e);
+    })
+  },[]);
+  // const id = 1;
+  // fetch(`http://localhost:8000/users/${id}`).then(res => res.json()).then(d => console.log(d))
 
   const user1 = new User(
     1,
