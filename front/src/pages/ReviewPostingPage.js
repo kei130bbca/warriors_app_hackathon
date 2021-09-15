@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -52,29 +52,44 @@ class Product {
     }
 }
 function Review(props) {
+    const stars = String(props.stars);
+    // function handleChange(event) {
+    //     event.preventDefault();
+    // }
+    useEffect(() => {
+        if (props.title !== null) {
+            document.getElementById('title').value = props.title;
+        }
+        if (props.comment !== null) {
+            document.getElementById('comment').value = props.comment;
+        }
+    }, []);
     return (
         <form>
-            <input type="text" value="nice" />
-            <input type="text" value="aaa" />
-            <select name="star" defaultValue="5">
+            <p>Title:<br></br>
+            <input type="text" id="title"/></p>
+            <p>Comment:<br></br>
+            <textarea name="comment" id="comment" cols="30" rows="10" /></p>
+            <p>Stars:<br></br>
+            <select name="star" defaultValue={stars} >
                 <option value="1">1</option>
                 <option value='2'>2</option>
                 <option value='3'>3</option>
                 <option value='4'>4</option>
                 <option value='5'>5</option>
-            </select>
+            </select></p>
         </form>
     );
 }
 
 function Main() {
-    const purchase3 = new Purchase(3, 2, 13, 10, 2020 - 1 - 1, 'nice orange', 5, "I'v never seen like this orange!");
+    const purchase3 = new Purchase(3, 2, 13, 10, 2020 - 1 - 1, 'nice orange', 4, "I'v never seen like this orange!");
     const product3 = new Product(13, 'orange', 'https://tshop.r10s.jp/benikou/cabinet/orenge/imgrc0084994537.jpg?fitin=275:275', 200, 'https://item.rakuten.co.jp/benikou/10000723/?iasid=07rpp_10095___et-ktjubpdf-zqv-23e8ef5b-f7a1-4739-8075-3f19a787f7c7');
 
     return (
         <div>
-            <img src={product3.img} height="200" alt="" />
-            <Review />
+            <img src={product3.img} height="250" alt="" />
+            <Review title={purchase3.title} comment={purchase3.comment} stars={purchase3.stars} />
             <button type="submit"> Submit </button>
         </div>
     );
@@ -87,7 +102,6 @@ function ReviewPostingPage() {
             <Main />
             <Footer />
         </div>
-
     );
 }
 
