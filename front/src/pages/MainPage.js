@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { fetchUser, fetchUsers, fetchProducts } from './components/api';
-// import { Button } from 'react-bulma-components';
 
 class User {
   id = 1;
@@ -108,17 +107,15 @@ function ReviewCard(props) {
 
 function Main() {
   const [userss, setUserss] = useState(null);
+
   // useEffect(() => {
-  //   fetchUser(0).then((u) => {
-  //     setUserss(u);
+  //   fetchProducts(2).then((u) => {
   //     console.log(u);
-  //   }
-  //   }, []);
-  useEffect(() => {
-    fetchProducts(2).then((u) => {
-      console.log(u);
-    })
-  });
+  //   })
+  //   .catch((e) => {
+  //     console.log(e);
+  //   })
+  // });
 
   // fetch('https:8000/users/1')
   //   .then((response) => {
