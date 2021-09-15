@@ -32,8 +32,8 @@ class InfluencerPersonal extends React.Component {
                 },
             ],
         };
-        // this.generatorData = this.generatorData.bind(this);
-        // this.generatorData(this.state)
+        this.generatorData = this.generatorData.bind(this);
+        this.generatorData(this.state)
         this.manageOnClick = this.manageOnClick.bind(this);
         this.modifyOnClick = this.modifyOnClick.bind(this);
     }
@@ -48,11 +48,11 @@ class InfluencerPersonal extends React.Component {
 
     generatorData = (state) =>{
         let temp_data = [];
-        axios.post('',
-            Qs.stringify({
-                id: this.state.id
-            }),
-            {headers:{'Content-Type':'application/x-www-form-urlencode'}}
+        axios.get('http://localhost:8000/users/', {
+            params:{
+                user_id: this.state.id
+            }},
+            {headers:{'Content-Type':'application/x-www-form-urlencode'}},
         ).then( (response) => {
             temp_data = response.data
             let temp_id = 0
