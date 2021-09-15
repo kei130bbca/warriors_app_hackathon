@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import testUrl from './test.png';
 import axios from 'axios';
 import Qs from 'qs';
-// import Review from './Review'
-
+import ReviewCard from './components/ReviewCard';
 
 class InfluencerPersonal extends React.Component {
     constructor(props) {
@@ -16,7 +14,23 @@ class InfluencerPersonal extends React.Component {
             desc : 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq',
             img : './test.png',
             ifShow : true,
-            review : [],
+            review : [
+                {
+                    img: 'https://images.dog.ceo/breeds/shiba/shiba-8.jpg',
+                    title: 'title1',
+                    content: 'content1',
+                },
+                {
+                    img: 'https://images.dog.ceo/breeds/shiba/shiba-8.jpg',
+                    title: 'title2',
+                    content: 'content2',
+                },
+                {
+                    img: 'https://images.dog.ceo/breeds/shiba/shiba-8.jpg',
+                    title: 'title3',
+                    content: 'content3',
+                },
+            ],
         };
         // this.generatorData = this.generatorData.bind(this);
         // this.generatorData(this.state)
@@ -92,6 +106,11 @@ class InfluencerPersonal extends React.Component {
     };
 
     render() {
+        let reviewData = this.state.review.map((item, index) =>{
+            return (
+                <ReviewCard img = {item.img} title = {item.title} content = {item.content} />
+            )
+        })
         return (
             <div>
                 <h1 style = {styles.title} > {this.state.nickname}'s personal page</h1>
@@ -102,9 +121,9 @@ class InfluencerPersonal extends React.Component {
                         ):null
                     }
                 </div>
-                {/* <div>
-                    <Review />
-                </div> */}
+                <div style = {styles.reviewLength}>
+                    {reviewData}
+                </div>
                 <div>
                     {
                         this.state.ifShow?(
@@ -113,7 +132,7 @@ class InfluencerPersonal extends React.Component {
                     }
                 </div>
                 <div>
-                    <img src = {testUrl} />
+                    <img src = 'https://images.dog.ceo/breeds/shiba/shiba-8.jpg' />
                     <div>
                         <span>nickname:</span>
                         <span>{this.state.nickname}</span>
@@ -145,7 +164,10 @@ const styles = {
     },
     manageButton: {
         maxWidth: '150px',
-    }
+    },
+    reviewLength: {
+        maxWidth: '1000px',
+    },
 }
 
 export default InfluencerPersonal
