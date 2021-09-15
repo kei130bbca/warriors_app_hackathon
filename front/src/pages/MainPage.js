@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { fetchUser, fetchUsers, fetchProducts } from './components/api';
+import { fetchUser, fetchUsers } from './components/api';
+// import { Button } from 'react-bulma-components';
+import { Button } from 'react-bootstrap';
 
 class User {
   constructor(id,
@@ -164,6 +166,8 @@ function Main() {
 
   return (
     <div>
+      <p>TESTSTSTTTTTTTTTTTTTTTTTT</p>
+      <Button>test</Button>
       {
         users.map((user) => {
           let ReviewElementArray = [];
