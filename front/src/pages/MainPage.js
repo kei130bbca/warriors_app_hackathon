@@ -4,15 +4,6 @@ import Footer from './components/Footer';
 import { fetchUser, fetchUsers, fetchProducts } from './components/api';
 
 class User {
-  id = 1;
-  username = 'hikakin@gmail';
-  nickname = 'Hikakin';
-  twitter_screenname = 'hikakin_twitter';
-  youtube_url = 'https://www.youtube.com/user/HikakinTV';
-  password = 'aaabbb';
-  icon = 'https://images.dog.ceo/breeds/shiba/shiba-8.jpg';
-  desc = 'hi, im hikakin.';
-
   constructor(id,
     username,
     nickname,
@@ -105,6 +96,30 @@ function ReviewCard(props) {
   );
 }
 
+function LoginSystem(props) {
+  // const loginState = props.loginState;
+  const loginState = true;
+  if (loginState === true) {
+    return (
+      <div>
+        <a href="/influencerparsonal">
+          go to personal page
+        </a>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <form>
+        <p>
+          username: <input type="text"></input>
+          password: <input type="text"></input>
+        </p>
+      </form>
+    </div>
+  );
+}
+
 function Main() {
   const [userss, setUserss] = useState(null);
 
@@ -187,6 +202,7 @@ function MainPage() {
   return (
     <div>
       <Header title="Influencer's Recommendations" />
+      <LoginSystem />
       <Main />
       <Footer />
     </div>
