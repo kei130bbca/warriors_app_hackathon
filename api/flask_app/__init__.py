@@ -11,6 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:docker@db/test_db?
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = 'top secret'
 app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
+# app.config['JWT_ACCESS_LIFESPAN'] = {'seconds': 3}
 app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
 
 db = SQLAlchemy()

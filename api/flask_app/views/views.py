@@ -69,8 +69,9 @@ def login():
 @views.route('/refresh', methods=['POST'])
 def refresh():
     print('refresh request')
-    old_token = request.get_data()
-    new_token = guard.refresh_jwt_token(old_token)
+    token_str = request.headers.get("Authorization")
+    token = token_str.split("Bearer ")[1]
+    new_token = guard.refresh_jwt_token(token)
     ret = {'access_token': new_token}
     return jsonify(ret), 200
 
