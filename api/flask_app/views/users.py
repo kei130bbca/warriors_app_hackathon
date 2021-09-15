@@ -45,10 +45,17 @@ def get_users():
 
 @users.route("/users/<int:id>", methods=['GET'])
 def get_user(id: int):
-    user = db.session.query(User.user_id, User.username, User.nickname,
-                            User.twitter, User.youtube, User.icon, User.descriptioin).get(id)
-    return jsonify(user), 200
-
+    query = db.session.query(User).get(id)
+    user = {
+        "id": query.id,
+        "username": query.username,
+        "nickname": query.nickname,
+        "twitter_screenname": query.twitter_screenname,
+        "youtube_url": query.youtube_url,
+        "icon": query.icon,
+        "description": query.description
+    }
+    return jsonify(user)
 
 @users.route("/users/<int:id>", methods=['PUT'])
 def put_user(id):
