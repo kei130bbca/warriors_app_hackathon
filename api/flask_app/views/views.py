@@ -15,8 +15,12 @@ def index():
 
 @views.route("/products/<string:id>", methods=['GET'])
 def get_product(id: str):
-    # product = db.session.query(Product).get(id)
-    product = get_product_rakuten(id)
+    try:
+        # product = db.session.query(Product).get(id)
+        product = get_product_rakuten(id)
+    except Exception as e:
+        print(e)
+        return jsonify({"message": "specified product code not found"}), 404
     return jsonify(product), 200
 
 
