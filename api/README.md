@@ -25,3 +25,14 @@ Type "flask db upgrade".
 
 Flask run doesn't load app.run arguments in app.py
 Use python app.py to launch application
+
+# Adding test user data
+
+If you want to add test user data, you cannot add them directory to database.
+Because user table has password column which should contain hashed password.
+To hash password, you have to use flask_praetorian.Praetorian.hash_password() function.
+
+Open register_user.py to add test data.
+There is "users" array. You can add some data into it.
+Then run "python manage.py regist_user" command in the docker API container.
+You can see the data registerd in database, through phpmyadmin.

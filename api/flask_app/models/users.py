@@ -9,10 +9,10 @@ class User(db.Model):
     username = db.Column(db.String(127))
     nickname = db.Column(db.String(127))
     twitter_screenname = db.Column(db.String(127))
-    youtube_url = db.Column(db.String(511))
+    youtube_url = db.Column(db.String(1023))
     password = db.Column(db.String(255))
-    icon = db.Column(db.String(127))
-    description = db.Column(db.String(511))
+    icon = db.Column(db.String(1023))
+    description = db.Column(db.String(1023))
     roles = db.Column(db.Text)
     purchses = db.relationship('Purchase')
     # TODO add __repr__ and __init__

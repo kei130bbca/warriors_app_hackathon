@@ -1,3 +1,5 @@
+from flask_app.models.products import Product
+from flask_app import db
 from flask_app.models.users import User
 import requests
 from flask import jsonify
@@ -16,8 +18,8 @@ def index():
 @views.route("/products/<string:id>", methods=['GET'])
 def get_product(id: str):
     try:
-        # product = db.session.query(Product).get(id)
-        product = get_product_rakuten(id)
+        product = db.session.query(Product).get(id)
+        # product = get_product_rakuten(id)
     except Exception as e:
         print(e)
         return jsonify({"message": "specified product code not found"}), 404
