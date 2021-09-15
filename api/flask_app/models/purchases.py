@@ -7,7 +7,7 @@ class Purchase (db.Model):  # A Model representing purchases and reviews
     __tablename__ = "purchases"
     id = db.Column(db.Integer, primary_key=True)  # ID
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    products_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    products_id = db.Column(db.String(63), db.ForeignKey('products.id'))
     count = db.Column(db.Integer)
     bought_at = db.Column(db.DateTime)
     comment = db.Column(db.String(511))
