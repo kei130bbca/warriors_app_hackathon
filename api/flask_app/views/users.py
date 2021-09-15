@@ -1,3 +1,4 @@
+import os
 import base64
 from flask import flash, jsonify
 from sqlalchemy import func
@@ -57,6 +58,7 @@ def get_user(id: int):
     }
     return jsonify(user)
 
+
 @users.route("/users/<int:id>", methods=['PUT'])
 def put_user(id):
     user = db.session.query(User).get(id)
@@ -70,18 +72,19 @@ def put_user(id):
     # save user icon
     icon = payload.get('img')
     if icon is not None:
-        src = convert_and_save(icon)
+        src = convert_and_save(icon, user.username)
         user.icon = src
     db.session.add(user)
     db.session.commit()
     return jsonify({}), 200
 
 
-def convert_and_save(b64_string: str):
-    FILE_NAME = "imageToSave.png"
-    with open(FILE_NAME, "wb") as fh:
+def convert_and_save(b64_string: str, filename="imageToSave"):
+    filename = filename+".png"
+    path = os.path.join(app.root_path, 'static', filename)
+    with open(path, "wb") as fh:
         fh.write(base64.decodebytes(b64_string.encode()))
-    return FILE_NAME
+    return filename
 
 
 @users.route("/users", methods=['POST'])
