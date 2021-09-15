@@ -2,23 +2,20 @@ import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 function Header(props) {
+    const NavLinkArray = [<Nav.Link href="/">Home</Nav.Link>];
+    if (props.auth === true) {
+        NavLinkArray.push(<Nav.Link href="/influencerpersonal">Influencer Personal Page</Nav.Link>);
+    }
     return (
         <header>
-            {/* <div className="hero is-primary is-bold">
-                <div className="hero-body">
-                    <div className="container">
-                        <h1>{props.title}</h1>
-                    </div>
-                </div>
-            </div> */}
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Brand href={props.path}>
-                    {props.title}
+                    {/* {props.title} */}
+                    Warriors app
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/influencerpersonal">Influencer Personal Page</Nav.Link>
+                    {NavLinkArray}
                 </Navbar.Collapse>
             </Navbar>
         </header>
