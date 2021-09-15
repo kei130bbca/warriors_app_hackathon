@@ -2,11 +2,13 @@ import React from 'react';
 
 
 const InfluencerPersonal = () => {
-  return (
+
+    return (
       <div>
-          <h1>InfluencerPersonal's personal page</h1>
+          <h1 />InfluencerPersonal's personal 
+          <button />modify your information
       </div> 
-  );
+    );
 }
 
 export default InfluencerPersonal
