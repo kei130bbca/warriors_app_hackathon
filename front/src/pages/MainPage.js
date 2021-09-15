@@ -131,8 +131,6 @@ function Main() {
       console.log(e);
     })
   },[]);
-  // const id = 1;
-  // fetch(`http://localhost:8000/users/${id}`).then(res => res.json()).then(d => console.log(d))
 
   const user1 = new User(
     1,
