@@ -3,6 +3,7 @@ flask
 flask_cors
 flask-migrate
 flask-praetorian
+flask-script
 flask-sqlalchemy
 python-dotenv
 pymysql
