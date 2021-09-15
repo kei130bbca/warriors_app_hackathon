@@ -25,23 +25,26 @@ def get_users():
     '''
     query the sum of users, if it is smaller than index, invalid operation
     '''
-    args = request.args
-    index = args.get("index")
+    index = request.args.get("index")
+    index = int(index)
     count = db.session.query(func.count(User.id)).scalar()
+    query = db.session.query(User)
     if count < index:
         flash('not enough data')
     else:
-        try:
-            sub_query = db.session.query(
-                User, func.row_number()).label("row_number")
-            sub_query = sub_query.subquery()
-            user_array = db.session.query(sub_query).filter(
-                sub_query.c.row_number >= index & sub_query.c.row_number < index + 10)
-        except Exception as e:
-            print(e)
-            flash('query failed!')
-            db.session.rollback()
-    return jsonify(user_array)
+        query = query.limit(10).offset(index)
+        ans = []
+        for user in query:
+            ans.append({"user_id": user.id,
+                        "username": user.username,
+                        "nickname": user.nickname,
+                        "twitter_screenname": user.twitter_screenname,
+                        "youtube_url": user.youtube_url,
+                        "password": user.password,
+                        "icon": user.icon,
+                        "description": user.description
+                        })
+        return jsonify(ans)
 
 
 @users.route("/users/<int:id>", methods=['GET'])

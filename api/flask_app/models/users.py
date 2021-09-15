@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 from flask_app import db
 from .purchases import Purchase
 
@@ -15,6 +16,7 @@ class User(db.Model):
     description = db.Column(db.String(1023))
     roles = db.Column(db.Text)
     purchses = db.relationship('Purchase')
+    #rownum = db.column_property(func.row_number())
     # TODO add __repr__ and __init__
 
     @classmethod
