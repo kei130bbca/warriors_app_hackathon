@@ -35,7 +35,12 @@ RAKUTEN_APP_ID = os.environ.get("RAKUTEN_APP_ID")
 
 def import_views():
     """The function to avoid code shaping destroying import orders. Views has to be loaded finally due to circular import."""
-    import flask_app.views
+    from .views.views import views
+    from .views.users import users
+    from .views.purchases import purchases
+    app.register_blueprint(views)
+    app.register_blueprint(users)
+    app.register_blueprint(purchases)
 
 
 import_views()
