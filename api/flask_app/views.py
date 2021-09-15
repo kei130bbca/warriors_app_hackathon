@@ -66,10 +66,11 @@ def post_user():
     payload = request.json
     user.username = payload.get('username')
     user.nickname = payload.get('nickname')
-    user.password = payload.get('password')
+    user.password = guard.hash_password(payload.get('password'))
     user.youtube_url = payload.get('youtube')
     user.twitter_screenname = payload.get('twitter')
     user.description = payload.get('desc')
+    user.roles = "viewer"
     # save user icon
     icon = payload.get('img')
     if icon is not None:
