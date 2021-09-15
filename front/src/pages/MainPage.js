@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { fetchUser, fetchUsers } from './components/api';
+import { fetchUser, fetchUsers, fetchProducts } from './components/api';
 // import { Button } from 'react-bulma-components';
 
 class User {
@@ -115,7 +115,7 @@ function Main() {
   //   }
   //   }, []);
   useEffect(() => {
-    fetchUser(0).then((u) => {
+    fetchProducts(2).then((u) => {
       console.log(u);
     })
   });
