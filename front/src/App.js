@@ -5,6 +5,7 @@ import TemplatePage from './pages/TemplatePage';
 import InfluencerPersonal from './pages/InfluencerPersonal'
 import ReviewManagementPage from './pages/ReviewManagementPage';
 import ReviewPostingPage from './pages/ReviewPostingPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
