@@ -5,7 +5,6 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
-
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:docker@db/test_db?charset=utf8"
@@ -40,19 +39,3 @@ def import_views():
 
 
 import_views()
-
-
-def register_test_user():
-    """Register test user data here. Because all password will be hashed when it is registered, we cannot add test user data to database directly."""
-    from .models.users import User
-    with app.app_context():
-        if db.session.query(User).filter_by(username='Yasoob').count() < 1:
-            db.session.add(User(
-                username='Yasoob',
-                password=guard.hash_password('strongpassword'),
-                roles='admin'
-            ))
-        db.session.commit()
-
-
-register_test_user()
