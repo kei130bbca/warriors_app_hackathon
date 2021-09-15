@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { fetchUser, fetchUsers } from './components/api';
 // import { Button } from 'react-bulma-components';
+import { Button } from 'react-bootstrap';
 
 class User {
   id = 1;
@@ -162,6 +163,8 @@ function Main() {
 
   return (
     <div>
+      <p>TESTSTSTTTTTTTTTTTTTTTTTT</p>
+      <Button>test</Button>
       {
         users.map((user) => {
           let ReviewElementArray = [];
