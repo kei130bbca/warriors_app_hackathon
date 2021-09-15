@@ -15,7 +15,7 @@ function App() {
     <Route path="/template-page">
       <TemplatePage />
     </Route>
-    <Route path="/influencerpersonal" component = {InfluencerPersonal} >
+    <Route path="/influencerpersonal">
       <InfluencerPersonal />
     </Route>
     <Route path="/review-management">
