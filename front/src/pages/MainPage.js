@@ -121,11 +121,12 @@ function LoginSystem(props) {
 }
 
 function Main() {
-  const [userss, setUserss] = useState(null);
+  const [users, setUsers] = useState(null);
 
   useEffect(() => {
     fetchUser(1).then((u) => {
-      console.log(u);
+      setUsers(u);
+      // console.log(u);
     })
     .catch((e) => {
       console.log(e);
