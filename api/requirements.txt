@@ -1,4 +1,7 @@
+cryptography
 flask
+flask_cors
 flask-migrate
+flask-praetorian
 flask-sqlalchemy
 pymysql

@@ -9,30 +9,25 @@ services:
     command: sh -c "yarn install && yarn start"
     ports:
       - "80:3000"
-    # environment:
-    #   REACT_APP_AUTH0_AUDIENCE: $AUTH0_AUDIENCE
-    #   REACT_APP_AUTH0_DOMAIN: $AUTH0_DOMAIN
-    #   REACT_APP_SERVER_URL: "http://localhost:3000"
+    restart: always
   api:
-    image: python:3
-    # hostname: api-container
+    build:
+      context: ./api
     volumes:
       - ./api/:/usr/src/
-      # - api_modules:/usr/src/node_modules #node_modulesはコンテナ内部で用意します
     working_dir: "/usr/src"
     ports:
       - "8000:80"
     environment:
       CLIENT_ORIGIN_URL: "http://localhost"
-      # RDS_HOSTNAME: $RDS_HOSTNAME
       RDS_HOSTNAME: db
       RDS_USERNAME: root
       RDS_PASSWORD: docker
       RDS_DB_NAME: test_db
-      FLASK_DEBUG: 1
-    command: sh -c "pip install -r requirements.txt && flask run --debugger"
+    command: sh -c 'flask db upgrade ; python app.py'
     depends_on:
       - db
+    restart: always
   db:
     platform: linux/x86_64 # M1チップ対応のため追記
     image: mysql:8
@@ -44,6 +39,7 @@ services:
     volumes:
       - ./db/data:/var/lib/mysql #データ永続化
       - ./db/sql:/docker-entrypoint-initdb.d #起動時sqlフォルダ内のsqlファイルを実行
+    restart: always
   phpmyadmin:
     image: phpmyadmin #fpmやalpineタグは別途httpサーバが必要
     environment:
@@ -57,6 +53,7 @@ services:
       - "./phpmyadmin:/sessions"
     depends_on:
       - db
+    restart: always
 volumes:
   front_modules:
   api_modules:

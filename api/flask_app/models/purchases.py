@@ -7,19 +7,22 @@ class Purchase (db.Model):  # A Model representing purchases and reviews
     __tablename__ = "purchases"
     id = db.Column(db.Integer, primary_key=True)  # ID
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    procucts_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    products_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     count = db.Column(db.Integer)
     bought_at = db.Column(db.DateTime)
-    comment = db.Column(db.String)
+    comment = db.Column(db.String(511))
     stars = db.Column(db.Integer)
-    title = db.Column(db.String)
+    title = db.Column(db.String(255))
 
-    # def __init__(self, attendance_id=None, started_at=None, end_at=None):
-    #     self.attendance_id = attendance_id
-    #     self.started_at = started_at
-    #     self.end_at = end_at
+    def __init__(self, id, products_id, count, bought_at, comment, stars, title):
+        self.id = id
+        # self.name = name
+        self.products_id = products_id
+        self.count = count
+        self.bought_at = bought_at
+        self.comment = comment
+        self.stars = stars
+        self.title = title
 
-    # def __repr__(self):
-    #     return f"<Break id:{self.id} attendance_id:{self.attendance_id} started_at:{self.started_at} end_at:{self.end_at}"
-
-    # TODO add __repr__ and __init__
+    def __repr__(self):
+        return f"<Purchase(id=%s)>" % self.id
