@@ -25,11 +25,7 @@ class RegisterTestUser(Command):
                      roles='admin')
             ]
             for user in users:
-                from flask_app import db, guard
+                from flask_app import db
                 if db.session.query(User).filter_by(username=user.username).count() < 1:
-                    db.session.add(User(
-                        username=user.username,
-                        password=guard.hash_password(user.password),
-                        roles=user.roles
-                    ))
+                    db.session.add(user)
             db.session.commit()
