@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import {fetchUser, fetchUsers} from './components/api';
 
 class User {
   id = 1;
@@ -105,6 +106,14 @@ function ReviewCard(props) {
 }
 
 function Main() {
+  const [userss, setUserss] = useState(null);
+  useEffect(() => {
+    fetchUser(0).then((u) => {
+      setUserss(u);
+      console.log(u);
+    });
+  }, []);
+  
   const user1 = new User(
     1,
     'hikakin@gmail',
