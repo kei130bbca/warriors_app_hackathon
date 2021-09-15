@@ -1,7 +1,7 @@
 from flask_script import Command
 from flask_app.models.users import User
 
-# You can run scripts through docker api container
+# You can run scripts in docker api container
 # python manage.py [command_name]
 # commands are listed in manage.py
 
