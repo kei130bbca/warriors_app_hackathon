@@ -1,4 +1,3 @@
-import json
 import requests
 from flask import flash, jsonify
 from sqlalchemy import func
@@ -7,7 +6,6 @@ from flask_app import app, db, guard, RAKUTEN_APP_ID
 from flask import jsonify, request
 from .models.purchases import Purchase
 from .models.users import User
-from .models.products import Product
 import flask_praetorian
 
 
