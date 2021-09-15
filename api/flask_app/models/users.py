@@ -36,15 +36,15 @@ class User(db.Model):
         except Exception:
             return []
 
-    # def __init__(self, id, username, nickname, password, twitter_screenname=None, youtube_url=None, icon=None, description=None):
-    #     self.id = id
-    #     self.username = username
-    #     self.nickname = nickname
-    #     self.password = password
-    #     self.twitter_screenname = twitter_screenname
-    #     self.youtube_url = youtube_url
-    #     self.icon = icon
-    #     self.description = description
+    def __init__(self, username=None, nickname=None, password=None, twitter_screenname=None, youtube_url=None, icon=None, description=None, roles="viewer"):
+        self.username = username
+        self.nickname = nickname
+        self.password = password
+        self.twitter_screenname = twitter_screenname
+        self.youtube_url = youtube_url
+        self.icon = icon
+        self.description = description
+        self.roles = roles
 
     def __repr__(self):
         return f"<User(id=%s)>" % self.id
