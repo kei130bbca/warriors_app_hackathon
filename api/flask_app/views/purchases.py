@@ -8,7 +8,18 @@ purchases = Blueprint("purchases", __name__)
 
 @purchases.route("/purchases")
 def get_purchases():
-    query = db.session.query(Purchase).all()
+    args = request.args
+    user_id = args.get("user_id")
+    product_id = args.get("product_id")
+    index = args.get("index")
+    query = db.session.query(Purchase)
+    if user_id is not None:
+        query = query.filter(Purchase.user_id == user_id)
+    if product_id is not None:
+        query = query.filter(Purchase.products_id == product_id)
+    if index is not None:
+        query = query.offset(index)
+    query = query.all()
     ans = []
     for purchase in query:
         ans.append({"purchase_id": purchase.id,
