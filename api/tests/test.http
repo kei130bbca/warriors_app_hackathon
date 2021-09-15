@@ -1,0 +1,32 @@
+GET http://localhost:8000/products/AAAAA HTTP/1.1
+
+###
+
+POST http://localhost:8000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "Yasoob",
+    "password": "strongpassword"
+}
+
+###
+
+GET http://localhost:8000/auth_user HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzE2ODU5ODcsImV4cCI6MTYzMTc3MjM4NywianRpIjoiOGI1NTE0NmItMzVkZC00Y2Q2LWIzNzYtNzNhYTIyYTBmZjQzIiwiaWQiOjEsInJscyI6ImFkbWluIiwicmZfZXhwIjoxNjM0Mjc3OTg3fQ.kWIHVwf2RmWK5RR0ov9vYSPWU8S9fp6tO3eVp_-WjP4
+
+###
+
+POST http://localhost:8000/refresh HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzE2ODU5ODcsImV4cCI6MTYzMTc3MjM4NywianRpIjoiOGI1NTE0NmItMzVkZC00Y2Q2LWIzNzYtNzNhYTIyYTBmZjQzIiwiaWQiOjEsInJscyI6ImFkbWluIiwicmZfZXhwIjoxNjM0Mjc3OTg3fQ.kWIHVwf2RmWK5RR0ov9vYSPWU8S9fp6tO3eVp_-WjP4
+
+###
+# You have to set RAKUTEN_APP_ID in your vscode/settings.json
+# https://dev.classmethod.jp/articles/vscode-rest-client-is-good/
+# test product Ids
+# sorara:10001376
+# jmei:10004611
+# sorara:10003082
+GET https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?applicationId={{RAKUTEN_APP_ID}}&keyword=%E7%A6%8F%E8%A2%8B&sort=standard HTTP/1.1
