@@ -1,11 +1,15 @@
 import React from 'react';
+import { Container, Row, Col } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Footer() {
     return (
-      <footer className="footer">
-        <div className="content has-text-centered">
-          <p>&copy; Warriors, Inc.</p>
-        </div>
+      <footer>
+        <Container>
+          <Row>
+            <Col>&copy; Warriors, Inc.</Col>
+          </Row>
+        </Container>
       </footer>
     );
   }
