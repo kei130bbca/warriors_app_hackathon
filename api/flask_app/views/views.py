@@ -1,3 +1,4 @@
+from api.flask_app.models.users import User
 import requests
 from flask import jsonify
 from flask_app import guard, RAKUTEN_APP_ID
@@ -19,7 +20,7 @@ def get_product(id: str):
     return jsonify(product), 200
 
 
-@views.route('/api/protected')
+@views.route('/auth_user')
 @flask_praetorian.auth_required
 def protected():
     """
@@ -29,7 +30,17 @@ def protected():
        $ curl http://localhost:8000/api/protected -X GET \
          -H "Authorization: Bearer <your_token>"
     """
-    return jsonify({"username": flask_praetorian.current_user().username})
+    user: User = flask_praetorian.current_user()
+    user_obj = {
+        "username": user.username,
+        "nickname": user.nickname,
+        "twitter_screenname": user.twitter_screenname,
+        "youtube_url": user.youtube_url,
+        "password": user.password,
+        "icon": user.icon,
+        "desc": user.description,
+    }
+    return jsonify(user_obj)
 
 
 @views.route("/login", methods=['POST'])
