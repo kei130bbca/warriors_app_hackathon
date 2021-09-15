@@ -38,6 +38,7 @@ import_views()
 
 
 def register_test_user():
+    """Register test user data here. Because all password will be hashed when it is registered, we cannot add test user data to database directly."""
     from .models.users import User
     with app.app_context():
         if db.session.query(User).filter_by(username='Yasoob').count() < 1:
