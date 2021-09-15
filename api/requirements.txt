@@ -4,4 +4,6 @@ flask_cors
 flask-migrate
 flask-praetorian
 flask-sqlalchemy
+python-dotenv
 pymysql
+requests

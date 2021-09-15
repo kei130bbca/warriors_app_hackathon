@@ -15,4 +15,8 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzE2MDU5N
 ###
 # You have to set RAKUTEN_APP_ID in your vscode/settings.json
 # https://dev.classmethod.jp/articles/vscode-rest-client-is-good/
-GET https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?applicationId={{RAKUTEN_APP_ID}}&keyword=%E7%A6%8F%E8%A2%8B&sort=%2BitemPrice HTTP/1.1
+# test product Ids
+# sorara:10001376
+# jmei:10004611
+# sorara:10003082
+GET https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?applicationId={{RAKUTEN_APP_ID}}&keyword=%E7%A6%8F%E8%A2%8B&sort=standard HTTP/1.1

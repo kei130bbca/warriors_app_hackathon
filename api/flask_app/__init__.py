@@ -1,3 +1,4 @@
+import os
 import flask_praetorian
 import flask_cors
 from flask_migrate import Migrate
@@ -23,10 +24,14 @@ def init_guard():
     guard.init_app(app, User)
 
 
+# Configure Flask libraries
 init_guard()
 db.init_app(app)
 migrate = Migrate(app, db)
 cors.init_app(app)
+
+# Load environmental variables
+RAKUTEN_APP_ID = os.environ.get("RAKUTEN_APP_ID")
 
 
 def import_views():
