@@ -23,7 +23,7 @@ def get_purchases():
 
 
 @app.route("/purchases/<int:id>", methods=['PUT'])
-def put_purchase(id):
+def put_purchase(id: int):
     purchase = db.session.query(Purchase).get(id)
     if purchase is None:
         return jsonify({'message': 'the purchase was not found'}), 404
@@ -36,7 +36,7 @@ def put_purchase(id):
 
 
 @app.route("/users/<int:id>", methods=['GET'])
-def get_user(id):
+def get_user(id: int):
     user = db.session.query(User.user_id, User.username, User.nickname,
                             User.twitter, User.youtube, User.icon, User.descriptioin).get(id)
     return jsonify(user), 200
@@ -125,7 +125,7 @@ def get_users():
     return jsonify(user_array)
 
 
-def convert_and_save(b64_string):
+def convert_and_save(b64_string: str):
     FILE_NAME = "imageToSave.png"
     with open(FILE_NAME, "wb") as fh:
         fh.write(base64.decodebytes(b64_string.encode()))
