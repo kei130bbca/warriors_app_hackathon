@@ -1,6 +1,5 @@
 import requests
 from flask import jsonify
-import base64
 from flask_app import guard, RAKUTEN_APP_ID
 from flask import jsonify, request
 import flask_praetorian
@@ -18,13 +17,6 @@ def get_product(id: str):
     # product = db.session.query(Product).get(id)
     product = get_product_rakuten(id)
     return jsonify(product), 200
-
-
-def convert_and_save(b64_string: str):
-    FILE_NAME = "imageToSave.png"
-    with open(FILE_NAME, "wb") as fh:
-        fh.write(base64.decodebytes(b64_string.encode()))
-    return FILE_NAME
 
 
 @views.route('/api/protected')

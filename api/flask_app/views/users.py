@@ -1,8 +1,10 @@
+import base64
 from flask import flash, jsonify
 from sqlalchemy import func
 from flask_app import app, db, guard
 from flask import jsonify, request
 from flask import Blueprint
+from flask_app.models.users import User
 users = Blueprint("users", __name__)
 
 
@@ -66,6 +68,13 @@ def put_user(id):
     db.session.add(user)
     db.session.commit()
     return jsonify({}), 200
+
+
+def convert_and_save(b64_string: str):
+    FILE_NAME = "imageToSave.png"
+    with open(FILE_NAME, "wb") as fh:
+        fh.write(base64.decodebytes(b64_string.encode()))
+    return FILE_NAME
 
 
 @users.route("/users", methods=['POST'])
