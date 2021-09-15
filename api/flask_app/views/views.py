@@ -1,4 +1,4 @@
-from api.flask_app.models.users import User
+from flask_app.models.users import User
 import requests
 from flask import jsonify
 from flask_app import guard, RAKUTEN_APP_ID
