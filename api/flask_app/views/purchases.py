@@ -9,7 +9,18 @@ purchases = Blueprint("purchases", __name__)
 @purchases.route("/purchases")
 def get_purchases():
     query = db.session.query(Purchase).all()
-    return jsonify(query)
+    ans = []
+    for purchase in query:
+        ans.append({"purchase_id": purchase.id,
+                    "users_id": purchase.user_id,
+                    "products_id": purchase.products_id,
+                    "count": purchase.count,
+                    "bought_at": purchase.bought_at,
+                    "comment": purchase.comment,
+                    "stars": purchase.stars,
+                    "title": purchase.title,
+                    })
+    return jsonify(ans)
 
 
 @purchases.route("/purchases/<int:id>", methods=['PUT'])
