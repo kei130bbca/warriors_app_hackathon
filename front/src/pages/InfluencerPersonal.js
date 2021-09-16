@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Qs from 'qs';
 import ReviewCard from './components/ReviewCard';
 
 class InfluencerPersonal extends React.Component {
