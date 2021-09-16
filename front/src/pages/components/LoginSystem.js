@@ -69,6 +69,8 @@ function LoginSystem(props) {
                     .then((res) => {
                         if (res.ok === true) {
                             return res.json();
+                        } else {
+                            throw('token is expired.')
                         }
                     })
                     .then((data) => {
@@ -78,6 +80,10 @@ function LoginSystem(props) {
                             state: { user_id: data.id }
                         }
                         )
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                        localStorage.removeItem('token');
                     })
             });
 
