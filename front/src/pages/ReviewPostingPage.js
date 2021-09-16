@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { useParams } from 'react-router';
-import { Row, Button, Container, Col } from 'react-bootstrap';
+import { Row, Button, Container, Col, Form } from 'react-bootstrap';
 import axios from 'axios';
 
 class User {
@@ -60,16 +60,6 @@ class Product {
 }
 
 function Main() {
-  const purchase3 = new Purchase(
-    3,
-    2,
-    13,
-    10,
-    2020 - 1 - 1,
-    'nice orange',
-    4,
-    "I'v never seen like this orange!"
-  );
   const product3 = new Product(
     13,
     'orange',
@@ -82,47 +72,61 @@ function Main() {
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
   const [star, setStar] = useState(3);
-  // axios.
-  return (
-    <div>
-      <img src={product3.img} height="250" alt="" />
 
-      <form>
-        <p>
-          Title:<br></br>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </p>
-        <p>
-          Comment:<br></br>
-          <textarea
-            name="comment"
-            id="comment"
-            cols="30"
-            rows="10"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-        </p>
-        <p>
-          Stars:<br></br>
-          <select
-            name="star"
-            value={star}
-            onChange={(e) => setStar(e.target.value)}
-          >
-            {[...Array(5).keys()]
-              .map((i) => ++i)
-              .map((i) => (
-                <option value={i}>{i}</option>
-              ))}
-          </select>
-        </p>
-      </form>
+  axios
+    .get('http://localhost:8000/purchases/' + id)
+    .then((response) => {
+      const data = response.data;
+      setTitle(data.title);
+      setComment(data.comment);
+      setStar(data.star);
+    })
+    .catch((e) => console.error(e));
+
+  return (
+    <Container className="text-center pt-5 px-xl-5">
+      <img src={product3.img} height="250" alt="" />
+      <Form className="mt-5 mx-xl-5 px-xl-5">
+        <Form.Group as={Row} className="mb-3" controlId="title">
+          <Form.Label column xs={2}>
+            Title
+          </Form.Label>
+          <Col xs={10}>
+            <Form.Control
+              placeholder="Enter your title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} className="mb-3" controlId="comment">
+          <Form.Label column xs={2}>
+            Comment
+          </Form.Label>
+          <Col xs={10}>
+            <Form.Control
+              as="textarea"
+              placeholder="Enter your comment"
+              value={comment}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} className="mb-3" controlId="comment">
+          <Form.Label column xs={2}>
+            Star
+          </Form.Label>
+          <Col>
+            <Form.Select value={star} onChange={(e) => setStar(e.target.value)}>
+              {[...Array(5).keys()]
+                .map((i) => ++i)
+                .map((i) => (
+                  <option value={i}>{i}</option>
+                ))}
+            </Form.Select>
+          </Col>
+        </Form.Group>
+      </Form>
       <Button
         onClick={() => {
           console.log(title, comment, star);
@@ -130,7 +134,7 @@ function Main() {
       >
         Submit
       </Button>
-    </div>
+    </Container>
   );
 }
 function ReviewPostingPage() {
