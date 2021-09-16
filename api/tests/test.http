@@ -1,4 +1,4 @@
-GET http://localhost:8000/products/946kitchen:10004398 HTTP/1.1
+GET http://localhost:8000/products/f182028-tsuruga:10000630 HTTP/1.1
 
 ###
 
