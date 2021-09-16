@@ -1,9 +1,7 @@
 import React from 'react'
-// import ReviewCard from './components/ReviewCard';
 import axios from 'axios';
 import ReviewCard2 from './components/ReviewCard2';
-import Footer from './components/Footer'
-import Header from './components/Header';
+import { withRouter, useParams } from 'react-router';
 
 class ProductDetail extends React.Component {
     constructor(props) {
@@ -21,9 +19,7 @@ class ProductDetail extends React.Component {
 
     generatorData = async(state) =>{
         let temp_data = [];
-        let param = window.location.search;
-        let product_id = param.split("=")[1];
-        console.log(product_id);
+        let product_id = this.props.match.params.id;
         let temp_url_product = 'http://localhost:8000/products/' + product_id;
         let response_product = await axios.get(temp_url_product);
         temp_data = response_product.data
@@ -50,6 +46,7 @@ class ProductDetail extends React.Component {
             item_name: temp_name,
             item_price: temp_price,
         })
+        console.log(this.state.review);
     };
 
     render() {
@@ -65,17 +62,17 @@ class ProductDetail extends React.Component {
         return (
             <div>
                 <div>
-                    <div style = {styles.inlineDisplay}>
-                        <img src = {this.state.item_img}></img>
-                        <div style = {styles.inlineDisplay}>
-                            <div>
-                                <h2>{this.state.item_name}</h2>
+                    <div style ={styles.products}>
+                        <img src = {this.state.item_img} style = {styles.displayPic}></img>
+                        <div style = {styles.displayTitle}>
+                            <div >
+                                <span>{this.state.item_name}</span>
                             </div>
-                        <div>
-                            {this.state.item_price}
+                            <div>
+                                {'price:' + this.state.item_price}
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <div style = {styles.reviewLength}>
                     {reviewData}
@@ -98,9 +95,22 @@ const styles = {
     reviewLength: {
         maxWidth: '1000px',
     },
+    displayTitle:{
+        display: 'inline-block',
+        maxWidth: '400px',
+    },
+    displayPic:{
+        Width: '300px',
+        height: '300px',
+        padding: '50px',
+    },
+    products:{
+        textAlign: 'center',
+        Height: '750px',
+    },
     inlineDisplay:{
-        display: 'inline-block'
+        display: 'inline-block',
     },
 }
  
-export default ProductDetail
+export default withRouter(ProductDetail)
