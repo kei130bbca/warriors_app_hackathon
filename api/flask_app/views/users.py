@@ -96,7 +96,7 @@ def put_user(id):
 
 
 def convert_and_save(b64_string: str, filename="imageToSave"):
-    filename = filename+".png"
+    filename = urllib.parse.quote(filename, safe='')+".png"
     path = os.path.join(app.root_path, 'static', filename)
     with open(path, "wb") as fh:
         fh.write(base64.decodebytes(b64_string.encode()))
