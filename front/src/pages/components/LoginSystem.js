@@ -75,6 +75,7 @@ function LoginSystem(props) {
                     })
                     .then((data) => {
                         // console.log(data);
+                        localStorage.setItem('user_id',data.id);
                         history.push({
                             pathname: `/influencerpersonal/?user_id=${data.id}`,
                             state: { user_id: data.id }
@@ -84,6 +85,7 @@ function LoginSystem(props) {
                     .catch((e) => {
                         console.log(e);
                         localStorage.removeItem('token');
+                        localStorage.removeItem('user_id');
                     })
             });
 
