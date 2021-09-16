@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 import ReviewCard from './components/ReviewCard';
 import axios from 'axios';
 
 class ProductDetail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      item_id: '',
-      item_img: '',
-      item_name: '',
-      item_price: 0,
-      review: [],
-    };
-    this.generatorData = this.generatorData.bind(this);
-    this.generatorData(this.state);
-    console.log(this.state);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            item_id: '',
+            item_img: '',
+            item_name: '',
+            item_price: 0,
+            review: [],
+        };
+        this.generatorData = this.generatorData.bind(this);
+        this.generatorData(this.state);
+        console.log(this.state);
+    }
 
     generatorData = async(state) =>{
         let temp_data = [];
@@ -48,47 +48,52 @@ class ProductDetail extends React.Component {
         })
     };
 
-  render() {
-    let reviewData = this.state.review.map((item, index) => {
-      return (
-        <ReviewCard img={item.img} title={item.title} content={item.content} />
-      );
-    });
-    return (
-      <div>
-        <h1 style={styles.title}>Product Detail Page</h1>
-        <div>
-          <div style={styles.inlineDisplay}>
-            <img src={this.state.item_img}></img>
-            <div style={styles.inlineDisplay}>
-              <div>
-                <h2>{this.state.item_name}</h2>
-              </div>
-              <div>{this.state.item_price}</div>
+    render() {
+            let reviewData = this.state.review.map((item, index) =>{
+                return (
+                    <ReviewCard img = {item.img} title = {item.title} content = {item.content} />
+                )
+            })  
+        return (
+            <div>
+                <h1 style = {styles.title} >Product Detail Page</h1>
+                <div>
+                    <div style = {styles.inlineDisplay}>
+                        <img src = {this.state.item_img}></img>
+                        <div style = {styles.inlineDisplay}>
+                            <div>
+                                <h2>{this.state.item_name}</h2>
+                            </div>
+                        <div>
+                            {this.state.item_price}
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div style = {styles.reviewLength}>
+                    {reviewData}
+                </div>
             </div>
-          </div>
-        </div>
-        <div style={styles.reviewLength}>{reviewData}</div>
-      </div>
-    );
-  }
-}
+        );
+    }
+};
 
 const styles = {
-  title: {
-    textAlign: 'center',
-  },
-  modiButton: {
-    maxWidth: '150px',
-  },
-  manageButton: {
-    maxWidth: '150px',
-  },
-  reviewLength: {
-    maxWidth: '1000px',
-  },
-  inlineDisplay: {
-    display: 'inline-block',
-  },
-};
-export default ProductDetail;
+    title: {
+        textAlign: 'center',
+    },
+    modiButton: {
+        maxWidth: '150px',
+    },
+    manageButton: {
+        maxWidth: '150px',
+    },
+    reviewLength: {
+        maxWidth: '1000px',
+    },
+    inlineDisplay:{
+        display: 'inline-block'
+    },
+}
+ 
+export default ProductDetail
