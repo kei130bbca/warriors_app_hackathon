@@ -31,7 +31,7 @@ def get_users():
     count = db.session.query(func.count(User.id)).scalar()
     query = db.session.query(User)
     if count < index:
-        flash('not enough data')
+        return jsonify({'message': 'no enough data!'}), 404
     else:
         query = query.limit(10).offset(index)
         ans = []
