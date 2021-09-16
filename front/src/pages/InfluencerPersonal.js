@@ -80,17 +80,21 @@ class InfluencerPersonal extends React.Component {
                 }}
             ).then ( (response_review) => {
                 let temp_data = response_review.data;
+                // let promise = [];
                 for(let i = 0; i < temp_data.length; i++){
                     let temp_url = 'http://localhost:8000/products/' + temp_data[i].products_id;
+                    //promise[i] = axios.get(temp_url);
                     axios.get(temp_url)
                     .then((response_product) => {
-                        console.log(responce);
+                        console.log(response_product);
                         temp_data[i].img = response_product.data.img;
                     }).catch((e) => {
                         console.log(e);
                     });
                 }
-                let done = true;
+                // Promise.all(promise);
+                // console.log(promise);
+                // let done = true;
                 this.setState({
                     nickname: temp_nickname,
                     youtubleUrl: temp_youtuble,
@@ -100,7 +104,7 @@ class InfluencerPersonal extends React.Component {
                     ifShow: ifShow,
                     review: temp_data,
                     show_id: user_id,
-                    done: done,
+                    // done: done,
                 });
             }).catch( (error2) => {
                 console.log(error2);
@@ -123,6 +127,7 @@ class InfluencerPersonal extends React.Component {
             })
             return (
                 <div>
+                    <h1>{this.state.nickname + "'s personial homepage"}</h1>
                     <div>
                         {
                             this.state.ifShow?(
