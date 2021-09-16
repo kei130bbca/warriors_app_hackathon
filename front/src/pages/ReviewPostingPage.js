@@ -1,108 +1,150 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { useParams } from 'react-router';
+import { Row, Button, Container, Col, Form } from 'react-bootstrap';
+import axios from 'axios';
 
 class User {
-    constructor(id,
-        username,
-        nickname,
-        twitter_screenname,
-        youtube_url,
-        password,
-        icon,
-        desc) {
-        this.id = id;
-        this.username = username;
-        this.nickname = nickname;
-        this.twitter_screenname = twitter_screenname;
-        this.youtube_url = youtube_url;
-        this.password = password;
-        this.icon = icon;
-        this.desc = desc;
-    }
+  constructor(
+    id,
+    username,
+    nickname,
+    twitter_screenname,
+    youtube_url,
+    password,
+    icon,
+    desc
+  ) {
+    this.id = id;
+    this.username = username;
+    this.nickname = nickname;
+    this.twitter_screenname = twitter_screenname;
+    this.youtube_url = youtube_url;
+    this.password = password;
+    this.icon = icon;
+    this.desc = desc;
+  }
 }
 
 class Purchase {
-    constructor(purchase_id,
-        user_id,
-        product_id,
-        count,
-        bouth_at,
-        comment,
-        stars,
-        title) {
-        this.purchase_id = purchase_id;
-        this.user_id = user_id;
-        this.product_id = product_id;
-        this.count = count;
-        this.bouth_at = bouth_at;
-        this.comment = comment;
-        this.stars = stars;
-        this.title = title;
-    }
+  constructor(
+    purchase_id,
+    user_id,
+    product_id,
+    count,
+    bouth_at,
+    comment,
+    stars,
+    title
+  ) {
+    this.purchase_id = purchase_id;
+    this.user_id = user_id;
+    this.product_id = product_id;
+    this.count = count;
+    this.bouth_at = bouth_at;
+    this.comment = comment;
+    this.stars = stars;
+    this.title = title;
+  }
 }
 
 class Product {
-    constructor(id, name, img, price, url) {
-        this.id = id;
-        this.name = name;
-        this.img = img;
-        this.price = price;
-        this.url = url;
-    }
-}
-function Review(props) {
-    const stars = String(props.stars);
-    // function handleChange(event) {
-    //     event.preventDefault();
-    // }
-    useEffect(() => {
-        if (props.title !== null) {
-            document.getElementById('title').value = props.title;
-        }
-        if (props.comment !== null) {
-            document.getElementById('comment').value = props.comment;
-        }
-    }, []);
-    return (
-        <form>
-            <p>Title:<br></br>
-            <input type="text" id="title"/></p>
-            <p>Comment:<br></br>
-            <textarea name="comment" id="comment" cols="30" rows="10" /></p>
-            <p>Stars:<br></br>
-            <select name="star" defaultValue={stars} >
-                <option value="1">1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option>
-                <option value='5'>5</option>
-            </select></p>
-        </form>
-    );
+  constructor(id, name, img, price, url) {
+    this.id = id;
+    this.name = name;
+    this.img = img;
+    this.price = price;
+    this.url = url;
+  }
 }
 
 function Main() {
-    const purchase3 = new Purchase(3, 2, 13, 10, 2020 - 1 - 1, 'nice orange', 4, "I'v never seen like this orange!");
-    const product3 = new Product(13, 'orange', 'https://tshop.r10s.jp/benikou/cabinet/orenge/imgrc0084994537.jpg?fitin=275:275', 200, 'https://item.rakuten.co.jp/benikou/10000723/?iasid=07rpp_10095___et-ktjubpdf-zqv-23e8ef5b-f7a1-4739-8075-3f19a787f7c7');
+  const product3 = new Product(
+    13,
+    'orange',
+    'https://tshop.r10s.jp/benikou/cabinet/orenge/imgrc0084994537.jpg?fitin=275:275',
+    200,
+    'https://item.rakuten.co.jp/benikou/10000723/?iasid=07rpp_10095___et-ktjubpdf-zqv-23e8ef5b-f7a1-4739-8075-3f19a787f7c7'
+  );
 
-    return (
-        <div>
-            <img src={product3.img} height="250" alt="" />
-            <Review title={purchase3.title} comment={purchase3.comment} stars={purchase3.stars} />
-            <button type="submit"> Submit </button>
-        </div>
-    );
+  let { id } = useParams();
+  const [title, setTitle] = useState('');
+  const [comment, setComment] = useState('');
+  const [star, setStar] = useState(3);
+
+  axios
+    .get('http://localhost:8000/purchases/' + id)
+    .then((response) => {
+      const data = response.data;
+      setTitle(data.title);
+      setComment(data.comment);
+      setStar(data.star);
+    })
+    .catch((e) => console.error(e));
+
+  return (
+    <Container className="text-center pt-5 px-xl-5">
+      <img src={product3.img} height="250" alt="" />
+      <Form className="mt-5 mx-xl-5 px-xl-5">
+        <Form.Group as={Row} className="mb-3" controlId="title">
+          <Form.Label column xs={2}>
+            Title
+          </Form.Label>
+          <Col xs={10}>
+            <Form.Control
+              placeholder="Enter your title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} className="mb-3" controlId="comment">
+          <Form.Label column xs={2}>
+            Comment
+          </Form.Label>
+          <Col xs={10}>
+            <Form.Control
+              as="textarea"
+              placeholder="Enter your comment"
+              value={comment}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} className="mb-3" controlId="comment">
+          <Form.Label column xs={2}>
+            Star
+          </Form.Label>
+          <Col>
+            <Form.Select value={star} onChange={(e) => setStar(e.target.value)}>
+              {[...Array(5).keys()]
+                .map((i) => ++i)
+                .map((i) => (
+                  <option value={i}>{i}</option>
+                ))}
+            </Form.Select>
+          </Col>
+        </Form.Group>
+      </Form>
+      <Button
+        onClick={() => {
+          console.log(title, comment, star);
+        }}
+      >
+        Submit
+      </Button>
+    </Container>
+  );
 }
-
 function ReviewPostingPage() {
-    return (
-        <div>
-            <Header title="Review Posting Page" />
-            <Main />
-            <Footer />
-        </div>
-    );
+  return (
+    <div>
+      <Header title="Review Posting Page" />
+      <Main />
+      <Footer />
+    </div>
+  );
 }
 
 export default ReviewPostingPage;

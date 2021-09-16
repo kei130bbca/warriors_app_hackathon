@@ -34,6 +34,22 @@ def get_purchases():
     return jsonify(ans)
 
 
+@purchases.route("/purchases/<int:id>", methods=['GET'])
+def get_purchase(id):
+    query = db.session.query(Purchase).get(id)
+    purchase = {
+        "purchase_id": query.id,
+        "users_id": query.user_id,
+        "products_id": query.products_id,
+        "count": query.count,
+        "bought_at": query.bought_at,
+        "comment": query.comment,
+        "stars": query.stars,
+        "title": query.title,
+    }
+    return jsonify(purchase)
+
+
 @purchases.route("/purchases/<int:id>", methods=['PUT'])
 def put_purchase(id: int):
     purchase = db.session.query(Purchase).get(id)
