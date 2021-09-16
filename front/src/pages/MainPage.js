@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { fetchUser, fetchUsers } from './components/api';
 import {
   Form,
   Button,
@@ -14,7 +13,6 @@ import {
   ToastContainer,
 } from 'react-bootstrap';
 import { fetchUser, fetchUsers, postLogin } from './components/api';
-import { Form, Button, Row, Col, Card, Image, Container, Toast, ToastContainer } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewCard2 from './components/ReviewCard2';
 import LoginSystem from './components/LoginSystem';
