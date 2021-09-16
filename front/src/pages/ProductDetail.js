@@ -1,9 +1,7 @@
 import React from 'react'
-// import ReviewCard from './components/ReviewCard';
 import axios from 'axios';
 import ReviewCard2 from './components/ReviewCard2';
-import Footer from './components/Footer'
-import Header from './components/Header';
+import { withRouter, useParams } from 'react-router';
 
 class ProductDetail extends React.Component {
     constructor(props) {
@@ -21,9 +19,7 @@ class ProductDetail extends React.Component {
 
     generatorData = async(state) =>{
         let temp_data = [];
-        let param = window.location.search;
-        let product_id = param.split("=")[1];
-        console.log(product_id);
+        let product_id = this.props.match.params.id;
         let temp_url_product = 'http://localhost:8000/products/' + product_id;
         let response_product = await axios.get(temp_url_product);
         temp_data = response_product.data
@@ -50,6 +46,7 @@ class ProductDetail extends React.Component {
             item_name: temp_name,
             item_price: temp_price,
         })
+        console.log(this.state.review);
     };
 
     render() {
@@ -103,4 +100,4 @@ const styles = {
     },
 }
  
-export default ProductDetail
+export default withRouter(ProductDetail)
