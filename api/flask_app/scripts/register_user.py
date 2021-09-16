@@ -16,21 +16,27 @@ class RegisterTestUser(Command):
         with app.app_context():
             # Add test users here!
             users = [
-                User(username='Yasoob',
-                     nickname='Yasoob',
-                     password='strongpassword',
-                     twitter_screenname="Yasoob",
-                     youtube_url="Yasoob_youtube_link",
-                     icon="https://th.bing.com/th/id/OIP.7J4ZZXCg0CXWkowqduuvQgHaHa?pid=ImgDet&rs=1",
-                     description="This is test user",
-                     roles='admin'),
-                User(username='hikakin@hikakin.com',
-                     nickname='Hikakin',
-                     twitter_screenname='Hikakin',
-                     youtube_url='https://www.youtube.com/user/HikakinTV',
-                     password='hikakinhikakin',
-                     icon='https://th.bing.com/th/id/OIP.7J4ZZXCg0CXWkowqduuvQgHaHa?pid=ImgDet&rs=1',
-                     description='This is Hikakin.')
+                User(username='clutch@eagles.com',
+                     nickname='Clutch',
+                     twitter_screenname='rakuten__eagles',
+                     youtube_url='https://www.youtube.com/user/EAGLESTATION2012',
+                     password='clutchclutch',
+                     icon='https://www.rakuteneagles.jp/cmn/images/expansion/character/clutch01_list.png',
+                     description='I am Clutch from Japan. I like eating and drawing. My favorite food is Onigiri.'),
+                User(username='clutchena@eagles.com',
+                     nickname='Clutchena',
+                     twitter_screenname='rakuten__eagles',
+                     youtube_url='https://www.youtube.com/user/EAGLESTATION2012',
+                     password='clutchenaclutchena',
+                     icon='https://www.rakuteneagles.jp/cmn/images/expansion/character/clutchena01_list.png',
+                     description='I am Clutchena born in Japan. My hobbies are drawing and making accessories. I like srawberry and cute stuff.'),
+                User(username='switch@eagles.com',
+                     nickname='Switch',
+                     twitter_screenname='rakuten__eagles',
+                     youtube_url='https://www.youtube.com/user/EAGLESTATION2012',
+                     password='switchswitch',
+                     icon='https://www.rakuteneagles.jp/cmn/images/expansion/character/switch01_list.png',
+                     description='This is Switch from US. I love DJ and dancing.')
             ]
             for user in users:
                 from flask_app import db
