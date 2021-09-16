@@ -45,6 +45,7 @@ function MainPage() {
   useEffect(() => {
     const f = async () => {
       const res_users = await fetchUsers(0);
+      setUsers(res_users);
       let res_purchases = await Promise.all(
         res_users.map(async (user) => {
           return await fetchPurchases(user.user_id);
@@ -52,7 +53,6 @@ function MainPage() {
       );
       res_purchases = Array.prototype.concat(...res_purchases);
       console.log(res_purchases);
-      setUsers(res_users);
       setPurchases(res_purchases);
     };
     f();
