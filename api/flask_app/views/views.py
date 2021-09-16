@@ -18,14 +18,14 @@ def index():
 @views.route("/products/<string:id>", methods=['GET'])
 def get_product(id: str):
     try:
-        query = db.session.query(Product).get(id)
-        # query = get_product_rakuten(id)
+        # query = db.session.query(Product).get(id)
+        query = get_product_rakuten(id)
         product = {
-            'id': query.id,
-            'name': query.name,
-            'img': query.img,
-            'price': query.price,
-            'url': query.url
+            'id': query['id'],
+            'name': query['name'],
+            'img': query['img'],
+            'price': query['price'],
+            'url': query['url']
         }
     except Exception as e:
         print(e)
@@ -83,8 +83,7 @@ def get_product_rakuten(product_id: str = "sorara:10001376"):
     }
     response = requests.get(
         f"https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706", params=query)
-    item = response.json().Items[0].Item
-    print(item)
-    product = {"id": item.itemCode, "name": item.itemName,
-               "img": item.smallImageUrls[0].imageUrl, "price": item.itemPrice, "url": item.itemUrl}
+    item = response.json()['Items'][0]['Item']
+    product = {"id": item['itemCode'], "name": item['itemName'],
+               "img": item['smallImageUrls'][0]['imageUrl'], "price": item['itemPrice'], "url": item['itemUrl']}
     return product
