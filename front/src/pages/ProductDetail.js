@@ -17,37 +17,36 @@ class ProductDetail extends React.Component {
     console.log(this.state);
   }
 
-  generatorData = async (state) => {
-    let temp_data = [];
-    let temp_url_product = 'http://localhost:8000/products/' + 'AAAAA';
-    let response_product = await axios.get(temp_url_product);
-    temp_data = response_product.data;
-    let temp_name = '';
-    temp_name = response_product.data.name;
-    let temp_img = response_product.data.img;
-    let temp_price = response_product.data.price;
+    generatorData = async(state) =>{
+        let temp_data = [];
+        let temp_url_product = 'http://localhost:8000/products/' + 'belluna-gourmet:10023396';
+        let response_product = await axios.get(temp_url_product);
+        temp_data = response_product.data
+        let temp_name = '';
+        temp_name = response_product.data.name;
+        let temp_img = response_product.data.img;
+        let temp_price = response_product.data.price;
 
-    let temp_url_review = 'http://localhost:8000/purchases';
-    let response_review = await axios.get(temp_url_review, {
-      params: {
-        product_id: 'AAAAA',
-      },
-    });
-    temp_data = response_review.data;
-    for (let i = 0; i < temp_data.length; i++) {
-      let temp_user_icon =
-        'http://localhost:8000/users/' + temp_data[i].users_id;
-      let response_user = await axios.get(temp_user_icon);
-      console.log(response_user.data);
-      temp_data[i].img = response_user.data.icon;
-    }
-    this.setState({
-      review: temp_data,
-      item_img: temp_img,
-      item_name: temp_name,
-      item_price: temp_price,
-    });
-  };
+        let temp_url_review = 'http://localhost:8000/purchases';
+        let response_review = await axios.get(temp_url_review, {
+            params:{
+                product_id: '946kitchen:10004398',
+            }}
+        );
+        temp_data = response_review.data;
+        for(let i = 0; i < temp_data.length; i++){
+            let temp_user_icon = 'http://localhost:8000/users/' + temp_data[i].users_id;
+            let response_user = await axios.get(temp_user_icon);
+            console.log(response_user.data);
+            temp_data[i].img = response_user.data.icon;
+        }
+        this.setState({
+            review: temp_data,
+            item_img: temp_img,
+            item_name: temp_name,
+            item_price: temp_price,
+        })
+    };
 
   render() {
     let reviewData = this.state.review.map((item, index) => {

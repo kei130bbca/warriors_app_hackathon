@@ -36,6 +36,9 @@ function App() {
         <Route path="/profile-edit">
           <ProfileEdit />
         </Route>
+        <Route exact path="/">
+          <MainPage />
+        </Route>
       </BrowserRouter>
       <Footer />
     </>
