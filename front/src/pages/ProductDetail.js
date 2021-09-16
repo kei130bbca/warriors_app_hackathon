@@ -68,7 +68,7 @@ class ProductDetail extends React.Component {
                             <div >
                                 <span>{this.state.item_name}</span>
                             </div>
-                            <div>
+                            <div style = {styles.price}>
                                 {'price:' + this.state.item_price}
                             </div>
                         </div>
@@ -98,10 +98,11 @@ const styles = {
     displayTitle:{
         display: 'inline-block',
         maxWidth: '400px',
+        marginTop: '30px',
     },
     displayPic:{
-        Width: '300px',
-        height: '300px',
+        Width: '450px',
+        height: '450px',
         padding: '50px',
     },
     products:{
@@ -111,6 +112,9 @@ const styles = {
     inlineDisplay:{
         display: 'inline-block',
     },
+    price:{
+        marginTop: '50px',
+    }
 }
  
 export default withRouter(ProductDetail)
