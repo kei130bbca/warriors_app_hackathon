@@ -5,6 +5,7 @@ import { fetchUser, fetchUsers, postLogin } from './components/api';
 import { Form, Button, Row, Col, Card, Image, Container, Toast, ToastContainer } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewCard2 from './components/ReviewCard2';
+import LoginSystem from './components/LoginSystem';
 
 class User {
   constructor(id,
@@ -143,86 +144,31 @@ function ReviewCard(props) {
   );
 }
 
-function LoginSystem(props) {
-  const loginState = props.loginState;
-  // const loginState = true;
-  // if (loginState === true) {
-  //   return (
-  //     <div>
-  //       <a href="/influencerparsonal">
-  //         go to personal page
-  //       </a>
-  //     </div>
-  //   );
-  // }
-  return (
-    <div className="container">
-      <Container>
-        {/* <Toast>
-          <Toast.Header>
-            <strong className="me-auto">You wanna be a influencer? </strong>
-          </Toast.Header>
-          <Toast.Body>
-            <a href="/influencer-registration-form"> Get registerd!</a>
-          </Toast.Body>
-        </Toast> */}
-        <Form >
-          <Row className="align-itme-center">
-          <Col xs="auto">
-          <h2>You wanna be a influencer? &rarr;  
-          <a href="/influencer-registration-form"> get registerd!</a>
-          </h2>
-          </Col>
-        </Row>
-          <Row className="align-itme-center">
-            <Col xs>
-              <Form.Group>
-                {/* <Form.Label>username: </Form.Label> */}
-                {/* <input type="text"></input> */}
-                <Form.Control type="text" placeholder="username" />
-              </Form.Group>
-            </Col>
-            <Col xs>
-              <Form.Group>
-                {/* <Form.Label>password: </Form.Label> */}
-                {/* <input type="text"></input> */}
-                <Form.Control type="password" placeholder="Password" />
-              </Form.Group>
-            </Col>
-            <Col xs="auto">
-              <Button variant="primary" type="submit">
-                Log in
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-      </Container>
-    </div>
-  );
-}
 
 function Main() {
   // const [users, setUsers] = useState(null);
+  const [accessToken, setAcseesToken] = useState();
 
   useEffect(() => {
-    fetchUser(1).then((u) => {
-      // setUsers(u);
-      console.log(u);
-    })
-      .catch((e) => {
-        console.log(e);
-      })
-  }, []);
-
-  useEffect(() => {
-    postLogin('Yasoob', 'strongpassword')
+    fetchUser(1)
       .then((u) => {
+        // setUsers(u);
         console.log(u);
       })
       .catch((e) => {
         console.log(e);
       })
   }, []);
+
+  // useEffect(() => {
+  //   postLogin('Yasoob', 'strongpassword')
+  //     .then((data) => {
+  //       setAcseesToken(data);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     })
+  // }, []);
 
   const user1 = new User(
     1,
