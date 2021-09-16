@@ -10,9 +10,9 @@ function Header(props) {
     const token = localStorage.getItem('token');
     if (token) {
         const user_id = localStorage.getItem('user_id');
-        const url = `/influencerpersonal/?user_id=${user_id}`
+        const url = `/influencerpersonal/${user_id}`
         NavLinkArray.push(
-            <Nav.Link href={url} key="home">
+            <Nav.Link href={url} key="influencerpersonal">
                 Personal page
             </Nav.Link>);
     }

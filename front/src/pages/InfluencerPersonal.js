@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ReviewCard2 from './components/ReviewCard2';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
+import { withRouter, useParams } from 'react-router';
 class InfluencerPersonal extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +38,9 @@ class InfluencerPersonal extends React.Component {
 
   generatorData = async (state) => {
     let param = window.location.search;
-    let user_id = param.split('=')[1];
+    // let user_id = param.split('=')[1];
+    let user_id = this.props.match.params.myid;
+    console.log(user_id);
     axios
       .get('http://localhost:8000/users/' + user_id)
       .then((responce) => {
