@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
 import { fetchAuthUser, postLogin } from './api';
+import { useHistory } from 'react-router-dom';
 
 function LoginSystem(props) {
     const loginState = props.loginState;
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
+    const history = useHistory()
     let data = {
         username: '',
         password: ''
@@ -40,33 +42,79 @@ function LoginSystem(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        // console.log(userData);
+        // console.log(userData)
+        // postLogin(userData.username, userData.password)
+        //     .then((res) => {
+        //         console.log(res.ok);
+        //         if (res.ok === true) {
+        //             return res.json();
+        //         }
+        //     })
+        //     .then((data) => {
+        //         fetchAuthUser(data.access_token)
+        //                 .then((res) => {
+        //                     if (res.ok === true) {
+        //                         return res.json();
+        //                     }
+        //                 })
+        //                 .then((data) => {
+        //                         history.push({
+        //                             pathname: '/influencerpersonal',
+        //                             state: { review: data }
+        //                         }
+        //                         )
+        //                         console.log(' aaa ' + data);
+        //                 })
+        //     });
 
-        postLogin(userData.username, userData.password)
-            .then((data) => {
-                fetchAuthUser().then((token) => {
-                    if (data.access_token === token) {
-                        console.log('your auth.');
-                    }
+        // console.log(userData)
+        const request = {
+            username: userData.username,
+            password: userData.password,
+        };
+        fetch(`http://localhost:8000/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;'
+            },
+            body: JSON.stringify(request)
+        })
+            .then((res) => {
+                console.log(res.ok);
+                if (res.ok === true) {
+                    return res.json();
+                } else {
+                    throw("sss");
                 }
-                );
-            })
-            .catch((e) => {
-                console.log(e);
-            })
+            }).then((data) => {
+                // console.log(data);
+                const token = data.access_token;
+                fetch('http://localhost:8000/auth_user', {
+                    headers: {
+                        'Content-Type': 'application/json;',
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then((res) => {
+                        if (res.ok === true) {
+                            return res.json();
+                        }
+                    })
+                    .then((data) => {
+                        // console.log(data);
+                        history.push({
+                            pathname: `/influencerpersonal/?user_id=${data.id}`,
+                            state: { user_id: data.id }
+                        }
+                        )
+                    })
+            });
+
     }
 
     return (
         <div className="container">
             <Container>
-                {/* <Toast>
-            <Toast.Header>
-              <strong className="me-auto">You wanna be a influencer? </strong>
-            </Toast.Header>
-            <Toast.Body>
-              <a href="/influencer-registration-form"> Get registerd!</a>
-            </Toast.Body>
-          </Toast> */}
                 <Form onSubmit={handleSubmit}>
                     <Row className="align-itme-center">
                         <Col xs="auto">
@@ -91,7 +139,7 @@ function LoginSystem(props) {
                             </Form.Group>
                         </Col>
                         <Col xs="auto">
-                            <Button variant="primary" type="submit" >
+                            <Button variant="primary" type="submit" id="loginButton">
                                 Log in
                             </Button>
                         </Col>

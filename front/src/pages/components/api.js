@@ -38,17 +38,17 @@ export async function postLogin(username, password) {
         },
         body: JSON.stringify(request)
     });
-    const data = await response.json();
-    return data;
+    // const data = await response.json();
+    return response;
 }
 
 export async function fetchAuthUser(token) {
     const response = await fetch('http://localhost:8000/auth_user', {
         headers: {
             'Content-Type': 'application/json;',
-            'Authorization': `${token}`
+            'Authorization': `Bearer ${token}`
         }
     });
-    const data = await response.json();
-    return data;
+    // const data = await response.json();
+    return response;
 }
