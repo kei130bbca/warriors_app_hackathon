@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetail from './pages/ProductDetail';
 import Header from './pages/components/Header';
 import Footer from './pages/components/Footer';
+import InfluencerRegistrationForm from './pages/InfluencerRegistraionForm';
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path="/profile-edit">
           <ProfileEdit />
+        </Route>
+        <Route path="/influencer-registration-form">
+          <InfluencerRegistrationForm />
         </Route>
       </BrowserRouter>
       <Footer />
