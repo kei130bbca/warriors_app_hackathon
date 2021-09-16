@@ -117,7 +117,7 @@ def post_user():
     # save user icon
     icon = payload.get('img')
     if icon is not None:
-        src = convert_and_save(icon)
+        src = convert_and_save(icon, user.username)
         user.icon = src
     db.session.add(user)
     db.session.commit()
