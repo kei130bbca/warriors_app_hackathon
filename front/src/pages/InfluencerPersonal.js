@@ -48,11 +48,11 @@ class InfluencerPersonal extends React.Component {
 
     generatorData = (state) =>{
         let temp_data = [];
-        axios.get('http://localhost:8000/users/', {
-            params:{
-                user_id: this.state.id
-            }},
-            {headers:{'Content-Type':'application/x-www-form-urlencode'}},
+        axios.get('http://localhost:8000/users/1'
+            // , {params:{
+            //     user_id: this.state.id
+            // }},
+            // {headers:{'Content-Type':'application/x-www-form-urlencode'}}
         ).then( (response) => {
             temp_data = response.data
             let temp_id = 0
