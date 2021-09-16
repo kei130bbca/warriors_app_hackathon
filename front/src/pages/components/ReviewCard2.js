@@ -1,24 +1,17 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
-
-function Star(props) {
-  return (
-    <div>
-      <span>★{props.stars}</span>
-    </div>
-  );
-}
+import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Star from './Star';
 
 function ReviewCard2(props) {
   const purchase = props.purchase;
   const product = props.product;
+  const show_edit = props.show_edit ?? false;
 
   return (
-    <div>
-      <Card style={{ width: '18rem' }} className="bg-light text-dark">
-        <a href="/">
-          <Card.Img variant="top" src={product.img} />
-        </a>
+    <Card style={{ width: '18rem' }} className="bg-light text-dark">
+      <Link to={'productDetail/' + product.id}>
+        <Card.Img variant="top" src={product.img} />
         <Card.Body>
           <Card.Title>{purchase.title}</Card.Title>
           <Card.Text>
@@ -26,8 +19,11 @@ function ReviewCard2(props) {
             <Star stars={purchase.stars} />
           </Card.Text>
         </Card.Body>
-      </Card>
-    </div>
+      </Link>
+      <Link to={'/review-posting/' + product.id}>
+        <Button className={show_edit ? 'd-block' : 'd-none'}>Edit</Button>
+      </Link>
+    </Card>
   );
 }
 

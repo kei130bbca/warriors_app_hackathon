@@ -31,7 +31,7 @@ function App() {
         <Route path="/review-posting/:id">
           <ReviewPostingPage />
         </Route>
-        <Route path="/productDetail">
+        <Route path="/productDetail/:id">
           <ProductDetail />
         </Route>
         <Route path="/profile-edit">

@@ -1,71 +1,10 @@
-import axios from 'axios';
 import React from 'react';
 import { Row, Button, Container, Col } from 'react-bootstrap';
-import { useHistory, Link } from 'react-router-dom';
-class Purchase {
-  constructor(
-    purchase_id,
-    user_id,
-    product_id,
-    count,
-    bouth_at,
-    comment,
-    stars,
-    title
-  ) {
-    this.purchase_id = purchase_id;
-    this.user_id = user_id;
-    this.product_id = product_id;
-    this.count = count;
-    this.bouth_at = bouth_at;
-    this.comment = comment;
-    this.stars = stars;
-    this.title = title;
-  }
-}
-
-class Product {
-  constructor(id, name, img, price, url) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.price = price;
-    this.url = url;
-  }
-}
-
-function Star(props) {
-  return (
-    <div>
-      <span>★{props.stars}</span>
-    </div>
-  );
-}
-
-function ReviewCard(props) {
-  const history = useHistory();
-
-  const purchase = props.purchase;
-  const product = props.product;
-  const show_edit = props.show_edit;
-
-  return (
-    <div>
-      <a href="/">
-        <img src={product.img} height="200" alt="" />
-        <h2>{purchase.title}</h2>
-        <p>{purchase.comment}</p>
-        <Star stars={purchase.stars} />
-      </a>
-      <Link to={'/review-posting/' + product.id}>
-        <Button className={show_edit ? 'd-block' : 'd-none'}>Edit</Button>
-      </Link>
-    </div>
-  );
-}
+import Purchase from '../classes/Purchase';
+import Product from '../classes/Product';
+import ReviewCard2 from './components/ReviewCard2';
 
 function ReviewManagementPage() {
-  const history = useHistory();
   const purchase2 = new Purchase(
     2,
     2,
@@ -112,7 +51,7 @@ function ReviewManagementPage() {
           products
             .filter((product) => purchase.product_id === product.id)
             .map((product) => (
-              <ReviewCard
+              <ReviewCard2
                 purchase={purchase}
                 product={product}
                 show_edit={true}

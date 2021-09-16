@@ -1,63 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Image } from 'react-bootstrap';
 import { fetchUser } from './components/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewCard2 from './components/ReviewCard2';
 import LoginSystem from './components/LoginSystem';
-
-class User {
-  constructor(
-    id,
-    username,
-    nickname,
-    twitter_screenname,
-    youtube_url,
-    password,
-    icon,
-    desc
-  ) {
-    this.id = id;
-    this.username = username;
-    this.nickname = nickname;
-    this.twitter_screenname = twitter_screenname;
-    this.youtube_url = youtube_url;
-    this.password = password;
-    this.icon = icon;
-    this.desc = desc;
-  }
-}
-
-class Purchase {
-  constructor(
-    purchase_id,
-    user_id,
-    product_id,
-    count,
-    bouth_at,
-    comment,
-    stars,
-    title
-  ) {
-    this.purchase_id = purchase_id;
-    this.user_id = user_id;
-    this.product_id = product_id;
-    this.count = count;
-    this.bouth_at = bouth_at;
-    this.comment = comment;
-    this.stars = stars;
-    this.title = title;
-  }
-}
-
-class Product {
-  constructor(id, name, img, price, url) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.price = price;
-    this.url = url;
-  }
-}
+import Icon from './components/Icon';
+import User from '../classes/User';
+import Purchase from '../classes/Purchase';
+import Product from '../classes/Product';
 
 const styles = {
   inlineDisplay: {
@@ -78,22 +27,6 @@ const styles = {
   },
 };
 
-function Icon(props) {
-  return (
-    <div>
-      <a href="/">
-        <Image
-          rounded
-          src={props.src}
-          width={props.width}
-          height={props.height}
-          alt=""
-        />
-      </a>
-    </div>
-  );
-}
-
 function InfluencerName(props) {
   return (
     <div className="bg-li">
@@ -105,17 +38,6 @@ function InfluencerName(props) {
         {props.desc}
       </div>
     </div>
-    // <div className="media">
-    //     <a href="/">
-    //       <Image className="mr-3" src={props.icon} width="64" height="64" />
-    //     </a>
-    //   <div className="media-body">
-    //     <h3 className="mt-0">
-    //       {`${props.name}'s recommendations`}
-    //     </h3>
-    //     {props.desc}
-    //   </div>
-    // </div>
   );
 }
 
