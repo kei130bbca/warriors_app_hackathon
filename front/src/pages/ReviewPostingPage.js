@@ -73,15 +73,17 @@ function Main() {
   const [comment, setComment] = useState('');
   const [star, setStar] = useState(3);
 
-  axios
-    .get('http://localhost:8000/purchases/' + id)
-    .then((response) => {
-      const data = response.data;
-      setTitle(data.title);
-      setComment(data.comment);
-      setStar(data.star);
-    })
-    .catch((e) => console.error(e));
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/purchases/' + id)
+      .then((response) => {
+        const data = response.data;
+        setTitle(data.title);
+        setComment(data.comment);
+        setStar(data.star);
+      })
+      .catch((e) => console.error(e));
+  }, []);
 
   return (
     <Container className="text-center pt-5 px-xl-5">
@@ -108,7 +110,7 @@ function Main() {
               as="textarea"
               placeholder="Enter your comment"
               value={comment}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => setComment(e.target.value)}
             />
           </Col>
         </Form.Group>
@@ -117,7 +119,10 @@ function Main() {
             Star
           </Form.Label>
           <Col>
-            <Form.Select value={star} onChange={(e) => setStar(e.target.value)}>
+            <Form.Select
+              value={star}
+              onChange={(e) => setStar(parseInt(e.target.value))}
+            >
               {[...Array(5).keys()]
                 .map((i) => ++i)
                 .map((i) => (
@@ -130,6 +135,11 @@ function Main() {
       <Button
         onClick={() => {
           console.log(title, comment, star);
+          axios.put('http://localhost:8000/purchases/' + id, {
+            title,
+            comment,
+            star,
+          });
         }}
       >
         Submit
