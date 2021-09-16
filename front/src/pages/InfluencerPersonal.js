@@ -26,11 +26,11 @@ class InfluencerPersonal extends React.Component {
   }
 
   manageOnClick() {
-    alert('You click manage!');
+    this.props.history.push('/review-management/' + this.props.match.params.myid);
   }
 
   modifyOnClick() {
-    alert('You click modify!');
+    this.props.history.push('/profile-edit/' + this.props.match.params.myid);
   }
 
   componentDidMount() {
@@ -136,8 +136,12 @@ class InfluencerPersonal extends React.Component {
       return (
         <div>
           <h1 style = {styles.title}>{this.state.nickname + "'s personal page"}</h1>
-          <div className = 'container-fluid'>{reviewData}</div>
-          <div>
+          <div className="container-fluid">
+              <div className="row flex-row row flex-nowrap overflow-auto">
+                {reviewData}
+              </div>
+          </div>
+          <div style = {styles.reviewManage}>
             {this.state.ifShow ? (
               <Button onClick={this.manageOnClick}>
                 Review management
@@ -163,14 +167,14 @@ class InfluencerPersonal extends React.Component {
                 <span style = {styles.otherInformation} >Description:</span>
                 <span style = {styles.otherInformation} >{this.state.desc}</span>
               </div>
+              <div style={styles.modiButton}>
+                {this.state.ifShow ? (
+                  <Button onClick={this.modifyOnClick}>
+                    modify your information
+                  </Button>
+                ) : null}
+              </div>
             </div>
-          </div>
-          <div style={styles.modiButton}>
-            {this.state.ifShow ? (
-              <Button onClick={this.modifyOnClick}>
-                modify your information
-              </Button>
-            ) : null}
           </div>
         </div>
       );
@@ -182,10 +186,12 @@ class InfluencerPersonal extends React.Component {
 const styles = {
   title: {
     textAlign: 'center',
+    padding: '50px',
   },
   modiButton: {
     maxWidth: '150px',
     textAlign: 'center',
+    marginTop: '40px',
   },
   manageButton: {
     maxWidth: '150px',
@@ -196,10 +202,11 @@ const styles = {
   icon: {
     maxWidth: '400px',
     maxHeight: '400px',
+    verticalAlign: 'top',
   },
   inlineDisplay: {
     display: 'inline-block',
-    maxWidth: '600px',
+    maxWidth: '700px',
     marginLeft: '50px',
     marginBottom: '50px',
   },
@@ -208,7 +215,11 @@ const styles = {
   },
   userinformation: {
     padding: '15px',
-  }
+  },
+  reviewManage: {
+    padding: '10px',
+    textAlign: 'center',
+  },
 };
 
 export default withRouter(InfluencerPersonal);
