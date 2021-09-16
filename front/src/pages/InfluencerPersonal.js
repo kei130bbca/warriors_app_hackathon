@@ -116,7 +116,6 @@ class InfluencerPersonal extends React.Component {
         })
         return (
             <div>
-                <Header title={this.state.nickname + "'s personal page"} auth={true} />
                 <div>
                     {
                         this.state.ifShow?(
@@ -153,7 +152,6 @@ class InfluencerPersonal extends React.Component {
                         <span>{this.state.desc}</span>
                     </div>                    
                 </div>
-                <Footer />
             </div>
         );
     }
