@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Footer() {
     return (
-      <footer>
-        <Container>
+      <footer className="footer">
+        <Container className="text-center">
           <Row>
             <Col>&copy; Warriors, Inc.</Col>
           </Row>
