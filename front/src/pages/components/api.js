@@ -5,9 +5,11 @@ export async function fetchUser(user_id) {
 }
 
 export async function fetchUsers(index) {
-  const query = new URLSearchParams({ left_index: index });
   const response = await fetch(
-    `http://localhost:8000/users?${query}`
+    `http://localhost:8000/users` +
+      {
+        left_index: index,
+      }
   );
   const data = await response.json();
   return data;
@@ -22,9 +24,9 @@ export async function fetchProducts(product_id) {
 export async function fetchPurchases(user_id) {
   const response = await fetch(
     `http://localhost:8000/purchases` +
-    {
-      user_id: user_id,
-    }
+      {
+        user_id: user_id,
+      }
   );
   const data = await response.json();
   return data;

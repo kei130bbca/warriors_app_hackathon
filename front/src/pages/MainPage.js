@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchUsers } from './components/api';
+import { fetchUser } from './components/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewCard2 from './components/ReviewCard2';
 import LoginSystem from './components/LoginSystem';
@@ -42,28 +42,120 @@ function InfluencerName(props) {
 }
 
 function MainPage() {
-  const [users, setUsers] = useState(null);
+  // const [users, setUsers] = useState(null);
+  const [accessToken, setAcseesToken] = useState();
 
   useEffect(() => {
-    fetchUsers(1)
+    fetchUser(1)
       .then((u) => {
         // setUsers(u);
-        console.log(u[0]);
-        // setUsers(JSON.stringify(...u));
+        // console.log(u);
       })
       .catch((e) => {
         console.log(e);
       });
   }, []);
 
-  // const users = [user1, user2];
-  // const purchases = [purchase1, purchase2, purchase3, purchase4];
-  // const products = [product1, product2, product3];
+  // useEffect(() => {
+  //   postLogin('Yasoob', 'strongpassword')
+  //     .then((data) => {
+  //       setAcseesToken(data);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     })
+  // }, []);
 
-  // function getProduct(id) {
-  //   const product = products.filter((product) => product.id === id);
-  //   return product.length > 0 ? product[0] : null;
-  // }
+  const user1 = new User(
+    1,
+    'hikakin@gmail',
+    'Hikakin',
+    'hikakin_twitter',
+    'https://www.youtube.com/user/HikakinTV',
+    'aaabbb',
+    'https://images.dog.ceo/breeds/shiba/shiba-8.jpg',
+    'hi, im hikakin.'
+  );
+  const user2 = new User(
+    2,
+    'hikakin@gmail',
+    'Masuo',
+    'hikakin_twitter',
+    'https://www.youtube.com/user/HikakinTV',
+    'aaabbb',
+    'https://images.dog.ceo/breeds/shiba/shiba-11.jpg',
+    'hi, im hikakin.'
+  );
+  const purchase1 = new Purchase(
+    1,
+    1,
+    11,
+    5,
+    2020 - 1 - 1,
+    'This is my best book',
+    3,
+    'The greatest book'
+  );
+  const purchase2 = new Purchase(
+    2,
+    2,
+    11,
+    2,
+    2020 - 1 - 1,
+    'nice apple',
+    4,
+    'How nice apple!'
+  );
+  const purchase3 = new Purchase(
+    3,
+    2,
+    12,
+    10,
+    2020 - 1 - 1,
+    'nice orange',
+    5,
+    "I'v never seen like this orange!"
+  );
+  const purchase4 = new Purchase(
+    3,
+    2,
+    13,
+    10,
+    2020 - 1 - 1,
+    'nice orange',
+    5,
+    "I'v never seen like this orange!"
+  );
+  const product1 = new Product(
+    11,
+    'readable code',
+    'https://images-na.ssl-images-amazon.com/images/I/51MgH8Jmr3L.jpg',
+    2200,
+    'https://books.rakuten.co.jp/rb/11753651/'
+  );
+  const product2 = new Product(
+    12,
+    'apple',
+    'https://tshop.r10s.jp/ultra-taste/cabinet/daiiti/daiiti_143.jpg?fitin=275:275',
+    100,
+    'https://search.rakuten.co.jp/search/mall/%E3%82%8A%E3%82%93%E3%81%94/'
+  );
+  const product3 = new Product(
+    13,
+    'orange',
+    'https://tshop.r10s.jp/benikou/cabinet/orenge/imgrc0084994537.jpg?fitin=275:275',
+    200,
+    'https://item.rakuten.co.jp/benikou/10000723/?iasid=07rpp_10095___et-ktjubpdf-zqv-23e8ef5b-f7a1-4739-8075-3f19a787f7c7'
+  );
+
+  const users = [user1, user2];
+  const purchases = [purchase1, purchase2, purchase3, purchase4];
+  const products = [product1, product2, product3];
+
+  function getProduct(id) {
+    const product = products.filter((product) => product.id === id);
+    return product.length > 0 ? product[0] : null;
+  }
 
   return (
     <div>
@@ -78,19 +170,17 @@ function MainPage() {
             />
             <div className="container-fluid">
               <div className="row flex-row row flex-nowrap overflow-auto">
-                {/* {
-                  const purchases  
-                  purchases
-                    .filter((purchase) => purchase.user_id === user.id)
-                    .map((purchase) => {
-                      return (
-                        <ReviewCard2
-                          purchase={purchase}
-                          product={getProduct(purchase.product_id)}
-                          key={purchase.user_id + '' + purchase.product_id}
-                        />
-                      );
-                    })} */}
+                {purchases
+                  .filter((purchase) => purchase.user_id === user.id)
+                  .map((purchase) => {
+                    return (
+                      <ReviewCard2
+                        purchase={purchase}
+                        product={getProduct(purchase.product_id)}
+                        key={purchase.user_id + '' + purchase.product_id}
+                      />
+                    );
+                  })}
               </div>
             </div>
             <br></br>
