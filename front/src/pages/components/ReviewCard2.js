@@ -7,14 +7,23 @@ import axios from 'axios';
 function ReviewCard2(props) {
   const purchase = props.purchase;
   const show_edit = props.show_edit ?? false;
+  const show_user = props.show_edit ?? false;
   const [img, setImg] = useState('');
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8000/products/' + purchase.products_id)
-      .then((res) => {
-        setImg(res.data.img);
-      });
+    if (show_user) {
+      axios
+        .get('http://localhost:8000/users/' + purchase.users_id)
+        .then((res) => {
+          setImg(res.data.icon);
+        });
+    } else {
+      axios
+        .get('http://localhost:8000/products/' + purchase.products_id)
+        .then((res) => {
+          setImg(res.data.img);
+        });
+    }
   }, []);
 
   return (
