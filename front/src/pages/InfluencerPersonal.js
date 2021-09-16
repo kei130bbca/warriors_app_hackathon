@@ -31,7 +31,7 @@ class InfluencerPersonal extends React.Component {
 
     generatorData = async(state) =>{
         let response_user = await axios.get('http://localhost:8000/users/1');
-        let temp_data = response_user.data
+        let temp_data = response_user.data;
         let temp_id = 0
         let temp_nickname = '';
         let temp_twitter = '';
@@ -74,12 +74,13 @@ class InfluencerPersonal extends React.Component {
             }}
         );
         temp_data = response_review.data;
-        console.log(temp_data);
-        for(let i = 0; i < temp_data.length; i++){
-            let temp_url = 'http://localhost:8000/products/' + temp_data[i].products_id
-            let response_product = await axios.get(temp_url);
-            temp_data[i].img = response_product.data.img;
-        }
+        // for(let i = 0; i < temp_data.length; i++){
+        //     let temp_url = 'http://localhost:8000/products/' + temp_data[i].products_id;
+        //     let response_product = await axios.get(temp_url);
+        //     if(response_product.status == 200){
+        //         temp_data[i].img = response_product.data.img;
+        //     }         
+        // }
         this.setState({
             nickname: temp_nickname,
             youtubleUrl: temp_youtuble,
@@ -92,7 +93,6 @@ class InfluencerPersonal extends React.Component {
     };
 
     render() {
-    console.log(this.state.review);
         let reviewData = this.state.review.map((item, index) =>{
             return (
                 <ReviewCard img = {item.img} title = {item.title} content = {item.comment} />
