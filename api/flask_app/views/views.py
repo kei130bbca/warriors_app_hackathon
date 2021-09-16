@@ -45,12 +45,13 @@ def protected():
     """
     user: User = flask_praetorian.current_user()
     user_obj = {
+        "id": user.id,
         "username": user.username,
         "nickname": user.nickname,
         "twitter_screenname": user.twitter_screenname,
         "youtube_url": user.youtube_url,
         "password": user.password,
-        "icon": user.icon,
+        "icon": request.url_root+"static/"+user.icon,
         "desc": user.description,
     }
     return jsonify(user_obj)

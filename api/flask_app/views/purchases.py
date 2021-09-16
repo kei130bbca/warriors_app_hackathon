@@ -37,6 +37,8 @@ def get_purchases():
 @purchases.route("/purchases/<int:id>", methods=['GET'])
 def get_purchase(id):
     query = db.session.query(Purchase).get(id)
+    if query is None:
+        return jsonify({'message': 'the purchase was not found'}), 404
     purchase = {
         "purchase_id": query.id,
         "users_id": query.user_id,

@@ -5,6 +5,7 @@ import TemplatePage from './pages/TemplatePage';
 import InfluencerPersonal from './pages/InfluencerPersonal';
 import ReviewManagementPage from './pages/ReviewManagementPage';
 import ReviewPostingPage from './pages/ReviewPostingPage';
+import ProfileEdit from './pages/ProfileEdit';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetail from './pages/ProductDetail';
 
@@ -28,6 +29,9 @@ function App() {
       </Route>
       <Route path="/productDetail">
         <ProductDetail />
+      </Route>
+      <Route path="/profile-edit">
+        <ProfileEdit />
       </Route>
     </BrowserRouter>
   );
