@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { fetchUser, fetchUsers } from './components/api';
+import { fetchUser, fetchUsers, postLogin } from './components/api';
 import { Form, Button, Row, Col, Card, Image, Container, Toast, ToastContainer} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewCard2 from './components/ReviewCard2';
@@ -121,18 +121,12 @@ function Star(props) {
   );
 }
 
-
-
 function ReviewCard(props) {
   const purchase = props.purchase;
   const product = props.product;
 
   return (
     <div>
-      {/* <img src={product.img} height="200" alt="" />
-        <h2>{purchase.title}</h2>
-        <p>{purchase.comment}</p>
-        <Star stars={purchase.stars} /> */}
       <Card style={{ width: '18rem' }} className="bg-light text-dark">
         <a href="/" >
           <Card.Img variant="top" src={product.img} />
@@ -212,6 +206,16 @@ function Main() {
 
   useEffect(() => {
     fetchUser(1).then((u) => {
+      // setUsers(u);
+      console.log(u);
+    })
+      .catch((e) => {
+        console.log(e);
+      })
+  }, []);
+
+  useEffect(() => {
+    postLogin('Yasoob', 'strongpassword').then((u) => {
       // setUsers(u);
       console.log(u);
     })

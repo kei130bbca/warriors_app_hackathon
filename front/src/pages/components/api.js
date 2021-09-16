@@ -25,3 +25,15 @@ export async function fetchPurchases(user_id) {
     const data = await response.json();
     return data;
 }
+
+export async function postLogin(username, password) {
+    const request = {
+        username: username,
+        password: password
+    };
+    const response = await fetch(`http://localhost:8000/login`, {
+        method: 'POST',
+        body: JSON.stringify(request)
+    })
+    console.log(response);
+}
