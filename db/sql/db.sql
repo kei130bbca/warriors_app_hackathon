@@ -101,18 +101,18 @@ CREATE TABLE IF NOT EXISTS `purchases` (
 --
 
 INSERT IGNORE INTO `purchases` (`id`, `user_id`, `products_id`, `count`, `bought_at`, `comment`, `stars`, `title`) VALUES
-(2, 1, 'f182028-tsuruga:10000630', 1, '2021-09-03 00:00:00', 'This is amazing item. I wanna buy again.', 5, 'Amazing Item'),
-(3, 1, 'kimsho:10000695', 2, '2020-12-11 00:00:00', 'I made Onigiri of this. It was so delicious.', 4, 'Onigiri'),
-(4, 2, 'toucher-home:10000786', 3, '2020-04-22 00:00:00', 'I like this towel. I wanna recommend to anyone.', 4, 'Great Towel'),
-(5, 3, 'picoanna:10000267', 1, '2021-01-10 00:00:00', '', 3, ''),
-(6, 2, 'one-p-slender:10015953', 1, '2021-05-30 00:00:00', '', 4, ''),
-(7, 1, 'wakeary-shop:10114479', 2, '2020-12-11 00:00:00', '', 3, ''),
-(8, 3, 'hidakara:10000014', 1, '2020-09-03 00:00:00', 'I am missing to travel...', 5, 'Hida food'),
-(9, 2, '946kitchen:10004398', 2, '2021-06-18 00:00:00', 'This is so delicious cheeze.', 4, 'Go to Hakkaido'),
-(10, 2, 'morrymama:10000281', 2, '2021-03-11 00:00:00', 'This is good for gifts.', 3, 'Great Gifts'),
-(11, 3, 'renovatio:10017271', 1, '2021-02-04 00:00:00', 'I bought this for my birthday.', 4, 'Birthday Gift'),
-(12, 3, 'threenice:10006057', 1, '2020-10-18 00:00:00', '', 3, ''),
-(13, 1, 'chugokuoroshi:10002180', 1, '2020-11-20 00:00:00', '', 4, '');
+(1, 1, 'f182028-tsuruga:10000630', 1, '2021-09-03 00:00:00', 'This is amazing item. I wanna buy again.', 5, 'Amazing Item'),
+(2, 1, 'kimsho:10000695', 2, '2020-12-11 00:00:00', 'I made Onigiri of this. It was so delicious.', 4, 'Onigiri'),
+(3, 2, 'toucher-home:10000786', 3, '2020-04-22 00:00:00', 'I like this towel. I wanna recommend to anyone.', 4, 'Great Towel'),
+(4, 3, 'picoanna:10000267', 1, '2021-01-10 00:00:00', 'I buy this Lucky Bag every year. I will buy this next year!', 3, 'Lovely Clothes'),
+(5, 2, 'one-p-slender:10015953', 1, '2021-05-30 00:00:00', 'This is so amaiznig Fukubukuro. I recommened to my friends.', 4, 'Fukubukuro'),
+(6, 1, 'wakeary-shop:10114479', 2, '2020-12-11 00:00:00', 'I wanna support for food loss. This was good shopping.', 3, 'Support for Food Loss'),
+(7, 3, 'hidakara:10000014', 1, '2020-09-03 00:00:00', 'I am missing to travel...', 5, 'Hida food'),
+(8, 2, '946kitchen:10004398', 2, '2021-06-18 00:00:00', 'This is so delicious cheeze.', 4, 'Go to Hakkaido'),
+(9, 2, 'morrymama:10000281', 2, '2021-03-11 00:00:00', 'This is good for gifts.', 3, 'Great Gifts'),
+(10, 3, 'renovatio:10017271', 1, '2021-02-04 00:00:00', 'I bought this for my birthday.', 4, 'Birthday Gift'),
+(11, 3, 'threenice:10006057', 1, '2020-10-18 00:00:00', 'There were 40 drinks in this. This will make me healthy.', 3, 'Drink for my Health'),
+(12, 1, 'chugokuoroshi:10002180', 1, '2020-11-20 00:00:00', 'This is amaizing number. 90 ramens!!!! I like this so much.', 4, '90 ramens!!!');
 
 -- --------------------------------------------------------
 
