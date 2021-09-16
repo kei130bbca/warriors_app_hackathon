@@ -7,7 +7,7 @@ function Header(props) {
       Home
     </Nav.Link>,
   ];
-  if (props.auth === true) {
+  if (localStorage.getItem('token')) {
     NavLinkArray.push(
       <Nav.Link href="/influencerpersonal" key="influencerpersonal">
         Influencer Personal Page
