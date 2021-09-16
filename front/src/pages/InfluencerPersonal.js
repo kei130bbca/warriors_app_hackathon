@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ReviewCard2 from './components/ReviewCard2';
-import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { withRouter, useParams } from 'react-router';
+import { Button } from 'react-bootstrap';
 class InfluencerPersonal extends React.Component {
   constructor(props) {
     super(props);
@@ -135,39 +136,41 @@ class InfluencerPersonal extends React.Component {
       return (
         <div>
           <h1 style = {styles.title}>{this.state.nickname + "'s personal page"}</h1>
+          <div className = 'container-fluid'>{reviewData}</div>
           <div>
             {this.state.ifShow ? (
-              <button style={styles.manageButton} onClick={this.manageOnClick}>
+              <Button onClick={this.manageOnClick}>
                 Review management
-              </button>
+              </Button>
             ) : null}
           </div>
-          <div style={styles.reviewLength}>{reviewData}</div>
-          <div>
+          <div style = {styles.userinformation}>
+            <img src={this.state.img} style = {styles.icon}/>
+            <div style = {styles.inlineDisplay}>
+              <div>
+                <span style = {styles.otherInformation}>nickname:</span>
+                <span style = {styles.otherInformation}>{this.state.nickname}</span>
+              </div>
+              <div>
+                <span style = {styles.otherInformation} >Youtuble:</span>
+                <span style = {styles.otherInformation} >{this.state.youtubleUrl}</span>
+              </div>
+              <div>
+                <span style = {styles.otherInformation} >Twitter:</span>
+                <span style = {styles.otherInformation} >{this.state.twitter}</span>
+              </div>
+              <div>
+                <span style = {styles.otherInformation} >Description:</span>
+                <span style = {styles.otherInformation} >{this.state.desc}</span>
+              </div>
+            </div>
+          </div>
+          <div style={styles.modiButton}>
             {this.state.ifShow ? (
-              <button style={styles.modiButton} onClick={this.modifyOnClick}>
+              <Button onClick={this.modifyOnClick}>
                 modify your information
-              </button>
+              </Button>
             ) : null}
-          </div>
-          <div>
-            <img src={this.state.img} />
-            <div>
-              <span>nickname:</span>
-              <span>{this.state.nickname}</span>
-            </div>
-            <div>
-              <span>Youtuble:</span>
-              <span>{this.state.youtubleUrl}</span>
-            </div>
-            <div>
-              <span>Twitter:</span>
-              <span>{this.state.twitter}</span>
-            </div>
-            <div>
-              <span>Description:</span>
-              <span>{this.state.desc}</span>
-            </div>
           </div>
         </div>
       );
@@ -182,6 +185,7 @@ const styles = {
   },
   modiButton: {
     maxWidth: '150px',
+    textAlign: 'center',
   },
   manageButton: {
     maxWidth: '150px',
@@ -189,6 +193,22 @@ const styles = {
   reviewLength: {
     maxWidth: '1000px',
   },
+  icon: {
+    maxWidth: '400px',
+    maxHeight: '400px',
+  },
+  inlineDisplay: {
+    display: 'inline-block',
+    maxWidth: '600px',
+    marginLeft: '50px',
+    marginBottom: '50px',
+  },
+  otherInformation: {
+    fontSize: '24px',
+  },
+  userinformation: {
+    padding: '15px',
+  }
 };
 
 export default withRouter(InfluencerPersonal);
