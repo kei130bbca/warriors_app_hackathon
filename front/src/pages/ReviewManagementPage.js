@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Button, Container, Col } from 'react-bootstrap';
 import Purchase from '../classes/Purchase';
-import Product from '../classes/Product';
 import ReviewCard2 from './components/ReviewCard2';
 
 function ReviewManagementPage() {
@@ -25,39 +24,16 @@ function ReviewManagementPage() {
     5,
     "I'v never seen like this orange!"
   );
-  const product2 = new Product(
-    12,
-    'apple',
-    'https://tshop.r10s.jp/ultra-taste/cabinet/daiiti/daiiti_143.jpg?fitin=275:275',
-    100,
-    'https://search.rakuten.co.jp/search/mall/%E3%82%8A%E3%82%93%E3%81%94/'
-  );
-  const product3 = new Product(
-    13,
-    'orange',
-    'https://tshop.r10s.jp/benikou/cabinet/orenge/imgrc0084994537.jpg?fitin=275:275',
-    200,
-    'https://item.rakuten.co.jp/benikou/10000723/?iasid=07rpp_10095___et-ktjubpdf-zqv-23e8ef5b-f7a1-4739-8075-3f19a787f7c7'
-  );
 
   const purchases = [purchase2, purchase3];
-  const products = [product2, product3];
 
   return (
     <Container className="text-center">
       <h1 className="my-3">Review management page</h1>
       <Row xs={1} md={2} gutter={4} className="my-5">
-        {purchases.map((purchase) =>
-          products
-            .filter((product) => purchase.product_id === product.id)
-            .map((product) => (
-              <ReviewCard2
-                purchase={purchase}
-                product={product}
-                show_edit={true}
-              />
-            ))
-        )}
+        {purchases.map((purchase) => (
+          <ReviewCard2 purchase={purchase} show_edit={true} />
+        ))}
       </Row>
       <Col className="my-5">
         <Button

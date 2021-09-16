@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { fetchUsers, fetchPurchases, fetchProducts } from './components/api';
+import { fetchUsers, fetchPurchases } from './components/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewCard2 from './components/ReviewCard2';
 import LoginSystem from './components/LoginSystem';
 import Icon from './components/Icon';
-import User from '../classes/User';
-import Purchase from '../classes/Purchase';
-import Product from '../classes/Product';
 
 const styles = {
   inlineDisplay: {
