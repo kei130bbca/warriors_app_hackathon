@@ -25,7 +25,7 @@ class ProductDetail extends React.Component {
         let product_id = param.split("=")[1]
         let temp_url_product = 'http://localhost:8000/products/' + product_id;
         let response_product = await axios.get(temp_url_product);
-        //console.log(response_product);
+        alert('aa')
         temp_data = response_product.data
         let temp_name = '';
         temp_name = response_product.data.name;
@@ -42,7 +42,6 @@ class ProductDetail extends React.Component {
         for(let i = 0; i < temp_data.length; i++){
             let temp_user_icon = 'http://localhost:8000/users/' + temp_data[i].users_id;
             let response_user = await axios.get(temp_user_icon);
-            //console.log(response_user);
             temp_data[i].img = response_user.data.icon;
         }        
         this.setState({
@@ -51,13 +50,11 @@ class ProductDetail extends React.Component {
             item_name: temp_name,
             item_price: temp_price,
         })
-        console.log(this.state.review);
     };
 
     render() {
             let reviewData = this.state.review.map((item, index) =>{
                 return (
-                    // <ReviewCard img = {item.img} title = {item.title} content = {item.content} />
                     <ReviewCard2
                         purchase={item}
                         product={item}
@@ -67,7 +64,6 @@ class ProductDetail extends React.Component {
             })  
         return (
             <div>
-                <Header title="Product Detail Page" path="/productDetail" auth={true} />
                 <div>
                     <div style = {styles.inlineDisplay}>
                         <img src = {this.state.item_img}></img>
@@ -84,7 +80,6 @@ class ProductDetail extends React.Component {
                 <div style = {styles.reviewLength}>
                     {reviewData}
                 </div>
-                <Footer />
             </div>
         );
     }

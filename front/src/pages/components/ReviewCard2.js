@@ -7,7 +7,6 @@ function ReviewCard2(props) {
   const purchase = props.purchase;
   const product = props.product;
   const show_edit = props.show_edit ?? false;
-
   return (
     <Card style={{ width: '18rem' }} className="bg-light text-dark">
       <Link to={'productDetail/' + product.id}>

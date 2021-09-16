@@ -16,7 +16,7 @@ class InfluencerPersonal extends React.Component {
             ifShow : false,
             review : [],
             show_id: 0,
-            done:false,
+            done: false,
         };
         this.generatorData = this.generatorData.bind(this);
         this.generatorData(this.state);
@@ -80,32 +80,27 @@ class InfluencerPersonal extends React.Component {
                 }}
             ).then ( (response_review) => {
                 let temp_data = response_review.data;
-                // let promise = [];
+                let reviews = [];
                 for(let i = 0; i < temp_data.length; i++){
                     let temp_url = 'http://localhost:8000/products/' + temp_data[i].products_id;
-                    //promise[i] = axios.get(temp_url);
                     axios.get(temp_url)
                     .then((response_product) => {
-                        console.log(response_product);
                         temp_data[i].img = response_product.data.img;
+                        reviews[i] = temp_data[i];
+                        this.setState({
+                            nickname: temp_nickname,
+                            youtubleUrl: temp_youtuble,
+                            twitter: temp_twitter,
+                            desc: temp_desc,
+                            img: temp_img,
+                            ifShow: ifShow,
+                            review: reviews,
+                            show_id: user_id,
+                        });
                     }).catch((e) => {
                         console.log(e);
                     });
                 }
-                // Promise.all(promise);
-                // console.log(promise);
-                // let done = true;
-                this.setState({
-                    nickname: temp_nickname,
-                    youtubleUrl: temp_youtuble,
-                    twitter: temp_twitter,
-                    desc: temp_desc,
-                    img: temp_img,
-                    ifShow: ifShow,
-                    review: temp_data,
-                    show_id: user_id,
-                    // done: done,
-                });
             }).catch( (error2) => {
                 console.log(error2);
             })
@@ -115,60 +110,56 @@ class InfluencerPersonal extends React.Component {
     };
 
     render() {
-        if(this.state.done){
-            let reviewData = this.state.review.map((item, index) =>{
-                return (
-                    <ReviewCard2
-                            purchase={item}
-                            product={item}
-                            key={item.user_id + '' + this.state.item_id}
-                    />
-                )
-            })
+        let reviewData = this.state.review.map((item, index) =>{
             return (
+                <ReviewCard2
+                    purchase={item}
+                    product={item}
+                    key={item.user_id + '' + this.state.item_id}
+                />
+            )
+        })
+        return (
+            <div>
+                <h1 style = {styles.title}>{this.state.nickname + "'s personial homepage"}</h1>
                 <div>
-                    <h1>{this.state.nickname + "'s personial homepage"}</h1>
-                    <div>
-                        {
-                            this.state.ifShow?(
-                                <button style = {styles.manageButton} onClick = {this.manageOnClick}>Review management</button>
-                            ):null
-                        }
-                    </div>
-                    <div style = {styles.reviewLength}>
-                        {reviewData}
-                    </div>
-                    <div>
-                        {
-                            this.state.ifShow?(
-                                <button style = {styles.modiButton} onClick = {this.modifyOnClick} >modify your information</button>
-                            ):null
-                        }
-                    </div>
-                    <div>
-                        <img src = {this.state.img} />
-                        <div>
-                            <span>nickname:</span>
-                            <span>{this.state.nickname}</span>
-                        </div>
-                        <div>
-                            <span>Youtuble:</span>
-                            <span>{this.state.youtubleUrl}</span>
-                        </div>
-                        <div>
-                            <span>Twitter:</span>
-                            <span>{this.state.twitter}</span>
-                        </div>
-                        <div>
-                            <span>Description:</span>
-                            <span>{this.state.desc}</span>
-                        </div>                    
-                    </div>
+                    {
+                        this.state.ifShow?(
+                            <button style = {styles.manageButton} onClick = {this.manageOnClick}>Review management</button>
+                        ):null
+                    }
                 </div>
-            );
-        } else{
-            return(null);
-        }
+                <div style = {styles.reviewLength}>
+                    {reviewData}
+                </div>
+                <div>
+                    {
+                        this.state.ifShow?(
+                            <button style = {styles.modiButton} onClick = {this.modifyOnClick} >modify your information</button>
+                        ):null
+                    }
+                </div>
+                <div>
+                    <img src = {this.state.img} />
+                    <div>
+                        <span>nickname:</span>
+                        <span>{this.state.nickname}</span>
+                    </div>
+                    <div>
+                        <span>Youtuble:</span>
+                        <span>{this.state.youtubleUrl}</span>
+                    </div>
+                    <div>
+                        <span>Twitter:</span>
+                        <span>{this.state.twitter}</span>
+                    </div>
+                    <div>
+                        <span>Description:</span>
+                        <span>{this.state.desc}</span>
+                    </div>                    
+                </div>
+            </div>
+        );
     }
 };
  
