@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import { useParams } from 'react-router';
 import { Row, Button, Container, Col, Form } from 'react-bootstrap';
 import axios from 'axios';
 
-function Main() {
+function ReviewPostingPage() {
   let { id } = useParams();
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
@@ -90,15 +88,6 @@ function Main() {
         Submit
       </Button>
     </Container>
-  );
-}
-function ReviewPostingPage() {
-  return (
-    <div>
-      <Header title="Review Posting Page" />
-      <Main />
-      <Footer />
-    </div>
   );
 }
 

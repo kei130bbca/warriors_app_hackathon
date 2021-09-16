@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import { Row, Button, Container, Col, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { useParams } from 'react-router';
-function Main() {
+
+function ProfileEdit() {
   let { token } = useParams();
   token =
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzE3NjUxODksImV4cCI6MTYzMTg1MTU4OSwianRpIjoiOWVjNmQ4YjEtMjQ0Ny00MzhmLWIwOGYtZTEyNTE0NjJhZjYxIiwiaWQiOjEsInJscyI6InZpZXdlciIsInJmX2V4cCI6MTYzNDM1NzE4OX0.s0Arc8FYByNWHL2JC3nHRjdOZjbNWfQzYniarmJCwVc';
@@ -148,15 +147,6 @@ function Main() {
         Submit
       </Button>
     </Container>
-  );
-}
-function ProfileEdit() {
-  return (
-    <div>
-      <Header title="Profile Edit" />
-      <Main />
-      <Footer />
-    </div>
   );
 }
 
