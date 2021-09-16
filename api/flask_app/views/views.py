@@ -18,8 +18,8 @@ def index():
 @views.route("/products/<string:id>", methods=['GET'])
 def get_product(id: str):
     try:
-        query = db.session.query(Product).get(id)
-        # query = get_product_rakuten(id)
+        # query = db.session.query(Product).get(id)
+        query = get_product_rakuten(id)
         product = {
             'id': query.id,
             'name': query.name,
