@@ -1,6 +1,7 @@
+import axios from 'axios';
 import React from 'react';
 import { Row, Button, Container, Col } from 'react-bootstrap';
-
+import { useHistory, Link } from 'react-router-dom';
 class Purchase {
   constructor(
     purchase_id,
@@ -42,8 +43,11 @@ function Star(props) {
 }
 
 function ReviewCard(props) {
+  const history = useHistory();
+
   const purchase = props.purchase;
   const product = props.product;
+  const show_edit = props.show_edit;
 
   return (
     <div>
@@ -53,11 +57,15 @@ function ReviewCard(props) {
         <p>{purchase.comment}</p>
         <Star stars={purchase.stars} />
       </a>
+      <Link to={'/review-posting/' + product.id}>
+        <Button className={show_edit ? 'd-block' : 'd-none'}>Edit</Button>
+      </Link>
     </div>
   );
 }
 
 function ReviewManagementPage() {
+  const history = useHistory();
   const purchase2 = new Purchase(
     2,
     2,
@@ -104,12 +112,23 @@ function ReviewManagementPage() {
           products
             .filter((product) => purchase.product_id === product.id)
             .map((product) => (
-              <ReviewCard purchase={purchase} product={product} />
+              <ReviewCard
+                purchase={purchase}
+                product={product}
+                show_edit={true}
+              />
             ))
         )}
       </Row>
       <Col className="my-5">
-        <Button size="lg">Add new review</Button>
+        <Button
+          size="lg"
+          onClick={() => {
+            // history.push(`/influencerpersonal/?user_id=${data.id}`);
+          }}
+        >
+          Add new review
+        </Button>
       </Col>
     </Container>
   );
