@@ -25,7 +25,7 @@ def get_users():
     '''
     query the sum of users, if it is smaller than index, invalid operation
     '''
-    index = request.args.get("index")
+    index = request.args.get("left_index")
     index = int(index)
     count = db.session.query(func.count(User.id)).scalar()
     query = db.session.query(User)

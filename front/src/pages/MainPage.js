@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { fetchUser, fetchUsers } from './components/api';
-import { Form, Button, Row, Col, Card, Image, Carousel } from 'react-bootstrap';
+import { Form, Button, Row, Col, Card, Image, Container, Toast, ToastContainer} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ReviewCard2 from './components/ReviewCard2';
 
 class User {
   constructor(id,
@@ -87,16 +88,28 @@ function Icon(props) {
 
 function InfluencerName(props) {
   return (
-    <div>
+    <div className="bg-li">
       <div style={styles.inlineDisplay}>
-        <Icon src={props.icon} height="200" />
+        <Icon src={props.icon} height="100" />
       </div>
       <div style={styles.inlineDisplay}>
         <h3>
           {`${props.name}'s recommendations`}
         </h3>
+        {props.desc}
       </div>
     </div>
+    // <div className="media">
+    //     <a href="/">
+    //       <Image className="mr-3" src={props.icon} width="64" height="64" />
+    //     </a>
+    //   <div className="media-body">
+    //     <h3 className="mt-0">
+    //       {`${props.name}'s recommendations`}
+    //     </h3>
+    //     {props.desc}
+    //   </div>
+    // </div>
   );
 }
 
@@ -120,7 +133,7 @@ function ReviewCard(props) {
         <h2>{purchase.title}</h2>
         <p>{purchase.comment}</p>
         <Star stars={purchase.stars} /> */}
-      <Card style={{ width: '18rem' }}>
+      <Card style={{ width: '18rem' }} className="bg-light text-dark">
         <a href="/" >
           <Card.Img variant="top" src={product.img} />
         </a>
@@ -149,21 +162,33 @@ function LoginSystem(props) {
   //   );
   // }
   return (
-    <div>
+    <div className="container">
+      <Container>
+      <Toast>
+        <Toast.Header>
+          <strong className="me-auto">You wanna be a influencer? </strong>
+        </Toast.Header>
+        <Toast.Body>
+        <a href="/influencer-registration-form"> Get registerd!</a>
+        </Toast.Body>
+      </Toast>
       <Form >
-        <p>
-          <font>You wanna be a influencer? &rarr;  </font>
-          <a href="/influencer-registration-form"> get registerd!</a>
-        </p>
-        <Row className="align-itme-center">
+        {/* <Row className="align-itme-center">
           <Col xs="auto">
+          <h2>You wanna be a influencer? &rarr;  
+          <a href="/influencer-registration-form"> get registerd!</a>
+          </h2>
+          </Col>
+        </Row> */}
+        <Row className="align-itme-center">
+          <Col xs>
             <Form.Group>
               {/* <Form.Label>username: </Form.Label> */}
               {/* <input type="text"></input> */}
               <Form.Control type="email" placeholder="username" />
             </Form.Group>
           </Col>
-          <Col xs="auto">
+          <Col xs>
             <Form.Group>
               {/* <Form.Label>password: </Form.Label> */}
               {/* <input type="text"></input> */}
@@ -177,6 +202,7 @@ function LoginSystem(props) {
           </Col>
         </Row>
       </Form>
+      </Container>
     </div>
   );
 }
@@ -231,14 +257,15 @@ function Main() {
           let ReviewElementArray = [];
           return (
             <div>
-              <InfluencerName name={user.nickname} icon={user.icon} />
+              <InfluencerName name={user.nickname} icon={user.icon} desc={user.desc} />
               {purchases.map((purchase) => {
                 if (purchase.user_id === user.id) {
                   products.map((product) => {
                     if (purchase.product_id === product.id) {
                       ReviewElementArray.push(
                         <div className="col">
-                          <ReviewCard purchase={purchase} product={product} />
+                          {/* <ReviewCard purchase={purchase} product={product} /> */}
+                          <ReviewCard2 purchase={purchase} product={product}/>
                         </div>
                       );
                     }
