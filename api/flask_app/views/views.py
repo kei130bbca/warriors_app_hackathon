@@ -1,3 +1,4 @@
+import random
 import time
 import urllib.parse
 from flask_app.models.products import Product
@@ -95,12 +96,12 @@ def get_product_rakuten(product: Product):
         "applicationId": RAKUTEN_APP_ID,
         "itemCode": product.id
     }
-    # retry for 3 times
-    for _ in range(3):
+    # retry for 10 times
+    for _ in range(10):
         response = requests.get(
             f"https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706", params=query)
         if response.status_code != 200:
-            time.sleep(1)
+            time.sleep(1+random.random())
             continue
         break
     item = response.json()['Items'][0]['Item']
