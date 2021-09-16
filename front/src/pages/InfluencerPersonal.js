@@ -1,38 +1,41 @@
 import React from 'react';
 import axios from 'axios';
 import ReviewCard2 from './components/ReviewCard2';
+import { withRouter } from 'react-router';
 
 class InfluencerPersonal extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            id : 0,
-            nickname : '',
-            youtubleUrl : '',
-            twitter : '',
-            desc : '',
-            img : '',
-            ifShow : false,
-            review : [],
-            show_id: 0,
-        };
-        this.generatorData = this.generatorData.bind(this);
-        this.generatorData(this.state);
-        this.manageOnClick = this.manageOnClick.bind(this);
-        this.modifyOnClick = this.modifyOnClick.bind(this);
-    }
-
-    manageOnClick(){
-        alert('You click manage!');
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: 0,
+      nickname: '',
+      youtubleUrl: '',
+      twitter: '',
+      desc: '',
+      img: '',
+      ifShow: false,
+      review: [],
     };
+    this.generatorData = this.generatorData.bind(this);
+    this.generatorData(this.state);
+    this.manageOnClick = this.manageOnClick.bind(this);
+    this.modifyOnClick = this.modifyOnClick.bind(this);
+  }
 
-    modifyOnClick(){
-        alert('You click modify!');
-    };
+  modifyOnClick() {
+      alert('You click modify!')
+  }
 
+  manageOnClick() {
+    alert('You click manage!');
+  }
+  componentDidMount() {
+    console.log(this.props.location.state.user_id);
+  }
     generatorData = async(state) =>{
         let param = window.location.search;
-        let user_id = param.split("=")[1];
+        // let user_id = param.split("=")[this.props.location.state.user_id];
+        let user_id = this.props.location.state.user_id;
         let response_user = await axios.get('http://localhost:8000/users/' + user_id);
         let temp_data = response_user.data;
         let temp_id = 0
@@ -151,21 +154,20 @@ class InfluencerPersonal extends React.Component {
             </div>
         );
     }
-};
- 
-const styles = {
-    title: {
-        textAlign: 'center',
-    },
-    modiButton: {
-        maxWidth: '150px',
-    },
-    manageButton: {
-        maxWidth: '150px',
-    },
-    reviewLength: {
-        maxWidth: '1000px',
-    },
 }
+const styles = {
+  title: {
+    textAlign: 'center',
+  },
+  modiButton: {
+    maxWidth: '150px',
+  },
+  manageButton: {
+    maxWidth: '150px',
+  },
+  reviewLength: {
+    maxWidth: '1000px',
+  },
+};
 
-export default InfluencerPersonal
+export default withRouter(InfluencerPersonal);

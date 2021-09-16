@@ -127,7 +127,7 @@ function MainPage() {
     fetchUser(1)
       .then((u) => {
         // setUsers(u);
-        console.log(u);
+        // console.log(u);
       })
       .catch((e) => {
         console.log(e);
