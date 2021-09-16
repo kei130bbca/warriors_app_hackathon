@@ -48,7 +48,7 @@ function MainPage() {
     fetchUsers(1)
       .then((u) => {
         // setUsers(u);
-        console.log(JSON.stringify(...u));
+        console.log(u[0]);
         // setUsers(JSON.stringify(...u));
       })
       .catch((e) => {
