@@ -32,7 +32,6 @@ class InfluencerPersonal extends React.Component {
     generatorData = async(state) =>{        
         let response_user = await axios.get('http://localhost:8000/users/1');        
         let temp_data = response_user.data;
-        console.log(temp_data);
         let temp_id = 0
         let temp_nickname = '';
         let temp_twitter = '';
