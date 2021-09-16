@@ -121,7 +121,8 @@ function Main() {
   const products = [product2, product3];
 
   return (
-    <Container>
+    <Container className="text-center">
+      <h1 className="my-3">Review management page</h1>
       <Row xs={1} md={2} gutter={4} className="my-5">
         {purchases.map((purchase) =>
           products
@@ -131,7 +132,7 @@ function Main() {
             ))
         )}
       </Row>
-      <Col className="text-center my-5">
+      <Col className="my-5">
         <Button size="lg">Add new review</Button>
       </Col>
     </Container>
