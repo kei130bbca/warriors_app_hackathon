@@ -4,7 +4,7 @@ import { fetchAuthUser, postLogin } from './api';
 import { useHistory } from 'react-router-dom';
 
 function LoginSystem(props) {
-    const loginState = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
     const history = useHistory()
@@ -13,11 +13,11 @@ function LoginSystem(props) {
         password: ''
     };
     const [userData, setUserData] = useState(data);
-    if (loginState) {
-      return (
-        <div>
-        </div>
-      );
+    if (token) {
+        return (
+            <div>
+            </div>
+        );
     }
 
     function handleChange(event) {
@@ -59,7 +59,7 @@ function LoginSystem(props) {
                 // console.log(data);
                 const token = data.access_token;
                 localStorage.setItem('token', token);
-                
+
                 fetch('http://localhost:8000/auth_user', {
                     headers: {
                         'Content-Type': 'application/json;',
@@ -70,20 +70,21 @@ function LoginSystem(props) {
                         if (res.ok === true) {
                             return res.json();
                         } else {
-                            throw('token is expired.')
+                            throw ('token is expired.')
                         }
                     })
                     .then((data) => {
                         // console.log(data);
+                        localStorage.setItem('user_id', data.id);
                         history.push({
-                            pathname: `/influencerpersonal/?user_id=${data.id}`,
-                            state: { user_id: data.id }
+                            pathname: `/influencerpersonal/${data.id}`
                         }
                         )
                     })
                     .catch((e) => {
                         console.log(e);
                         localStorage.removeItem('token');
+                        localStorage.removeItem('user_id');
                     })
             });
 
