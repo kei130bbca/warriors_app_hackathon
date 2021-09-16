@@ -9,7 +9,7 @@ function ReviewCard2(props) {
   const show_edit = props.show_edit ?? false;
   return (
     <Card style={{ width: '18rem' }} className="bg-light text-dark">
-      <Link to={'productDetail/' + product.id}>
+      <Link to={'/productDetail/' + purchase.products_id}>
         <Card.Img variant="top" src={product.img} />
         <Card.Body>
           <Card.Title>{purchase.title}</Card.Title>
@@ -19,7 +19,7 @@ function ReviewCard2(props) {
           </Card.Text>
         </Card.Body>
       </Link>
-      <Link to={'/review-posting/' + product.id}>
+      <Link to={'/review-posting/' + purchase.products_id}>
         <Button className={show_edit ? 'd-block' : 'd-none'}>Edit</Button>
       </Link>
     </Card>

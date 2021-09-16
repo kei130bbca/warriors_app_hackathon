@@ -22,10 +22,10 @@ class ProductDetail extends React.Component {
     generatorData = async(state) =>{
         let temp_data = [];
         let param = window.location.search;
-        let product_id = param.split("=")[1]
+        let product_id = param.split("=")[1];
+        console.log(product_id);
         let temp_url_product = 'http://localhost:8000/products/' + product_id;
         let response_product = await axios.get(temp_url_product);
-        alert('aa')
         temp_data = response_product.data
         let temp_name = '';
         temp_name = response_product.data.name;

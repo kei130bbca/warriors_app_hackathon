@@ -96,25 +96,24 @@ class InfluencerPersonal extends React.Component {
               axios
                 .get(temp_url)
                 .then((response_product) => {
-                  console.log(responce);
                   temp_data[i].img = response_product.data.img;
+                  let done = true;
+                  this.setState({
+                    nickname: temp_nickname,
+                    youtubleUrl: temp_youtuble,
+                    twitter: temp_twitter,
+                    desc: temp_desc,
+                    img: temp_img,
+                    ifShow: ifShow,
+                    review: temp_data,
+                    show_id: user_id,
+                    done: done,
+                  });
                 })
                 .catch((e) => {
                   console.log(e);
                 });
             }
-            let done = true;
-            this.setState({
-              nickname: temp_nickname,
-              youtubleUrl: temp_youtuble,
-              twitter: temp_twitter,
-              desc: temp_desc,
-              img: temp_img,
-              ifShow: ifShow,
-              review: temp_data,
-              show_id: user_id,
-              done: done,
-            });
           })
           .catch((error2) => {
             console.log(error2);
@@ -138,6 +137,7 @@ class InfluencerPersonal extends React.Component {
       });
       return (
         <div>
+          <h1 style = {styles.title}>{this.state.nickname + "'s personal page"}</h1>
           <div>
             {this.state.ifShow ? (
               <button style={styles.manageButton} onClick={this.manageOnClick}>
