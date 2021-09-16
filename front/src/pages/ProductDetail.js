@@ -1,5 +1,5 @@
 import React from 'react'
-import ReviewCard from './components/ReviewCard';
+// import ReviewCard from './components/ReviewCard';
 import axios from 'axios';
 import ReviewCard2 from './components/ReviewCard2';
 import Footer from './components/Footer'
@@ -21,7 +21,9 @@ class ProductDetail extends React.Component {
 
     generatorData = async(state) =>{
         let temp_data = [];
-        let temp_url_product = 'http://localhost:8000/products/' + 'belluna-gourmet:10023396';
+        let param = window.location.search;
+        let product_id = param.split("=")[1]
+        let temp_url_product = 'http://localhost:8000/products/' + product_id;
         let response_product = await axios.get(temp_url_product);
         //console.log(response_product);
         temp_data = response_product.data
@@ -33,7 +35,7 @@ class ProductDetail extends React.Component {
         let temp_url_review = 'http://localhost:8000/purchases';
         let response_review = await axios.get(temp_url_review, {
             params:{
-                product_id: '946kitchen:10004398',
+                product_id: product_id,
             }}
         );
         temp_data = response_review.data;
@@ -65,7 +67,7 @@ class ProductDetail extends React.Component {
             })  
         return (
             <div>
-                <Header title={styles.title + "Product Detail Page"} auth={true} />
+                <Header title="Product Detail Page" path="/productDetail" auth={true} />
                 <div>
                     <div style = {styles.inlineDisplay}>
                         <img src = {this.state.item_img}></img>
