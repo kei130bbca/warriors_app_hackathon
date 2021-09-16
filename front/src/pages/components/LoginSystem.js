@@ -36,38 +36,11 @@ function LoginSystem(props) {
                 data.password = event.target.value;
                 break;
         }
-        // console.log(data);
         setUserData(data);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        // console.log(userData)
-        // postLogin(userData.username, userData.password)
-        //     .then((res) => {
-        //         console.log(res.ok);
-        //         if (res.ok === true) {
-        //             return res.json();
-        //         }
-        //     })
-        //     .then((data) => {
-        //         fetchAuthUser(data.access_token)
-        //                 .then((res) => {
-        //                     if (res.ok === true) {
-        //                         return res.json();
-        //                     }
-        //                 })
-        //                 .then((data) => {
-        //                         history.push({
-        //                             pathname: '/influencerpersonal',
-        //                             state: { review: data }
-        //                         }
-        //                         )
-        //                         console.log(' aaa ' + data);
-        //                 })
-        //     });
-
-        // console.log(userData)
         const request = {
             username: userData.username,
             password: userData.password,
@@ -84,7 +57,7 @@ function LoginSystem(props) {
                 if (res.ok === true) {
                     return res.json();
                 } else {
-                    throw("sss");
+                    throw ("sss");
                 }
             }).then((data) => {
                 // console.log(data);
@@ -95,7 +68,7 @@ function LoginSystem(props) {
                         'Authorization': `Bearer ${token}`
                     }
                 })
-                .then((res) => {
+                    .then((res) => {
                         if (res.ok === true) {
                             return res.json();
                         }
