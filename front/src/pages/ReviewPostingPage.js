@@ -5,29 +5,12 @@ import { useParams } from 'react-router';
 import { Row, Button, Container, Col, Form } from 'react-bootstrap';
 import axios from 'axios';
 
-class Product {
-  constructor(id, name, img, price, url) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.price = price;
-    this.url = url;
-  }
-}
-
 function Main() {
-  const product3 = new Product(
-    13,
-    'orange',
-    'https://tshop.r10s.jp/benikou/cabinet/orenge/imgrc0084994537.jpg?fitin=275:275',
-    200,
-    'https://item.rakuten.co.jp/benikou/10000723/?iasid=07rpp_10095___et-ktjubpdf-zqv-23e8ef5b-f7a1-4739-8075-3f19a787f7c7'
-  );
-
   let { id } = useParams();
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
   const [star, setStar] = useState(3);
+  const [img, setImg] = useState('');
 
   useEffect(() => {
     axios
@@ -37,13 +20,19 @@ function Main() {
         setTitle(data.title);
         setComment(data.comment);
         setStar(data.star);
+        return data.products_id;
       })
+      .then((product_id) =>
+        axios
+          .get('http://localhost:8000/products/' + product_id)
+          .then((response) => setImg(response.data.img))
+      )
       .catch((e) => console.error(e));
   }, []);
 
   return (
     <Container className="text-center pt-5 px-xl-5">
-      <img src={product3.img} height="250" alt="" />
+      <img src={img} height="250" alt="" />
       <Form className="mt-5 mx-xl-5 px-xl-5">
         <Form.Group as={Row} className="mb-3" controlId="title">
           <Form.Label column xs={2}>
