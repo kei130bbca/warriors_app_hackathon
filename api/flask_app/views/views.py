@@ -24,15 +24,15 @@ def get_product(id: str):
         if product is None:
             product = Product(id, None, None, None, None)
         # If the product name is None, call Rakuten API to get latest infromation
-        print(product.id, product.name)
+        # print(product.id, product.name)
         if product.name is None:
             product = get_product_rakuten(product)
         product = {
-            'id': product['id'],
-            'name': product['name'],
-            'img': product['img'],
-            'price': product['price'],
-            'url': product['url']
+            'id': product.id,
+            'name': product.name,
+            'img': product.img,
+            'price': product.price,
+            'url': product.url
         }
     except Exception as e:
         print(e)
