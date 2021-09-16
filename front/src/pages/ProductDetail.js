@@ -62,17 +62,17 @@ class ProductDetail extends React.Component {
         return (
             <div>
                 <div>
-                    <div style = {styles.inlineDisplay}>
-                        <img src = {this.state.item_img}></img>
-                        <div style = {styles.inlineDisplay}>
-                            <div>
-                                <h2>{this.state.item_name}</h2>
+                    <div style ={styles.products}>
+                        <img src = {this.state.item_img} style = {styles.displayPic}></img>
+                        <div style = {styles.displayTitle}>
+                            <div >
+                                <span>{this.state.item_name}</span>
                             </div>
-                        <div>
-                            {this.state.item_price}
+                            <div>
+                                {'price:' + this.state.item_price}
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <div style = {styles.reviewLength}>
                     {reviewData}
@@ -95,8 +95,21 @@ const styles = {
     reviewLength: {
         maxWidth: '1000px',
     },
+    displayTitle:{
+        display: 'inline-block',
+        maxWidth: '400px',
+    },
+    displayPic:{
+        Width: '300px',
+        height: '300px',
+        padding: '50px',
+    },
+    products:{
+        textAlign: 'center',
+        Height: '750px',
+    },
     inlineDisplay:{
-        display: 'inline-block'
+        display: 'inline-block',
     },
 }
  
