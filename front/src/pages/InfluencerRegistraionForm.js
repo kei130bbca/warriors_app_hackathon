@@ -3,12 +3,11 @@ import React, { useState } from 'react';
 import './registrationform.css';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
+import { Col, Form } from 'react-bootstrap';
 // Please change as needed
 function InfluencerRegistrationForm() {
-  const history = useHistory()
-  const [fileUrl, setFileUrl] = useState(null);
-  const [hasUploadedImage, setHasUploadedImage] = useState(false);
+  const history = useHistory();
+  const [imageUrl, setImageUrl] = useState('');
   function handleSubmit(e) {
     e.preventDefault();
     const username = document.getElementById('username').value;
@@ -17,28 +16,30 @@ function InfluencerRegistrationForm() {
     const youtube = document.getElementById('youtube').value;
     const twitter = document.getElementById('twitter').value;
     const desc = document.getElementById('desc').value;
-    const img = document.getElementById('img').value;
-    axios.post('http://localhost:8000/users', {
-      username: username,
-      nickname: nickname,
-      password: password,
-      youtube: youtube,
-      twitter: twitter,
-      desc: desc,
-      img: fileUrl
-    }).then((res) => {
-      console.log(res);
-    }).catch((e) => {
-      console.log(e);
-    });
+    axios
+      .post('http://localhost:8000/users', {
+        username: username,
+        nickname: nickname,
+        password: password,
+        youtube: youtube,
+        twitter: twitter,
+        desc: desc,
+        img: imageUrl.split('data:image/png;base64,')[1],
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     history.push({
-      pathname: "/"
-    })
+      pathname: '/',
+    });
   }
   //必須事項が入力されているかどうか確認
   function check() {
     console.log(document.getElementById);
-    if (document.getElementById('registrationform').value === " ") {
+    if (document.getElementById('registrationform').value === ' ') {
       alert('Please fill in the required fields.');
       return false;
     } else {
@@ -46,18 +47,30 @@ function InfluencerRegistrationForm() {
     }
   }
 
-  
+  const handleFile = async (event) => {
+    let files = event.target.files;
+    files = Array.from(files).filter((file) => {
+      return [
+        'image/gif',
+        'image/jpeg',
+        'image/png',
+        'image/bmp',
+        'image/svg+xml',
+      ].includes(file.type);
+    });
+    if (files.length === 0) return;
+    // setFiles(files);
+    const file = files[0];
+    const image = URL.createObjectURL(file);
+    console.log(image);
+    // setImageUrl(image);
 
-  const previewImage = (event) => {
-    const imageFile = event.target.files.item(0);
-    const imageUrl = URL.createObjectURL(imageFile);
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = function () {
       var base64data = reader.result;
       console.log(base64data);
-      setHasUploadedImage(true);
-      setFileUrl(base64data);
+      setImageUrl(base64data);
     };
   };
 
@@ -89,17 +102,13 @@ function InfluencerRegistrationForm() {
           className="registrationforms"
           id="password"
         ></input>
-        <p className="registrationtext">Icon image *required</p>
-        <img src={fileUrl} />
-        <input
-          type="file"
-          id="img"
-          name="img"
-          accept="image/*"
-          className="registrationforms"
-          onChange={previewImage}
-          id="img"
-        ></input>
+        <Col xs={4}>
+          <img src={imageUrl} alt="icon shows up here" />
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Upload Icon</Form.Label>
+            <Form.Control type="file" onChange={handleFile} accept="image/*" />
+          </Form.Group>
+        </Col>
         <p className="registrationtext">Twitter</p>
         <input
           type="text"
