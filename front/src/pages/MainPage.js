@@ -40,34 +40,25 @@ function InfluencerName(props) {
 
 function MainPage() {
   const [users, setUsers] = useState([]);
-  const [purchases, setPurchases] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [purchases, setPurchases] = useState([]); // {user_id:object}
 
   useEffect(() => {
-    fetchUsers(0)
-      .then((u) => {
-        setUsers(u);
-        u.forEach((user) => {
-          fetchPurchases(user.user_id).then((p) => {
-            setPurchases(products.concat(p));
-          });
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    const f = async () => {
+      const res_users = await fetchUsers(0);
+      let res_purchases = await Promise.all(
+        res_users.map(async (user) => {
+          return await fetchPurchases(user.user_id);
+        })
+      );
+      res_purchases = Array.prototype.concat(...res_purchases);
+      console.log(res_purchases);
+      setUsers(res_users);
+      setPurchases(res_purchases);
+    };
+    f();
   }, []);
 
   console.log(purchases);
-
-  // const users = [user1, user2];
-  // const purchases = [purchase1, purchase2, purchase3, purchase4];
-  // const products = [product1, product2, product3];
-
-  // function getProduct(id) {
-  //   const product = products.filter((product) => product.id === id);
-  //   return product.length > 0 ? product[0] : null;
-  // }
 
   return (
     <div>
@@ -83,7 +74,7 @@ function MainPage() {
             <div className="container-fluid">
               <div className="row flex-row row flex-nowrap overflow-auto">
                 {purchases
-                  .filter((purchase) => purchase.user_id === user.id)
+                  .filter((purchase) => purchase.users_id === user.user_id)
                   .map((purchase) => {
                     return (
                       <ReviewCard2
