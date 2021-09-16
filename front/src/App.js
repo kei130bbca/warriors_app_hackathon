@@ -22,7 +22,7 @@ function App() {
         <Route path="/template-page">
           <TemplatePage />
         </Route>
-        <Route path="/influencerpersonal">
+        <Route path="/influencerpersonal/:myid">
           <InfluencerPersonal />
         </Route>
         <Route path="/review-management">

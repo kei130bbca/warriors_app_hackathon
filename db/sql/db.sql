@@ -44,7 +44,7 @@ INSERT IGNORE INTO `alembic_version` (`version_num`) VALUES
 
 CREATE TABLE IF NOT EXISTS `products` (
   `id` varchar(63) NOT NULL,
-  `name` varchar(127) DEFAULT NULL,
+  `name` varchar(1023) DEFAULT NULL,
   `img` varchar(511) DEFAULT NULL,
   `price` int DEFAULT NULL,
   `url` varchar(511) DEFAULT NULL,
