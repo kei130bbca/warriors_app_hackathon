@@ -50,6 +50,8 @@ def get_users():
 @users.route("/users/<int:id>", methods=['GET'])
 def get_user(id: int):
     query = db.session.query(User).get(id)
+    if query is None:
+        return jsonify({'message': 'the user was not found'}), 404
     user = {
         "id": query.id,
         "username": query.username,
