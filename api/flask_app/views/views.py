@@ -1,3 +1,4 @@
+import urllib.parse
 from flask_app.models.products import Product
 from flask_app import db
 from flask_app.models.users import User
@@ -44,6 +45,11 @@ def protected():
          -H "Authorization: Bearer <your_token>"
     """
     user: User = flask_praetorian.current_user()
+    urlparse = urllib.parse.urlparse(user.icon)
+    if len(urlparse.scheme) > 0:
+        icon = user.icon
+    else:
+        icon = request.url_root+"static/"+user.icon
     user_obj = {
         "id": user.id,
         "username": user.username,
@@ -51,7 +57,7 @@ def protected():
         "twitter_screenname": user.twitter_screenname,
         "youtube_url": user.youtube_url,
         "password": user.password,
-        "icon": request.url_root+"static/"+user.icon,
+        "icon": icon,
         "desc": user.description,
     }
     return jsonify(user_obj)

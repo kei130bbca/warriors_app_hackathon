@@ -1,5 +1,6 @@
 import os
 import base64
+import urllib.parse
 from flask import flash, jsonify
 from sqlalchemy import func
 from flask_app import app, db, guard
@@ -35,13 +36,18 @@ def get_users():
         query = query.limit(10).offset(index)
         ans = []
         for user in query:
+            urlparse = urllib.parse.urlparse(user.icon)
+            if len(urlparse.scheme) > 0:
+                icon = user.icon
+            else:
+                icon = request.url_root+"static/"+user.icon
             ans.append({"user_id": user.id,
                         "username": user.username,
                         "nickname": user.nickname,
                         "twitter_screenname": user.twitter_screenname,
                         "youtube_url": user.youtube_url,
                         "password": user.password,
-                        "icon": user.icon,
+                        "icon": icon,
                         "description": user.description
                         })
         return jsonify(ans)
@@ -52,13 +58,18 @@ def get_user(id: int):
     query = db.session.query(User).get(id)
     if query is None:
         return jsonify({'message': 'the user was not found'}), 404
+    urlparse = urllib.parse.urlparse(query.icon)
+    if len(urlparse.scheme) > 0:
+        icon = query.icon
+    else:
+        icon = request.url_root+"static/"+query.icon
     user = {
         "id": query.id,
         "username": query.username,
         "nickname": query.nickname,
         "twitter_screenname": query.twitter_screenname,
         "youtube_url": query.youtube_url,
-        "icon": query.icon,
+        "icon": icon,
         "description": query.description
     }
     return jsonify(user)
