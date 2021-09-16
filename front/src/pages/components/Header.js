@@ -19,7 +19,10 @@ function Header(props) {
     return (
         <header>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand href={props.path}>
+                <Navbar.Brand href={props.path} onClick={()=>{
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user_id');
+                    }}>
                     {/* {props.title} */}
                     Warriors app
                 </Navbar.Brand>
