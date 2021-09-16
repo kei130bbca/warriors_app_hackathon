@@ -5,50 +5,6 @@ import { useParams } from 'react-router';
 import { Row, Button, Container, Col, Form } from 'react-bootstrap';
 import axios from 'axios';
 
-class User {
-  constructor(
-    id,
-    username,
-    nickname,
-    twitter_screenname,
-    youtube_url,
-    password,
-    icon,
-    desc
-  ) {
-    this.id = id;
-    this.username = username;
-    this.nickname = nickname;
-    this.twitter_screenname = twitter_screenname;
-    this.youtube_url = youtube_url;
-    this.password = password;
-    this.icon = icon;
-    this.desc = desc;
-  }
-}
-
-class Purchase {
-  constructor(
-    purchase_id,
-    user_id,
-    product_id,
-    count,
-    bouth_at,
-    comment,
-    stars,
-    title
-  ) {
-    this.purchase_id = purchase_id;
-    this.user_id = user_id;
-    this.product_id = product_id;
-    this.count = count;
-    this.bouth_at = bouth_at;
-    this.comment = comment;
-    this.stars = stars;
-    this.title = title;
-  }
-}
-
 class Product {
   constructor(id, name, img, price, url) {
     this.id = id;
