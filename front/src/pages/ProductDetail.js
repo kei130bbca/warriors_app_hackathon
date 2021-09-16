@@ -19,7 +19,7 @@ class ProductDetail extends React.Component {
 
     generatorData = async(state) =>{
         let temp_data = [];
-        let temp_url_product = 'http://localhost:8000/products/' + 'AAAAA';
+        let temp_url_product = 'http://localhost:8000/products/' + 'belluna-gourmet:10023396';
         let response_product = await axios.get(temp_url_product);
         temp_data = response_product.data
         let temp_name = '';
@@ -30,7 +30,7 @@ class ProductDetail extends React.Component {
         let temp_url_review = 'http://localhost:8000/purchases';
         let response_review = await axios.get(temp_url_review, {
             params:{
-                product_id: 'AAAAA',
+                product_id: '946kitchen:10004398',
             }}
         );
         temp_data = response_review.data;

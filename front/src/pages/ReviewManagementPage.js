@@ -1,29 +1,5 @@
 import React from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import { Row, Button, Container, Col } from 'react-bootstrap';
-
-class User {
-  constructor(
-    id,
-    username,
-    nickname,
-    twitter_screenname,
-    youtube_url,
-    password,
-    icon,
-    desc
-  ) {
-    this.id = id;
-    this.username = username;
-    this.nickname = nickname;
-    this.twitter_screenname = twitter_screenname;
-    this.youtube_url = youtube_url;
-    this.password = password;
-    this.icon = icon;
-    this.desc = desc;
-  }
-}
 
 class Purchase {
   constructor(
@@ -81,7 +57,7 @@ function ReviewCard(props) {
   );
 }
 
-function Main() {
+function ReviewManagementPage() {
   const purchase2 = new Purchase(
     2,
     2,
@@ -136,16 +112,6 @@ function Main() {
         <Button size="lg">Add new review</Button>
       </Col>
     </Container>
-  );
-}
-
-function ReviewManagementPage() {
-  return (
-    <div>
-      <Header title="Review Management" />
-      <Main />
-      <Footer />
-    </div>
   );
 }
 

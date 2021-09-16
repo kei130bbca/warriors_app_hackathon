@@ -1,18 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import {
-  Form,
-  Button,
-  Row,
-  Col,
-  Card,
-  Image,
-  Container,
-  Toast,
-  ToastContainer,
-} from 'react-bootstrap';
-import { fetchUser, fetchUsers, postLogin } from './components/api';
+import { Image } from 'react-bootstrap';
+import { fetchUser } from './components/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewCard2 from './components/ReviewCard2';
 import LoginSystem from './components/LoginSystem';
@@ -131,38 +119,7 @@ function InfluencerName(props) {
   );
 }
 
-function Star(props) {
-  return (
-    <div>
-      <span>★{props.stars}</span>
-    </div>
-  );
-}
-
-function ReviewCard(props) {
-  const purchase = props.purchase;
-  const product = props.product;
-
-  return (
-    <div>
-      <Card style={{ width: '18rem' }} className="bg-light text-dark">
-        <a href="/">
-          <Card.Img variant="top" src={product.img} />
-        </a>
-        <Card.Body>
-          <Card.Title>{purchase.title}</Card.Title>
-          <Card.Text>
-            {purchase.comment}
-            <Star stars={purchase.stars} />
-          </Card.Text>
-        </Card.Body>
-      </Card>
-    </div>
-  );
-}
-
-
-function Main() {
+function MainPage() {
   // const [users, setUsers] = useState(null);
   const [accessToken, setAcseesToken] = useState();
 
@@ -280,6 +237,7 @@ function Main() {
 
   return (
     <div>
+      <LoginSystem />
       {users.map((user) => {
         return (
           <div key={user.id}>
@@ -307,17 +265,6 @@ function Main() {
           </div>
         );
       })}
-    </div>
-  );
-}
-
-function MainPage() {
-  return (
-    <div>
-      <Header title="Influencer's Recommendations" path="/" auth={true} />
-      <LoginSystem />
-      <Main />
-      <Footer />
     </div>
   );
 }
