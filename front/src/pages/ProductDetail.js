@@ -1,6 +1,9 @@
 import React from 'react'
-import ReviewCard from './components/ReviewCard';
+// import ReviewCard from './components/ReviewCard';
 import axios from 'axios';
+import ReviewCard2 from './components/ReviewCard2';
+import Footer from './components/Footer'
+import Header from './components/Header';
 
 class ProductDetail extends React.Component {
     constructor(props) {
@@ -14,13 +17,15 @@ class ProductDetail extends React.Component {
         };
         this.generatorData = this.generatorData.bind(this);
         this.generatorData(this.state);
-        console.log(this.state);
     }
 
     generatorData = async(state) =>{
         let temp_data = [];
-        let temp_url_product = 'http://localhost:8000/products/' + 'belluna-gourmet:10023396';
+        let param = window.location.search;
+        let product_id = param.split("=")[1]
+        let temp_url_product = 'http://localhost:8000/products/' + product_id;
         let response_product = await axios.get(temp_url_product);
+        //console.log(response_product);
         temp_data = response_product.data
         let temp_name = '';
         temp_name = response_product.data.name;
@@ -30,33 +35,39 @@ class ProductDetail extends React.Component {
         let temp_url_review = 'http://localhost:8000/purchases';
         let response_review = await axios.get(temp_url_review, {
             params:{
-                product_id: '946kitchen:10004398',
+                product_id: product_id,
             }}
         );
         temp_data = response_review.data;
         for(let i = 0; i < temp_data.length; i++){
             let temp_user_icon = 'http://localhost:8000/users/' + temp_data[i].users_id;
             let response_user = await axios.get(temp_user_icon);
-            console.log(response_user.data);
+            //console.log(response_user);
             temp_data[i].img = response_user.data.icon;
-        }
+        }        
         this.setState({
             review: temp_data,
             item_img: temp_img,
             item_name: temp_name,
             item_price: temp_price,
         })
+        console.log(this.state.review);
     };
 
     render() {
             let reviewData = this.state.review.map((item, index) =>{
                 return (
-                    <ReviewCard img = {item.img} title = {item.title} content = {item.content} />
+                    // <ReviewCard img = {item.img} title = {item.title} content = {item.content} />
+                    <ReviewCard2
+                        purchase={item}
+                        product={item}
+                        key={item.user_id + '' + this.state.item_id}
+                    />
                 )
             })  
         return (
             <div>
-                <h1 style = {styles.title} >Product Detail Page</h1>
+                <Header title="Product Detail Page" path="/productDetail" auth={true} />
                 <div>
                     <div style = {styles.inlineDisplay}>
                         <img src = {this.state.item_img}></img>
@@ -73,6 +84,7 @@ class ProductDetail extends React.Component {
                 <div style = {styles.reviewLength}>
                     {reviewData}
                 </div>
+                <Footer />
             </div>
         );
     }

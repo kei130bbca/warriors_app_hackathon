@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ReviewCard from './components/ReviewCard';
+import ReviewCard2 from './components/ReviewCard2';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import { Link } from 'react-router-dom';
 
 class InfluencerPersonal extends React.Component {
     constructor(props) {
@@ -14,6 +18,7 @@ class InfluencerPersonal extends React.Component {
             img : '',
             ifShow : false,
             review : [],
+            show_id: 0,
         };
         this.generatorData = this.generatorData.bind(this);
         this.generatorData(this.state);
@@ -30,7 +35,9 @@ class InfluencerPersonal extends React.Component {
     };
 
     generatorData = async(state) =>{
-        let response_user = await axios.get('http://localhost:8000/users/1');
+        let param = window.location.search;
+        let user_id = param.split("=")[1];
+        let response_user = await axios.get('http://localhost:8000/users/' + user_id);
         let temp_data = response_user.data;
         let temp_id = 0
         let temp_nickname = '';
@@ -74,13 +81,16 @@ class InfluencerPersonal extends React.Component {
             }}
         );
         temp_data = response_review.data;
-        // for(let i = 0; i < temp_data.length; i++){
-        //     let temp_url = 'http://localhost:8000/products/' + temp_data[i].products_id;
-        //     let response_product = await axios.get(temp_url);
-        //     if(response_product.status == 200){
-        //         temp_data[i].img = response_product.data.img;
-        //     }         
-        // }
+        for(let i = 0; i < temp_data.length; i++){
+            let temp_url = 'http://localhost:8000/products/' + temp_data[i].products_id;
+            await axios.get(temp_url)
+            .then((response) => {
+                temp_data[i].img = response.data.img;
+                console.log(response);
+            }).catch((e) => {
+                console.log(e);
+            });       
+        }
         this.setState({
             nickname: temp_nickname,
             youtubleUrl: temp_youtuble,
@@ -89,18 +99,24 @@ class InfluencerPersonal extends React.Component {
             img: temp_img,
             ifShow: ifShow,
             review: temp_data,
+            show_id: user_id,
         });
     };
 
     render() {
         let reviewData = this.state.review.map((item, index) =>{
             return (
-                <ReviewCard img = {item.img} title = {item.title} content = {item.comment} />
+                // <ReviewCard img = {item.img} title = {item.title} content = {item.comment} />
+                <ReviewCard2
+                        purchase={item}
+                        product={item}
+                        key={item.user_id + '' + this.state.item_id}
+                />
             )
         })
         return (
             <div>
-                <h1 style = {styles.title} > {this.state.nickname}'s personal page</h1>
+                <Header title={this.state.nickname + "'s personal page"} auth={true} />
                 <div>
                     {
                         this.state.ifShow?(
@@ -137,6 +153,7 @@ class InfluencerPersonal extends React.Component {
                         <span>{this.state.desc}</span>
                     </div>                    
                 </div>
+                <Footer />
             </div>
         );
     }
