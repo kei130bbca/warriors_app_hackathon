@@ -42,8 +42,13 @@ export async function postLogin(username, password) {
     return data;
 }
 
-export async function fetchAuthUser() {
-    const response = await fetch('http://localhost:8000/auth_user');
-    const data = response.headers;
+export async function fetchAuthUser(token) {
+    const response = await fetch('http://localhost:8000/auth_user', {
+        headers: {
+            'Content-Type': 'application/json;',
+            'Authorization': `${token}`
+        }
+    });
+    const data = await response.json();
     return data;
 }
