@@ -33,17 +33,28 @@ export async function fetchPurchases(user_id) {
 }
 
 export async function postLogin(username, password) {
-  const request = {
-    username: username,
-    password: password,
-  };
-  const response = await fetch(`http://localhost:8000/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;',
-    },
-    body: JSON.stringify(request),
-  });
-  const data = await response.json();
-  return data;
+    const request = {
+        username: username,
+        password: password,
+    };
+    const response = await fetch(`http://localhost:8000/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;'
+        },
+        body: JSON.stringify(request)
+    });
+    // const data = await response.json();
+    return response;
+}
+
+export async function fetchAuthUser(token) {
+    const response = await fetch('http://localhost:8000/auth_user', {
+        headers: {
+            'Content-Type': 'application/json;',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    // const data = await response.json();
+    return response;
 }
