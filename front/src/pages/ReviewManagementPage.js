@@ -1,9 +1,7 @@
 import React from 'react';
 import { Row, Button, Container, Col } from 'react-bootstrap';
-import { useHistory, Link } from 'react-router-dom';
 import Purchase from '../classes/Purchase';
 import Product from '../classes/Product';
-import Star from './components/Star';
 import ReviewCard2 from './components/ReviewCard2';
 
 function ReviewManagementPage() {
