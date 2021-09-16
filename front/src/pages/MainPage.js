@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import { fetchUser, fetchUsers } from './components/api';
 import { Form, Button, Row, Col, Card, Image, Container, Toast, ToastContainer} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ReviewCard2 from './components/ReviewCard2';
 
 class User {
   constructor(id,
@@ -263,7 +264,8 @@ function Main() {
                     if (purchase.product_id === product.id) {
                       ReviewElementArray.push(
                         <div className="col">
-                          <ReviewCard purchase={purchase} product={product} />
+                          {/* <ReviewCard purchase={purchase} product={product} /> */}
+                          <ReviewCard2 purchase={purchase} product={product}/>
                         </div>
                       );
                     }
