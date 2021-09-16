@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ReviewCard from './components/ReviewCard';
+import ReviewCard2 from './components/ReviewCard2';
 import { withRouter } from 'react-router';
 
 class InfluencerPersonal extends React.Component {
@@ -22,12 +23,16 @@ class InfluencerPersonal extends React.Component {
     this.modifyOnClick = this.modifyOnClick.bind(this);
   }
 
+  modifyOnClick() {
+      alert('You click modify!')
+  }
+
   manageOnClick() {
     alert('You click manage!');
   }
-  componentDidMount() {
-    console.log(this.props.location.state.user_id);
-  }
+//   componentDidMount() {
+//     console.log(this.props.location.state.user_id);
+//   }
     generatorData = async(state) =>{
         let param = window.location.search;
         let user_id = param.split("=")[1];
@@ -149,101 +154,6 @@ class InfluencerPersonal extends React.Component {
             </div>
         );
     }
-    if (temp_data.nickname) {
-      temp_nickname = temp_data.nickname;
-    } else {
-      temp_nickname = 'A lazy man with no nickname.';
-    }
-    if (temp_data.youtube_url) {
-      temp_youtuble = temp_data.youtube_url;
-    } else {
-      temp_youtuble = 'A lazy man who did not fill in his youtube url';
-    }
-    if (temp_data.twitter_screenname) {
-      temp_twitter = temp_data.twitter_screenname;
-    } else {
-      temp_twitter = 'A lazy man who did not fill in his twitter screenname.';
-    }
-    if (temp_data.description) {
-      temp_desc = temp_data.description;
-    } else {
-      temp_desc = 'A lazy man who has written no description about himself.';
-    }
-    if (temp_data.icon) {
-      temp_img = temp_data.icon;
-    } else {
-      temp_img = '';
-    }
-    let response_review = await axios.get('http://localhost:8000/purchases', {
-      params: {
-        user_id: 1,
-      },
-    });
-    temp_data = response_review.data;
-    // for(let i = 0; i < temp_data.length; i++){
-    //     let temp_url = 'http://localhost:8000/products/' + temp_data[i].products_id;
-    //     let response_product = await axios.get(temp_url);
-    //     if(response_product.status == 200){
-    //         temp_data[i].img = response_product.data.img;
-    //     }
-    // }
-    this.setState({
-      nickname: temp_nickname,
-      youtubleUrl: temp_youtuble,
-      twitter: temp_twitter,
-      desc: temp_desc,
-      img: temp_img,
-      ifShow: ifShow,
-      review: temp_data,
-    });
-  };
-
-  render() {
-    let reviewData = this.state.review.map((item, index) => {
-      return (
-        <ReviewCard img={item.img} title={item.title} content={item.comment} />
-      );
-    });
-    return (
-      <div>
-        <h1 style={styles.title}> {this.state.nickname}'s personal page</h1>
-        <div>
-          {this.state.ifShow ? (
-            <button style={styles.manageButton} onClick={this.manageOnClick}>
-              Review management
-            </button>
-          ) : null}
-        </div>
-        <div style={styles.reviewLength}>{reviewData}</div>
-        <div>
-          {this.state.ifShow ? (
-            <button style={styles.modiButton} onClick={this.modifyOnClick}>
-              modify your information
-            </button>
-          ) : null}
-        </div>
-        <div>
-          <img src={this.state.img} />
-          <div>
-            <span>nickname:</span>
-            <span>{this.state.nickname}</span>
-          </div>
-          <div>
-            <span>Youtuble:</span>
-            <span>{this.state.youtubleUrl}</span>
-          </div>
-          <div>
-            <span>Twitter:</span>
-            <span>{this.state.twitter}</span>
-          </div>
-          <div>
-            <span>Description:</span>
-            <span>{this.state.desc}</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
 }
 const styles = {
   title: {
