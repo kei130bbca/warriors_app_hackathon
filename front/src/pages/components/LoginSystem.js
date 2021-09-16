@@ -62,6 +62,8 @@ function LoginSystem(props) {
             }).then((data) => {
                 // console.log(data);
                 const token = data.access_token;
+                localStorage.setItem('token', token);
+                console.log(localStorage['token'])
                 fetch('http://localhost:8000/auth_user', {
                     headers: {
                         'Content-Type': 'application/json;',

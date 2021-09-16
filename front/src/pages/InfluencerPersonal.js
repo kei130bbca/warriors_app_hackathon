@@ -30,12 +30,13 @@ class InfluencerPersonal extends React.Component {
   manageOnClick() {
     alert('You click manage!');
   }
-//   componentDidMount() {
-//     console.log(this.props.location.state.user_id);
-//   }
+  componentDidMount() {
+    console.log(this.props.location.state.user_id);
+  }
     generatorData = async(state) =>{
         let param = window.location.search;
-        let user_id = param.split("=")[1];
+        // let user_id = param.split("=")[this.props.location.state.user_id];
+        let user_id = this.props.location.state.user_id;
         let response_user = await axios.get('http://localhost:8000/users/' + user_id);
         let temp_data = response_user.data;
         let temp_id = 0
