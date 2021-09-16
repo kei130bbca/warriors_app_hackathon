@@ -158,22 +158,22 @@ function LoginSystem(props) {
   return (
     <div className="container">
       <Container>
-        <Toast>
+        {/* <Toast>
           <Toast.Header>
             <strong className="me-auto">You wanna be a influencer? </strong>
           </Toast.Header>
           <Toast.Body>
             <a href="/influencer-registration-form"> Get registerd!</a>
           </Toast.Body>
-        </Toast>
+        </Toast> */}
         <Form >
-          {/* <Row className="align-itme-center">
+          <Row className="align-itme-center">
           <Col xs="auto">
           <h2>You wanna be a influencer? &rarr;  
           <a href="/influencer-registration-form"> get registerd!</a>
           </h2>
           </Col>
-        </Row> */}
+        </Row>
           <Row className="align-itme-center">
             <Col xs>
               <Form.Group>
