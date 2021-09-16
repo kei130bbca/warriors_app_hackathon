@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
-import ReviewCard from './components/ReviewCard';
 import ReviewCard2 from './components/ReviewCard2';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import { Link } from 'react-router-dom';
 
 class InfluencerPersonal extends React.Component {
     constructor(props) {
