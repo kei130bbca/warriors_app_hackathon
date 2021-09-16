@@ -1,3 +1,4 @@
+import time
 import urllib.parse
 from flask_app.models.products import Product
 from flask_app import db
@@ -19,14 +20,20 @@ def index():
 @views.route("/products/<string:id>", methods=['GET'])
 def get_product(id: str):
     try:
-        # query = db.session.query(Product).get(id)
-        query = get_product_rakuten(id)
+        product = db.session.query(Product).get(id)
+        # If the product not found on database, create new product with speficied id
+        if product is None:
+            product = Product(id, None, None, None, None)
+        # If the product name is None, call Rakuten API to get latest infromation
+        # print(product.id, product.name)
+        if product.name is None:
+            product = get_product_rakuten(product)
         product = {
-            'id': query['id'],
-            'name': query['name'],
-            'img': query['img'],
-            'price': query['price'],
-            'url': query['url']
+            'id': product.id,
+            'name': product.name,
+            'img': product.img,
+            'price': product.price,
+            'url': product.url
         }
     except Exception as e:
         print(e)
@@ -83,14 +90,29 @@ def refresh():
     return jsonify(ret), 200
 
 
-def get_product_rakuten(product_id: str = "sorara:10001376"):
+def get_product_rakuten(product: Product):
     query = {
         "applicationId": RAKUTEN_APP_ID,
-        "itemCode": product_id
+        "itemCode": product.id
     }
-    response = requests.get(
-        f"https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706", params=query)
+    # retry for 3 times
+    for _ in range(3):
+        response = requests.get(
+            f"https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706", params=query)
+        if response.status_code != 200:
+            time.sleep(1)
+            continue
+        break
     item = response.json()['Items'][0]['Item']
-    product = {"id": item['itemCode'], "name": item['itemName'],
-               "img": item['smallImageUrls'][0]['imageUrl'], "price": item['itemPrice'], "url": item['itemUrl']}
+
+    # Update product object
+    product.id = item['itemCode']
+    product.name = item['itemName']
+    product.img = item['smallImageUrls'][0]['imageUrl']
+    product.price = item['itemPrice']
+    product.url = item['itemUrl']
+
+    # Save product as cashe into database
+    db.session.add(product)
+    db.session.commit()
     return product
