@@ -6,6 +6,7 @@ import InfluencerPersonal from './pages/InfluencerPersonal';
 import ReviewManagementPage from './pages/ReviewManagementPage';
 import ReviewPostingPage from './pages/ReviewPostingPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
       </Route>
       <Route path="/review-posting/:id">
         <ReviewPostingPage />
+      </Route>
+      <Route path="productDetail">
+        <ProductDetail />
       </Route>
     </BrowserRouter>
   );
