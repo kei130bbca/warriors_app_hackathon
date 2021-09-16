@@ -33,7 +33,7 @@ class InfluencerPersonal extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.location.state.user_id);
+    console.log(this.props.match.params.myid);
   }
 
   generatorData = async (state) => {
