@@ -9,6 +9,7 @@ function InfluencerRegistrationForm() {
   const history = useHistory()
   const [fileUrl, setFileUrl] = useState(null);
   const [hasUploadedImage, setHasUploadedImage] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
   function handleSubmit(e) {
     e.preventDefault();
     const username = document.getElementById('username').value;
@@ -38,7 +39,7 @@ function InfluencerRegistrationForm() {
   //必須事項が入力されているかどうか確認
   function check() {
     console.log(document.getElementById);
-    if (document.getElementById('registrationform').value === " ") {
+    if (document.getElementById('registrationform').value === "") {
       alert('Please fill in the required fields.');
       return false;
     } else {
@@ -46,18 +47,31 @@ function InfluencerRegistrationForm() {
     }
   }
 
-  
+  const handleFile = async (event) => {
+    let files = event.target.files;
+    files = Array.from(files).filter((file) => {
+      return [
+        'image/gif',
+        'image/jpeg',
+        'image/png',
+        'image/bmp',
+        'image/svg+xml',
+      ].includes(file.type);
+    });
+    if (files.length === 0) return;
+    // setFiles(files);
+    const file = files[0];
+    const image = URL.createObjectURL(file);
+    console.log(image);
+    // setImageUrl(image);
 
-  const previewImage = (event) => {
-    const imageFile = event.target.files.item(0);
-    const imageUrl = URL.createObjectURL(imageFile);
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = function () {
       var base64data = reader.result;
       console.log(base64data);
       setHasUploadedImage(true);
-      setFileUrl(base64data);
+      setImageUrl(base64data);
     };
   };
 
@@ -97,7 +111,7 @@ function InfluencerRegistrationForm() {
           name="img"
           accept="image/*"
           className="registrationforms"
-          onChange={previewImage}
+          onChange={handleFile}
           id="img"
         ></input>
         <p className="registrationtext">Twitter</p>
