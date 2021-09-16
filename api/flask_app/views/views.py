@@ -24,6 +24,7 @@ def get_product(id: str):
         if product is None:
             product = Product(id, None, None, None, None)
         # If the product name is None, call Rakuten API to get latest infromation
+        print(product.id, product.name)
         if product.name is None:
             product = get_product_rakuten(product)
         product = {
