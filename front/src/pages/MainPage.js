@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { fetchUser, fetchUsers, postLogin } from './components/api';
-import { Form, Button, Row, Col, Card, Image, Container, Toast, ToastContainer} from 'react-bootstrap';
+import { Form, Button, Row, Col, Card, Image, Container, Toast, ToastContainer } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewCard2 from './components/ReviewCard2';
 
@@ -135,7 +135,7 @@ function ReviewCard(props) {
           <Card.Title>{purchase.title}</Card.Title>
           <Card.Text>
             {purchase.comment}
-          <Star stars={purchase.stars} />
+            <Star stars={purchase.stars} />
           </Card.Text>
         </Card.Body>
       </Card>
@@ -158,44 +158,44 @@ function LoginSystem(props) {
   return (
     <div className="container">
       <Container>
-      <Toast>
-        <Toast.Header>
-          <strong className="me-auto">You wanna be a influencer? </strong>
-        </Toast.Header>
-        <Toast.Body>
-        <a href="/influencer-registration-form"> Get registerd!</a>
-        </Toast.Body>
-      </Toast>
-      <Form >
-        {/* <Row className="align-itme-center">
+        <Toast>
+          <Toast.Header>
+            <strong className="me-auto">You wanna be a influencer? </strong>
+          </Toast.Header>
+          <Toast.Body>
+            <a href="/influencer-registration-form"> Get registerd!</a>
+          </Toast.Body>
+        </Toast>
+        <Form >
+          {/* <Row className="align-itme-center">
           <Col xs="auto">
           <h2>You wanna be a influencer? &rarr;  
           <a href="/influencer-registration-form"> get registerd!</a>
           </h2>
           </Col>
         </Row> */}
-        <Row className="align-itme-center">
-          <Col xs>
-            <Form.Group>
-              {/* <Form.Label>username: </Form.Label> */}
-              {/* <input type="text"></input> */}
-              <Form.Control type="email" placeholder="username" />
-            </Form.Group>
-          </Col>
-          <Col xs>
-            <Form.Group>
-              {/* <Form.Label>password: </Form.Label> */}
-              {/* <input type="text"></input> */}
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-          </Col>
-          <Col xs="auto">
-            <Button variant="primary" type="submit">
-              Log in
-            </Button>
-          </Col>
-        </Row>
-      </Form>
+          <Row className="align-itme-center">
+            <Col xs>
+              <Form.Group>
+                {/* <Form.Label>username: </Form.Label> */}
+                {/* <input type="text"></input> */}
+                <Form.Control type="text" placeholder="username" />
+              </Form.Group>
+            </Col>
+            <Col xs>
+              <Form.Group>
+                {/* <Form.Label>password: </Form.Label> */}
+                {/* <input type="text"></input> */}
+                <Form.Control type="password" placeholder="Password" />
+              </Form.Group>
+            </Col>
+            <Col xs="auto">
+              <Button variant="primary" type="submit">
+                Log in
+              </Button>
+            </Col>
+          </Row>
+        </Form>
       </Container>
     </div>
   );
@@ -215,10 +215,10 @@ function Main() {
   }, []);
 
   useEffect(() => {
-    postLogin('Yasoob', 'strongpassword').then((u) => {
-      // setUsers(u);
-      console.log(u);
-    })
+    postLogin('Yasoob', 'strongpassword')
+      .then((u) => {
+        console.log(u);
+      })
       .catch((e) => {
         console.log(e);
       })
@@ -269,7 +269,7 @@ function Main() {
                       ReviewElementArray.push(
                         <div className="col">
                           {/* <ReviewCard purchase={purchase} product={product} /> */}
-                          <ReviewCard2 purchase={purchase} product={product}/>
+                          <ReviewCard2 purchase={purchase} product={product} />
                         </div>
                       );
                     }
