@@ -4,7 +4,7 @@ import { fetchAuthUser, postLogin } from './api';
 import { useHistory } from 'react-router-dom';
 
 function LoginSystem(props) {
-    const loginState = props.loginState;
+    const loginState = localStorage.getItem('token');
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
     const history = useHistory()
@@ -13,16 +13,12 @@ function LoginSystem(props) {
         password: ''
     };
     const [userData, setUserData] = useState(data);
-    // const loginState = true;
-    // if (loginState === true) {
-    //   return (
-    //     <div>
-    //       <a href="/influencerparsonal">
-    //         go to personal page
-    //       </a>
-    //     </div>
-    //   );
-    // }
+    if (loginState) {
+      return (
+        <div>
+        </div>
+      );
+    }
 
     function handleChange(event) {
         let data = userData;
@@ -63,7 +59,7 @@ function LoginSystem(props) {
                 // console.log(data);
                 const token = data.access_token;
                 localStorage.setItem('token', token);
-                console.log(localStorage['token'])
+                
                 fetch('http://localhost:8000/auth_user', {
                     headers: {
                         'Content-Type': 'application/json;',
