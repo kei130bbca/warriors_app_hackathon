@@ -50,25 +50,16 @@ function MainPage() {
     fetchUsers(0)
       .then((u) => {
         setUsers(u);
+        u.forEach((user) => {
+          fetchPurchases(user.user_id).then((p) => {
+            setPurchases(products.concat(p));
+          });
+        });
       })
       .catch((e) => {
         console.log(e);
       });
   }, []);
-
-  useEffect(() => {
-    users.map((user) => {
-      fetchPurchases(user.id)
-      .then((p) => {
-        const clone = Array.from(purchases);
-        clone.push(p);
-        setPurchases(clone);
-      })
-      .catch((e) => {
-        console.log(e);
-      })
-    });
-  }, [users]);
 
   console.log(purchases);
 
@@ -94,17 +85,16 @@ function MainPage() {
             />
             <div className="container-fluid">
               <div className="row flex-row row flex-nowrap overflow-auto">
-                {/* {purchases
+                {purchases
                   .filter((purchase) => purchase.user_id === user.id)
                   .map((purchase) => {
                     return (
                       <ReviewCard2
                         purchase={purchase}
-                        product={getProduct(purchase.product_id)}
                         key={purchase.user_id + '' + purchase.product_id}
                       />
                     );
-                  })} */}
+                  })}
               </div>
             </div>
             <br></br>
