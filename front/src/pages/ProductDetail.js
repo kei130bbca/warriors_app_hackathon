@@ -58,6 +58,7 @@ class ProductDetail extends React.Component {
                         purchase={item}
                         product={item}
                         key={item.user_id + '' + this.state.item_id}
+                        show_user = {true}
                     />
                 )
             })  
@@ -72,7 +73,7 @@ class ProductDetail extends React.Component {
                                 <span>{this.state.item_name}</span>
                             </div>
                             <div style = {styles.price}>
-                                {'$:  ' + this.state.item_price}
+                                {this.state.item_price + "円"}
                             </div>
                             <div style = {styles.link}>
                                 <span>Buy it in Rakuten Ichiba:</span>
