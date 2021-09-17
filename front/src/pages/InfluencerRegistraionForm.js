@@ -3,11 +3,20 @@ import React, { useState } from 'react';
 import './registrationform.css';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { Col, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import {
+  Container,
+  CardGroup,
+  Row,
+  Col,
+  InputGroup,
+  Button,
+} from 'react-bootstrap';
 // Please change as needed
 function InfluencerRegistrationForm() {
   const history = useHistory();
   const [imageUrl, setImageUrl] = useState('');
+
   function handleSubmit(e) {
     e.preventDefault();
     const username = document.getElementById('username').value;
@@ -16,6 +25,9 @@ function InfluencerRegistrationForm() {
     const youtube = document.getElementById('youtube').value;
     const twitter = document.getElementById('twitter').value;
     const desc = document.getElementById('desc').value;
+    const img = imageUrl.split(',')[1];
+    console.log(img);
+    console.log('send');
     axios
       .post('http://localhost:8000/users', {
         username: username,
@@ -24,7 +36,7 @@ function InfluencerRegistrationForm() {
         youtube: youtube,
         twitter: twitter,
         desc: desc,
-        img: imageUrl.split('data:image/png;base64,')[1],
+        img: img,
       })
       .then((res) => {
         console.log(res);
@@ -32,9 +44,9 @@ function InfluencerRegistrationForm() {
       .catch((e) => {
         console.log(e);
       });
-    history.push({
-      pathname: '/',
-    });
+    // history.push({
+    //   pathname: '/',
+    // });
   }
   //必須事項が入力されているかどうか確認
   function check() {
@@ -75,69 +87,116 @@ function InfluencerRegistrationForm() {
   };
 
   return (
-    <div>
-      <h1>Influencer Registration Form</h1>
-      <form method="get" onSubmit={handleSubmit} id="registrationform">
-        <p className="registrationtext">User name *required</p>
-        <input
-          type="text"
-          placeholder="Rakuten Taro"
-          name="username"
-          className="registrationforms"
-          id="username"
-        ></input>
-        <p className="registrationtext">Nick name *required</p>
-        <input
-          type="text"
-          placeholder="Taro"
-          name="nickname"
-          className="registrationforms"
-          id="nickname"
-        ></input>
-        <p className="registrationtext">Password *required</p>
-        <input
-          type="text"
-          placeholder="1234abcd"
-          name="password"
-          className="registrationforms"
-          id="password"
-        ></input>
-        <Col xs={4}>
-          <img src={imageUrl} alt="icon shows up here" />
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Upload Icon</Form.Label>
-            <Form.Control type="file" onChange={handleFile} accept="image/*" />
-          </Form.Group>
+    <Container className="px-xl-5">
+      <Row>
+        <Col xl={2} xs={0}></Col>
+        <Col>
+          <h1>Influencer Registration Form</h1>
+          <Form method="get" onSubmit={handleSubmit} id="registrationform">
+            <Form.Group as={Row} className="mb-3" controlId="title">
+              <Form.Label column xs={3}>
+                User name *required
+              </Form.Label>
+              <Col xs={9}>
+                <Form.Control
+                  placeholder="Rakuten Taro"
+                  name="username"
+                  id="username"
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="title">
+              <Form.Label column xs={3}>
+                Nick name *required
+              </Form.Label>
+              <Col xs={9}>
+                <Form.Control
+                  placeholder="Taro"
+                  name="nickname"
+                  id="nickname"
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="title">
+              <Form.Label column xs={3}>
+                Password *required
+              </Form.Label>
+              <Col xs={9}>
+                <Form.Control
+                  placeholder="1234abcd"
+                  name="password"
+                  id="password"
+                />
+              </Col>
+            </Form.Group>
+            <Row>
+              <Col auto>
+                <img src={imageUrl} alt="icon shows up here" />
+              </Col>
+              <Col auto>
+                <Form.Group controlId="formFile" className="mb-3">
+                  <Form.Label>Upload Icon</Form.Label>
+                  <Form.Control
+                    type="file"
+                    onChange={handleFile}
+                    accept="image/*"
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Form.Group as={Row} className="mb-3" controlId="title">
+              <Form.Label column xs={3}>
+                Twitter
+              </Form.Label>
+              <Col xs={9}>
+                <InputGroup className="mb-3">
+                  <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                  <Form.Control
+                    placeholder="xxx_xxx"
+                    name="twitter_screenname"
+                    id="twitter"
+                  />
+                </InputGroup>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="title">
+              <Form.Label column xs={3}>
+                YouTube
+              </Form.Label>
+              <Col xs={9}>
+                <Form.Control
+                  placeholder="https://www.youtube.com/user/xxx"
+                  name="youtube_url"
+                  id="youtube"
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="title">
+              <Form.Label column xs={3}>
+                Your Description
+              </Form.Label>
+              <Col xs={9}>
+                <Form.Control
+                  placeholder="Age, Hobby, Nationality..."
+                  name="desc"
+                  id="desc"
+                  as="textarea"
+                />
+              </Col>
+            </Form.Group>
+            <div className="text-center">
+              {' '}
+              <Button onClick={check} type="submit">
+                Submit
+              </Button>
+            </div>
+
+            {/* <input type="submit" className="button" onClick={check} /> */}
+          </Form>
         </Col>
-        <p className="registrationtext">Twitter</p>
-        <input
-          type="text"
-          placeholder="@xxx_xxx"
-          name="twitter_screenname"
-          className="registrationforms"
-          id="twitter"
-        ></input>
-        <p className="registrationtext">YouTube</p>
-        <input
-          type="text"
-          placeholder="https://www.youtube.com/user/xxx"
-          name="youtube_url"
-          className="registrationforms"
-          id="youtube"
-        ></input>
-        <p className="registrationtext">Your Description</p>
-        <textarea
-          type="text"
-          placeholder="Age, Hobby, Nationality..."
-          name="desc"
-          className="registrationforms"
-          id="desc"
-        ></textarea>
-        <br />
-        <br />
-        <input type="submit" className="button" onClick={check} />
-      </form>
-    </div>
+        <Col xl={2} xs={0}></Col>
+      </Row>
+    </Container>
   );
 }
 
