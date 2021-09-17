@@ -3,40 +3,7 @@ import { fetchUsers, fetchPurchases } from './components/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewCard2 from './components/ReviewCard2';
 import LoginSystem from './components/LoginSystem';
-import Icon from './components/Icon';
-
-const styles = {
-  inlineDisplay: {
-    display: 'inline-block',
-  },
-  horizontalList: {
-    overflowX: 'auto',
-    whiteSpace: 'nowrap',
-    webkitOverflowScrolling: 'touch',
-  },
-  item: {
-    display: 'inline-block',
-    width: '90%',
-    height: '400px',
-    margin: '16px',
-    fontSize: '48px',
-    background: 'rgba(255, 0, 0, 0.4)',
-  },
-};
-
-function InfluencerName(props) {
-  return (
-    <div className="bg-li">
-      <div style={styles.inlineDisplay}>
-        <Icon src={props.icon} height="100" />
-      </div>
-      <div style={styles.inlineDisplay}>
-        <h3>{`${props.name}'s recommendations`}</h3>
-        {props.desc}
-      </div>
-    </div>
-  );
-}
+import InfluencerName from './components/InfluencerName';
 
 function MainPage() {
   const [users, setUsers] = useState([]);
@@ -65,11 +32,12 @@ function MainPage() {
       <LoginSystem />
       {users.map((user) => {
         return (
-          <div key={user.id}>
+          <div key={user.user_id}>
             <InfluencerName
               name={user.nickname}
               icon={user.icon}
               desc={user.desc}
+              id={user.user_id}
             />
             <div className="container-fluid">
               <div className="row flex-row row flex-nowrap overflow-auto">
