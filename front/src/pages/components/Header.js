@@ -12,13 +12,13 @@ function Header(props) {
         const user_id = localStorage.getItem('user_id');
         const url = `/influencerpersonal/${user_id}`
         NavLinkArray.push(
-            <Nav.Link href={url} key="influencerpersonal">
+            <Nav.Link href={url} key="influencerpersonal" className="nav-link active">
                 Personal page
             </Nav.Link>);
     }
     return (
-        <header>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <header >
+            <Navbar collapseOnSelect expand="lg" bg="info" variant="dark">
                 <Navbar.Brand href={props.path} onClick={()=>{
                     localStorage.removeItem('token');
                     localStorage.removeItem('user_id');
@@ -27,7 +27,7 @@ function Header(props) {
                     Rakuten Recommend
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Collapse id="responsive-navbar-nav" bg="dark">
                     {NavLinkArray}
                 </Navbar.Collapse>
             </Navbar>
