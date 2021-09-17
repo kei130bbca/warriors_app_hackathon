@@ -2,7 +2,7 @@ export default class Purchase {
   constructor(
     purchase_id,
     user_id,
-    product_id,
+    products_id,
     count,
     bouth_at,
     comment,
@@ -11,7 +11,7 @@ export default class Purchase {
   ) {
     this.purchase_id = purchase_id;
     this.user_id = user_id;
-    this.product_id = product_id;
+    this.products_id = products_id;
     this.count = count;
     this.bouth_at = bouth_at;
     this.comment = comment;

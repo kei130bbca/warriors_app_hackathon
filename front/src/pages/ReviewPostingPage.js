@@ -11,6 +11,7 @@ function ReviewPostingPage() {
   const [img, setImg] = useState('');
 
   useEffect(() => {
+    console.log(id);
     axios
       .get('http://localhost:8000/purchases/' + id)
       .then((response) => {
