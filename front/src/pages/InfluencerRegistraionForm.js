@@ -44,9 +44,9 @@ function InfluencerRegistrationForm() {
       .catch((e) => {
         console.log(e);
       });
-    // history.push({
-    //   pathname: '/',
-    // });
+    history.push({
+      pathname: '/',
+    });
   }
   //必須事項が入力されているかどうか確認
   function check() {
@@ -185,13 +185,10 @@ function InfluencerRegistrationForm() {
               </Col>
             </Form.Group>
             <div className="text-center">
-              {' '}
               <Button onClick={check} type="submit">
                 Submit
               </Button>
             </div>
-
-            {/* <input type="submit" className="button" onClick={check} /> */}
           </Form>
         </Col>
         <Col xl={2} xs={0}></Col>
