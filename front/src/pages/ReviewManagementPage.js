@@ -15,34 +15,36 @@ function ReviewManagementPage() {
       fetch('http://localhost:8000/auth_user', {
         headers: {
           'Content-Type': 'application/json;',
-          'Authorization': `Bearer ${token}`
-        }
-      }).then((res) => {
-        if (res.ok === true) {
-          return res.json();
-        } else { throw ('token is expired.') }
-      }).then((data) => {
-        // console.log(data);
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          if (res.ok === true) {
+            return res.json();
+          } else {
+            throw 'token is expired.';
+          }
+        })
+        .then((data) => {
+          // console.log(data);
           localStorage.setItem('user_id', data.id);
           setUserId(data.id);
           console.log(data.id);
-        
-      })
+        })
         .catch((e) => {
           console.log(e);
           localStorage.removeItem('token');
           localStorage.removeItem('user_id');
-          history.push({ pathname: "/"});
-        })
+          history.push({ pathname: '/' });
+        });
     }
   }, []);
 
   useEffect(() => {
-    fetchPurchases(userId)
-    .then((data) => {
+    fetchPurchases(userId).then((data) => {
       console.log(data);
       setPurchases(data);
-    })
+    });
   }, [userId]);
 
   return (
@@ -53,16 +55,6 @@ function ReviewManagementPage() {
           <ReviewCard2 purchase={purchase} show_edit={true} />
         ))}
       </Row>
-      <Col className="my-5">
-        {/* <Button
-          size="lg"
-          onClick={() => {
-            // history.push(`/influencerpersonal/?user_id=${userId}`);
-          }}
-        >
-          Add new review
-        </Button> */}
-      </Col>
     </Container>
   );
 }
