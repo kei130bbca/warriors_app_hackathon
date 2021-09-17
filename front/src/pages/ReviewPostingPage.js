@@ -13,16 +13,16 @@ function ReviewPostingPage() {
   useEffect(() => {
     console.log(id);
     axios
-      .get('http://localhost:8000/purchases?product_id=' + id)
+      .get('http://localhost:8000/purchases/' + id)
       .then((response) => {
         let data = response.data;
-        if (data.length === 0) {
-          return;
-        }
-        data = data[0];
+        // if (data.length === 0) {
+        //   return;
+        // }
+        // data = data[0];
         setTitle(data.title);
         setComment(data.comment);
-        setStar(data.star);
+        setStar(data.stars);
         return data.products_id;
       })
       .then((product_id) =>
@@ -83,11 +83,15 @@ function ReviewPostingPage() {
       <Button
         onClick={() => {
           console.log(title, comment, star);
-          axios.put('http://localhost:8000/purchases/' + id, {
-            title,
-            comment,
-            star,
-          });
+          axios
+            .put('http://localhost:8000/purchases/' + id, {
+              title,
+              comment,
+              star,
+            })
+            .catch((e) => {
+              console.error(e);
+            });
         }}
       >
         Submit

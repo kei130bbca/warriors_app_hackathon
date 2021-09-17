@@ -11,7 +11,7 @@ function ReviewCard2(props) {
 
   useEffect(() => {
     if (props.show_user) {
-      console.log('here');
+      console.log(purchase);
       axios
         .get('http://localhost:8000/users/' + purchase.users_id)
         .then((res) => {
@@ -38,7 +38,7 @@ function ReviewCard2(props) {
           </Card.Text>
         </Card.Body>
       </Link>
-      <Link to={'/review-posting/' + purchase.products_id}>
+      <Link to={'/review-posting/' + purchase.purchase_id}>
         <Button className={show_edit ? 'd-block' : 'd-none'}>Edit</Button>
       </Link>
     </Card>
