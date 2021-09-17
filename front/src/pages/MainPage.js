@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { fetchUsers, fetchPurchases } from './components/api';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewCard2 from './components/ReviewCard2';
 import LoginSystem from './components/LoginSystem';
 import InfluencerName from './components/InfluencerName';
+import { Container } from 'react-bootstrap';
 
 function MainPage() {
   const [users, setUsers] = useState([]);
@@ -28,8 +28,8 @@ function MainPage() {
   console.log(purchases);
 
   return (
-    <div>
-      <LoginSystem />
+    <Container>
+      <LoginSystem className="mb-4 mt-3" />
       {users.map((user) => {
         return (
           <div key={user.user_id}>
@@ -57,7 +57,7 @@ function MainPage() {
           </div>
         );
       })}
-    </div>
+    </Container>
   );
 }
 
