@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import { Row, Button, Container, Col, Form } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -9,6 +9,8 @@ function ReviewPostingPage() {
   const [comment, setComment] = useState('');
   const [star, setStar] = useState(3);
   const [img, setImg] = useState('');
+  const [userId, setUserId] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     console.log(id);
@@ -16,13 +18,10 @@ function ReviewPostingPage() {
       .get('http://localhost:8000/purchases/' + id)
       .then((response) => {
         let data = response.data;
-        // if (data.length === 0) {
-        //   return;
-        // }
-        // data = data[0];
         setTitle(data.title);
         setComment(data.comment);
         setStar(data.stars);
+        setUserId(data.users_id);
         return data.products_id;
       })
       .then((product_id) =>
@@ -88,6 +87,9 @@ function ReviewPostingPage() {
               title,
               comment,
               star,
+            })
+            .then(() => {
+              history.push('/review-management/' + userId);
             })
             .catch((e) => {
               console.error(e);
