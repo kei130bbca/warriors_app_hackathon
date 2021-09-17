@@ -55,7 +55,13 @@ class InfluencerPersonal extends React.Component {
         let temp_youtuble = '';
         let temp_desc = '';
         let temp_img = '';
-        let ifShow = true;
+        let ifShow = false;
+        console.log(localStorage);
+        if(localStorage.getItem("user_id") != null){
+          if(user_id == localStorage.getItem("user_id")){
+            ifShow = true;
+          }
+        }
         if (temp_data.nickname) {
           temp_nickname = temp_data.nickname;
         } else {
