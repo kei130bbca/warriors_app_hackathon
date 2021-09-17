@@ -96,6 +96,17 @@ class InfluencerPersonal extends React.Component {
             for(let i = 0; i < temp_data.length; i++) {
               now_review.push(temp_data[i])
             }
+            this.setState({
+              nickname: temp_nickname,
+              youtubleUrl: temp_youtuble,
+              twitter: temp_twitter,
+              desc: temp_desc,
+              img: temp_img,
+              ifShow: ifShow,
+              review: [],
+              show_id: user_id,
+              done: done,
+            });
             for (let i = 0; i < temp_data.length; i++) {
               let temp_url =
                 'http://localhost:8000/products/' + temp_data[i].products_id;
@@ -118,17 +129,6 @@ class InfluencerPersonal extends React.Component {
                 })
                 .catch((e) => {
                   console.log(e);
-                  this.setState({
-                    nickname: temp_nickname,
-                    youtubleUrl: temp_youtuble,
-                    twitter: temp_twitter,
-                    desc: temp_desc,
-                    img: temp_img,
-                    ifShow: ifShow,
-                    review: [],
-                    show_id: user_id,
-                    done: done,
-                  });
                 });
             }
           })
