@@ -11,10 +11,15 @@ function ReviewPostingPage() {
   const [img, setImg] = useState('');
 
   useEffect(() => {
+    console.log(id);
     axios
-      .get('http://localhost:8000/purchases/' + id)
+      .get('http://localhost:8000/purchases?product_id=' + id)
       .then((response) => {
-        const data = response.data;
+        let data = response.data;
+        if (data.length === 0) {
+          return;
+        }
+        data = data[0];
         setTitle(data.title);
         setComment(data.comment);
         setStar(data.star);
