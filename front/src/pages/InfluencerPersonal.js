@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import ReviewCard2 from './components/ReviewCard2';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { withRouter, useParams } from 'react-router';
-import { Button } from 'react-bootstrap';
+import { withRouter } from 'react-router';
+import { Container, CardGroup, Row, Col, Button } from 'react-bootstrap';
+
 class InfluencerPersonal extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,9 @@ class InfluencerPersonal extends React.Component {
   }
 
   manageOnClick() {
-    this.props.history.push('/review-management/' + this.props.match.params.myid);
+    this.props.history.push(
+      '/review-management/' + this.props.match.params.myid
+    );
   }
 
   modifyOnClick() {
@@ -123,64 +126,59 @@ class InfluencerPersonal extends React.Component {
   };
 
   render() {
-    if (this.state.done) {
-      let reviewData = this.state.review.map((item, index) => {
-        return (
-          <ReviewCard2
-            purchase={item}
-            product={item}
-            key={item.user_id + '' + this.state.item_id}
-          />
-        );
-      });
-      return (
-        <div>
-          <h1 style = {styles.title}>{this.state.nickname + "'s personal page"}</h1>
-          <div className="container-fluid">
-              <div className="row flex-row row flex-nowrap overflow-auto">
-                {reviewData}
-              </div>
-          </div>
-          <div style = {styles.reviewManage}>
-            {this.state.ifShow ? (
-              <Button onClick={this.manageOnClick}>
-                Review management
-              </Button>
-            ) : null}
-          </div>
-          <div style = {styles.userinformation}>
-            <img src={this.state.img} style = {styles.icon}/>
-            <div style = {styles.inlineDisplay}>
-              <div>
-                <span style = {styles.otherInformation}>nickname:</span>
-                <span style = {styles.otherInformation}>{this.state.nickname}</span>
-              </div>
-              <div>
-                <span style = {styles.otherInformation} >Youtuble:</span>
-                <span style = {styles.otherInformation} >{this.state.youtubleUrl}</span>
-              </div>
-              <div>
-                <span style = {styles.otherInformation} >Twitter:</span>
-                <span style = {styles.otherInformation} >{this.state.twitter}</span>
-              </div>
-              <div>
-                <span style = {styles.otherInformation} >Description:</span>
-                <span style = {styles.otherInformation} >{this.state.desc}</span>
-              </div>
-              <div style={styles.modiButton}>
-                {this.state.ifShow ? (
-                  <Button onClick={this.modifyOnClick}>
-                    modify your information
-                  </Button>
-                ) : null}
-              </div>
+    return (
+      <Container>
+        <h1 style={styles.title}>{this.state.nickname + "'s personal page"}</h1>
+        <Row>
+          {this.state.review.map((item, index) => {
+            return (
+              <Col>
+                <ReviewCard2
+                  purchase={item}
+                  product={item}
+                  key={item.user_id + '' + this.state.item_id}
+                />
+              </Col>
+            );
+          })}
+        </Row>
+        <div style={styles.reviewManage}>
+          {this.state.ifShow ? (
+            <Button onClick={this.manageOnClick} className="mt-3">
+              Manage reviews
+            </Button>
+          ) : null}
+        </div>
+        <div style={styles.userinformation}>
+          <img src={this.state.img} style={styles.icon} />
+          <div style={styles.inlineDisplay}>
+            <div>
+              <span style={styles.otherInformation}>nickname:</span>
+              <span style={styles.otherInformation}>{this.state.nickname}</span>
+            </div>
+            <div>
+              <span style={styles.otherInformation}>Youtuble:</span>
+              <span style={styles.otherInformation}>
+                {this.state.youtubleUrl}
+              </span>
+            </div>
+            <div>
+              <span style={styles.otherInformation}>Twitter:</span>
+              <span style={styles.otherInformation}>{this.state.twitter}</span>
+            </div>
+            <div>
+              <span style={styles.otherInformation}>Description:</span>
+              <span style={styles.otherInformation}>{this.state.desc}</span>
+            </div>
+            <div style={styles.modiButton}>
+              {this.state.ifShow ? (
+                <Button onClick={this.modifyOnClick}>Modify profile</Button>
+              ) : null}
             </div>
           </div>
         </div>
-      );
-    } else {
-      return null;
-    }
+      </Container>
+    );
   }
 }
 const styles = {
