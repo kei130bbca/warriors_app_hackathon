@@ -109,7 +109,7 @@ def get_product_rakuten(product: Product):
     # Update product object
     product.id = item['itemCode']
     product.name = item['itemName']
-    product.img = item['smallImageUrls'][0]['imageUrl']
+    product.img = item['mediumImageUrls'][0]['imageUrl']
     product.price = item['itemPrice']
     product.url = item['itemUrl']
 
