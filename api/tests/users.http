@@ -1,0 +1,33 @@
+#GET http://localhost:8000/users HTTP/1.1
+
+GET http://localhost:8000/users?left_index=1 http/1.1
+
+###
+GET http://localhost:8000/users/2 HTTP/1.1
+
+###
+POST http://localhost:8000/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"test_user",
+    "nickname":"test_user",
+    "password":"password",
+    "youtube":"YOUTUBE_LINK",
+    "twitter":"TEST_USER",
+    "desc":"This is test user",
+    "img":"wolQTkcNChoKAAAADUlIRFIAAAAFAAAABQgCAAAAAg3CscKyAAAAAXNSR0IAwq7DjhzDqQAAAARnQU1BAADCscKPC8O8YQUAAAAJcEhZcwAADsODAAAOw4MBw4dvwqhkAAAAG0lEQVQYV2PCgMKAw79gAGXCgUVgAMKZD2LCo8OzUVgMDADDtcKEF8Opwr1pwq4EAAAAAElFTkTCrkJgwoI="
+}
+
+###
+
+PUT http://localhost:8000/users/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "nickname":"test_user2",
+    "youtube":"YOUTUBE_LINK",
+    "twitter":"TEST_USER",
+    "desc":"This is test user",
+    "img":"wolQTkcNChoKAAAADUlIRFIAAAAFAAAABQgCAAAAAg3CscKyAAAAAXNSR0IAwq7DjhzDqQAAAARnQU1BAADCscKPC8O8YQUAAAAJcEhZcwAADsODAAAOw4MBw4dvwqhkAAAAG0lEQVQYV2PCgMKAw79gAGXCgUVgAMKZD2LCo8OzUVgMDADDtcKEF8Opwr1pwq4EAAAAAElFTkTCrkJgwoI="
+}

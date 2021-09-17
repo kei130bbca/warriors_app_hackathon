@@ -1,0 +1,19 @@
+
+
+GET http://localhost:8000/purchases HTTP/1.1
+###
+
+GET http://localhost:8000/purchases?user_id=2&product_id=toucher-home:10000786&index=0 HTTP/1.1
+###
+
+PUT http://localhost:8000/purchases/f182028-tsuruga:10000630 HTTP/1.1
+Content-Type: application/json
+
+{
+    "title":"SUPER AMAZING ITEM",
+    "comment":"This is super amazing. I like this."
+}
+###
+
+GET http://localhost:8000/purchases/1 HTTP/1.1
+###
