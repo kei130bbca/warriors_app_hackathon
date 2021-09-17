@@ -3,7 +3,7 @@ import axios from 'axios';
 import ReviewCard2 from './components/ReviewCard2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { withRouter } from 'react-router';
-import { Container, CardGroup, Row, Col, Button } from 'react-bootstrap';
+import { Container, CardGroup, Row, Col, Button, Table } from 'react-bootstrap';
 
 class InfluencerPersonal extends React.Component {
   constructor(props) {
@@ -149,27 +149,34 @@ class InfluencerPersonal extends React.Component {
             </Button>
           ) : null}
         </div>
+
         <div style={styles.userinformation}>
           <img src={this.state.img} style={styles.icon} />
           <div style={styles.inlineDisplay}>
-            <div>
-              <span style={styles.otherInformation}>nickname:</span>
-              <span style={styles.otherInformation}>{this.state.nickname}</span>
-            </div>
-            <div>
-              <span style={styles.otherInformation}>Youtuble:</span>
-              <span style={styles.otherInformation}>
-                {this.state.youtubleUrl}
-              </span>
-            </div>
-            <div>
-              <span style={styles.otherInformation}>Twitter:</span>
-              <span style={styles.otherInformation}>{this.state.twitter}</span>
-            </div>
-            <div>
-              <span style={styles.otherInformation}>Description:</span>
-              <span style={styles.otherInformation}>{this.state.desc}</span>
-            </div>
+            <Table>
+              <tbody>
+                <tr>
+                  <th>nickname</th>
+                  <td>{this.state.nickname}</td>
+                </tr>
+                <tr>
+                  <th>Youtube</th>
+                  <td>
+                    <a href={this.state.youtubleUrl}>
+                      {this.state.youtubleUrl}
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Twitter</th>
+                  <td>@{this.state.twitter}</td>
+                </tr>
+                <tr>
+                  <th>Description</th>
+                  <td>{this.state.desc}</td>
+                </tr>
+              </tbody>
+            </Table>
             <div style={styles.modiButton}>
               {this.state.ifShow ? (
                 <Button onClick={this.modifyOnClick}>Modify profile</Button>
