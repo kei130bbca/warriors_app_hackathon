@@ -7,11 +7,11 @@ import axios from 'axios';
 function ReviewCard2(props) {
   const purchase = props.purchase;
   const show_edit = props.show_edit ?? false;
-  const show_user = props.show_edit ?? false;
   const [img, setImg] = useState('');
 
   useEffect(() => {
-    if (show_user) {
+    if (props.show_user) {
+      console.log('here');
       axios
         .get('http://localhost:8000/users/' + purchase.users_id)
         .then((res) => {
