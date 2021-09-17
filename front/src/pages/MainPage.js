@@ -3,7 +3,7 @@ import { fetchUsers, fetchPurchases } from './components/api';
 import ReviewCard2 from './components/ReviewCard2';
 import LoginSystem from './components/LoginSystem';
 import InfluencerName from './components/InfluencerName';
-import { Container } from 'react-bootstrap';
+import { Container, CardGroup, Row, Col } from 'react-bootstrap';
 
 function MainPage() {
   const [users, setUsers] = useState([]);
@@ -32,29 +32,28 @@ function MainPage() {
       <LoginSystem className="mb-4 mt-3" />
       {users.map((user) => {
         return (
-          <div key={user.user_id}>
+          <Container fluid key={user.user_id}>
             <InfluencerName
               name={user.nickname}
               icon={user.icon}
               desc={user.desc}
               id={user.user_id}
             />
-            <div className="container-fluid">
-              <div className="row flex-row row flex-nowrap overflow-auto">
-                {purchases
-                  .filter((purchase) => purchase.users_id === user.user_id)
-                  .map((purchase) => {
-                    return (
+            <Row className="mb-5 mt-3">
+              {purchases
+                .filter((purchase) => purchase.users_id === user.user_id)
+                .map((purchase) => {
+                  return (
+                    <Col>
                       <ReviewCard2
                         purchase={purchase}
                         key={purchase.user_id + '' + purchase.product_id}
                       />
-                    );
-                  })}
-              </div>
-            </div>
-            <br></br>
-          </div>
+                    </Col>
+                  );
+                })}
+            </Row>
+          </Container>
         );
       })}
     </Container>
