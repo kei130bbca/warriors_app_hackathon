@@ -112,7 +112,15 @@ INSERT IGNORE INTO `purchases` (`id`, `user_id`, `products_id`, `count`, `bought
 (9, 2, 'morrymama:10000281', 2, '2021-03-11 00:00:00', 'This is good for gifts.', 3, 'Great Gifts'),
 (10, 3, 'renovatio:10017271', 1, '2021-02-04 00:00:00', 'I bought this for my birthday.', 4, 'Birthday Gift'),
 (11, 3, 'threenice:10006057', 1, '2020-10-18 00:00:00', 'There were 40 drinks in this. This will make me healthy.', 3, 'Drink for my Health'),
-(12, 1, 'chugokuoroshi:10002180', 1, '2020-11-20 00:00:00', 'This is amaizing number. 90 ramens!!!! I like this so much.', 4, '90 ramens!!!');
+(12, 2, 'f182028-tsuruga:10000630', 1, '2021-01-20 00:00:00', 'This seafood is so good. This is suitable for gifts', 5, 'Good Seafood'),
+(13, 2, 'kimsho:10000695', 1, '2020-10-20 00:00:00', 'I like rice. This is good shopping', 4, 'High Quality Rice'),
+(14, 3, 'kimsho:10000695', 1, '2020-11-20 00:00:00', 'This is good for family. I recommend to my friends.', 3, 'Much Rice'),
+(15, 1, '946kitchen:10004398', 1, '2021-09-11 00:00:00', 'This cheeze is matched well to wine.', 3, 'Delicious Cheeze'),
+(16, 1, 'threenice:10006057', 1, '2020-09-11 00:00:00', 'I like this kind of drinks. So satisfied.', 5, 'Very Satisfied'),
+(17, 2, 'threenice:10006057', 1, '2020-08-13 00:00:00', 'Too many drinks. I will give this to my friends', 3, 'Too many drinks'),
+(18, 1, 'morrymama:10000281', 1, '2020-10-07 00:00:00', 'This is amaizing rask. 1kg!!!', 3, 'Too many rask'),
+(19, 1, 'toucher-home:10000786', 1, '2020-12-31 00:00:00', 'I like sports, so this item is awesome.', 3, 'Good Product'),
+(20, 1, 'toucher-home:10000786', 1, '2020-11-11 00:00:00', 'I have never touched such a soft towel.', 5, 'Soft Towel');
 
 -- --------------------------------------------------------
 
