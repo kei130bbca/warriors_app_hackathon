@@ -60,6 +60,7 @@ def put_purchase(id: int):
     payload = request.json
     purchase.title = payload.get('title')
     purchase.comment = payload.get('comment')
+    purchase.stars = int(payload.get('star'))
     db.session.add(purchase)
     db.session.commit()
     return jsonify({}), 200
