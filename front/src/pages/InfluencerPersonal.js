@@ -57,8 +57,8 @@ class InfluencerPersonal extends React.Component {
         let temp_img = '';
         let ifShow = false;
         console.log(localStorage);
-        if(localStorage.getItem("user_id") != null){
-          if(user_id == localStorage.getItem("user_id")){
+        if (localStorage.getItem('user_id') != null) {
+          if (user_id == localStorage.getItem('user_id')) {
             ifShow = true;
           }
         }
@@ -92,7 +92,7 @@ class InfluencerPersonal extends React.Component {
         axios
           .get('http://localhost:8000/purchases', {
             params: {
-              user_id: 1,
+              user_id: user_id,
             },
           })
           .then((response_review) => {
