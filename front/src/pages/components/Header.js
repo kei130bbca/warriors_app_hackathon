@@ -24,7 +24,7 @@ function Header(props) {
                     localStorage.removeItem('user_id');
                     }}>
                     {/* {props.title} */}
-                    Warriors app
+                    Rakuten Recommend
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
