@@ -55,13 +55,7 @@ class InfluencerPersonal extends React.Component {
         let temp_youtuble = '';
         let temp_desc = '';
         let temp_img = '';
-        let ifShow = false;
-        console.log(localStorage);
-        if (localStorage.getItem('user_id') != null) {
-          if (user_id == localStorage.getItem('user_id')) {
-            ifShow = true;
-          }
-        }
+        let ifShow = true;
         if (temp_data.nickname) {
           temp_nickname = temp_data.nickname;
         } else {
@@ -97,14 +91,19 @@ class InfluencerPersonal extends React.Component {
           })
           .then((response_review) => {
             let temp_data = response_review.data;
+            let now_review = [];
+            let done = false; 
+            for(let i = 0; i < temp_data.length; i++) {
+              now_review.push(temp_data[i])
+            }
             for (let i = 0; i < temp_data.length; i++) {
               let temp_url =
                 'http://localhost:8000/products/' + temp_data[i].products_id;
               axios
                 .get(temp_url)
                 .then((response_product) => {
-                  temp_data[i].img = response_product.data.img;
-                  let done = true;
+                  now_review[i].img = response_product.data.img;
+                  done = true;
                   this.setState({
                     nickname: temp_nickname,
                     youtubleUrl: temp_youtuble,
@@ -119,6 +118,17 @@ class InfluencerPersonal extends React.Component {
                 })
                 .catch((e) => {
                   console.log(e);
+                  this.setState({
+                    nickname: temp_nickname,
+                    youtubleUrl: temp_youtuble,
+                    twitter: temp_twitter,
+                    desc: temp_desc,
+                    img: temp_img,
+                    ifShow: ifShow,
+                    review: [],
+                    show_id: user_id,
+                    done: done,
+                  });
                 });
             }
           })
@@ -136,16 +146,17 @@ class InfluencerPersonal extends React.Component {
       <Container>
         <h1 style={styles.title}>{this.state.nickname + "'s personal page"}</h1>
         <Row>
-          {this.state.review.map((item, index) => {
-            return (
-              <Col>
-                <ReviewCard2
-                  purchase={item}
-                  product={item}
-                  key={item.user_id + '' + this.state.item_id}
-                />
-              </Col>
-            );
+          {
+            this.state.review.map((item, index) => {
+              return (
+                <Col>
+                  <ReviewCard2
+                      purchase={item}
+                      product={item}
+                      key={item.user_id + '' + this.state.item_id}
+                  />
+                </Col>
+              );
           })}
         </Row>
         <div style={styles.reviewManage}>
